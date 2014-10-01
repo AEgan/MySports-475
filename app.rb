@@ -4,7 +4,7 @@ require 'rubygems'
 require 'sports_data_api'
 
 get '/' do
-  @word = "Hello, World!"
+  @word = "MySports"
   SportsDataApi.set_key(:nfl, ENV['NFLKEY'])
   SportsDataApi.set_access_level(:nfl, 't')
   @teams = SportsDataApi::Nfl.teams
