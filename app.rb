@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'rubygems'
-# require 'active_record'
+# require 'activerecord'
 require 'sports_data_api'
 
 get '/' do
