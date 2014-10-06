@@ -16,5 +16,15 @@ end
 
 get '/test' do
 	content_type :json
-  { :key1 => 'value1', :key2 => 'value2' }.to_json
+	
+
+	@word = "MySports"
+	# {:key => "key"}.to_json
+	SportsDataApi.set_key(:nfl, ENV['NFLKEY'])
+  SportsDataApi.set_access_level(:nfl, 't')
+  @teams = SportsDataApi::Nfl.teams
+  @all_teams = @teams.map { |t| t }
+  @all_teams_names = @all_teams.map { |t| t.name }
+  { :word => @word, :names => @all_teams_names }.to_json
+
 end

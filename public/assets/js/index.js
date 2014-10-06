@@ -3,6 +3,7 @@ $(function() {
 	$( "#sortable" ).disableSelection();
 
 	$.ajax({
+		type: "GET",
 		dataType: "json",
 	  url: "/test"
 	}).done(function(data) {
