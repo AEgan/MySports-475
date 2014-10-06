@@ -1,13 +1,49 @@
-<!DOCTYPE hmtl>
-<html>
-  <head>
-    <title>MySports</title>
-  </head>
-  <body>
-    <h1><%= @word %></h1>
-    <h1><% puts @data %></h1>
-    <% for @name in @all_teams_names %>
-    	<%= @name %>
-    <% end %>
-  </body>
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MySports</title>
+  
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+  <link href="assets/styles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/jquery-ui.css" rel="stylesheet" type="text/css" >
+  
+
+  <script>
+  $(function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  });
+  </script>
+</head>
+<body>
+  
+  <div id="wrapper">
+    <div id="title">
+    <h1>My Sports</h1>
+        <h1><% puts @data %></h1>
+        <% for @name in @all_teams_names %>
+          <%= @name %>
+        <% end %>
+    </div>
+    <ul id="sortable">
+      <li class="ui-state-default">1</li>
+      <li class="ui-state-default">2</li>
+      <li class="ui-state-default">3</li>
+      <li class="ui-state-default">4</li>
+      <li class="ui-state-default">5</li>
+      <li class="ui-state-default">6</li>
+      <li class="ui-state-default">7</li>
+      <li class="ui-state-default">8</li>
+      <li class="ui-state-default">9</li>
+      <li class="ui-state-default">10</li>
+      <li class="ui-state-default">11</li>
+      <li class="ui-state-default">12</li>
+    </ul>
+   </div>
+</body>
 </html>
