@@ -9,6 +9,7 @@ gem "sinatra-activerecord"
 gem 'sinatra-flash'
 gem 'sinatra-redirect-with-flash'
 gem 'sports_data_api'
+gem 'json'
 
 group :development do
  gem 'sqlite3'
