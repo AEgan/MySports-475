@@ -21,28 +21,63 @@
   </script>
 </head>
 <body>
+
+  <div id="header">
+    <div id="title">
+      My Sports
+    </div>
+  </div>
   
   <div id="wrapper">
-    <div id="title">
-    <h1>My Sports</h1>
-        <h1><% puts @data %></h1>
-        <% for @name in @all_teams_names %>
-          <%= @name %>
-        <% end %>
-    </div>
+    
     <ul id="sortable">
-      <li class="ui-state-default">1</li>
-      <li class="ui-state-default">2</li>
-      <li class="ui-state-default">3</li>
-      <li class="ui-state-default">4</li>
-      <li class="ui-state-default">5</li>
-      <li class="ui-state-default">6</li>
-      <li class="ui-state-default">7</li>
-      <li class="ui-state-default">8</li>
-      <li class="ui-state-default">9</li>
-      <li class="ui-state-default">10</li>
-      <li class="ui-state-default">11</li>
-      <li class="ui-state-default">12</li>
+      <li class="ui-state-default">
+        <div class="sportsWrapper">
+          <div class="sportsTitle">
+            NFL Standings
+          </div>
+          <hr>
+          <div class="sportsContent">
+
+
+<b>American Football Conference - 2014 Regular Season</b><br/><br/>
+<b>AFC East Team W L</b> <br/>
+Buffalo Bills 3 2 <br/>
+New England Patriots  3 2 <br/>
+Miami Dolphins  2 2 <br/>
+New York Jets 1 4 <br/><br/>
+<b>AFC North Team  W L</b> <br/>
+Cincinnati Bengals  3 1 <br/>
+Baltimore Ravens  3 2 <br/>
+Pittsburgh Steelers 3 2 <br/>
+Cleveland Browns  2 2 <br/><br/>
+<b>AFC South Team  W L</b> <br/>
+Indianapolis Colts  3 2<br/>
+Houston Texans  3 2 <br/>
+Tennessee Titans  1 4 <br/>
+Jacksonville Jaguars  0 5 <br/><br/>
+<b>AFC West Team W L</b> <br/>
+San Diego Chargers  4 1<br/>
+Denver Broncos  3 1<br/>
+Kansas City Chiefs  2 3 <br/>
+Oakland Raiders 0 4<br/>
+
+
+
+          </div>
+        </div>
+      </li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
+      <li class="ui-state-default"><a class="button addNew" href="addinfo.html">Add Sports Data</a></li>
     </ul>
    </div>
 </body>
