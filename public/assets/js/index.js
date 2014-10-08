@@ -23,6 +23,7 @@ $(function() {
 	}).done(function(data) {
 	  console.log("done");
 	  console.log(data);
+	  $('#box4').html("Touchdowns" + data.touchdowns);
 	}).fail(function(xhr, status, error){
 		console.log(xhr);
 		console.log(status);
