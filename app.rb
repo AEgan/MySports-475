@@ -16,7 +16,6 @@ end
 
 class NflTeam
   include Mongoid::Document
- 
   field :team_info, type: Array
 end
 
@@ -32,6 +31,3 @@ end
 
 require_relative 'routes/init'
 require_relative 'helpers/init'
-
-
-
