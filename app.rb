@@ -25,9 +25,9 @@ get '/' do
   @word = "MySports"
   SportsDataApi.set_key(:nfl, ENV['NFLKEY'])
   SportsDataApi.set_access_level(:nfl, 't')
-  @teams = SportsDataApi::Nfl.teams
-  @all_teams = @teams.map { |t| t }
-  @all_teams_names = @all_teams.map { |t| t.name }
+  # @teams = SportsDataApi::Nfl.teams
+  # @all_teams = @teams.map { |t| t }
+  # @all_teams_names = @all_teams.map { |t| t.name }
   erb :index
 end
 
@@ -52,6 +52,7 @@ get '/team' do
   SportsDataApi.set_access_level(:nfl, 't')
   # @team = SportsDataApi::Nfl.team_roster('MIA').players.first
   @team_stats = SportsDataApi::Nfl.team_season_stats("BUF", 2013, "REG")
+  @team_stats += SportsDataApi::Nfl.team_season_stats("PIT", 2013, "REG")
   # @players = @team.map { |p| p.stats }
   {:teamstats => @team_stats.stats}.to_json
 end
@@ -63,7 +64,7 @@ end
 
 post '/getPlayerInfo' do
 	content_type :json
-	getPlayerInfo(request["player"], "MIA").to_json
+	getPlayerInfo(request["player"], request["team"]).to_json
 end
 
 post '/getTeamRoster' do

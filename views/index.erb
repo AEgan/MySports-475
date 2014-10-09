@@ -14,28 +14,28 @@
   <script src="assets/js/index.js" type="text/javascript"></script>
 </head>
 <body>
+
+  <div id="header">
+    <div id="title">
+      My Sports
+    </div>
+  </div>
   
   <div id="wrapper">
-    <div id="title">
-    <h1>My Sports</h1>
-        <h1><% puts @data %></h1>
-        <% for @name in @all_teams_names %>
-          <%= @name %>
-        <% end %>
-    </div>
+    
     <ul id="sortable">
-      <li class="ui-state-default" id= "box1">1</li>
-      <li class="ui-state-default" id= "box2">2</li>
-      <li class="ui-state-default" id= "box3">3</li>
-      <li class="ui-state-default" id= "box4">4</li>
-      <li class="ui-state-default" id= "box5">5</li>
-      <li class="ui-state-default" id= "box6">6</li>
-      <li class="ui-state-default" id= "box7">7</li>
-      <li class="ui-state-default" id= "box8">8</li>
-      <li class="ui-state-default" id= "box9">9</li>
-      <li class="ui-state-default" id= "box10">10</li>
-      <li class="ui-state-default" id= "box11">11</li>
-      <li class="ui-state-default" id= "box12">12</li>
+      <li class="ui-state-default" id="box1"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('1')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box2"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('2')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box3"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href='#' onclick="javascript:Popup('3')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box4"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('4')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box5"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('5')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box6"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('6')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box7"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('7')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box8"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('8')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box9"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('9')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box10"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('10')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box11"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('11')">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box12"><div class="sportsWrapper"><div class="sportsContent"><a class="button addNew" href="#" onclick="javascript:Popup('12')">Add Sports Data</a></div></div></li>
     </ul>
    </div>
 </body>
