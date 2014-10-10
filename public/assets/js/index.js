@@ -108,6 +108,25 @@ $(function() {
 		console.log(error);
 	});
 
+	var p5 = "DeMarco Murray"
+	var t5 = "DAL"
+	var box5 = '#box5'
+
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+	  url: "/getPlayerInfo",
+	  data: { player: p5, team: t5}
+	}).done(function(data) {
+	  console.log("done");
+	  console.log(data);
+	  $(box5 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Rushing Yards: &nbsp;" + data.rushing.yds+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
+
 	function Popup(boxNum) {
 		return 2;
 	}

@@ -64,7 +64,16 @@ def kicker(playerStats)
 end
 
 def runningBack(playerStats)
-	true
+	touchdowns = getTouchdowns(playerStats)
+	receiving = getReceiving(playerStats)
+	penalty = getPenalty(playerStats)
+	punt_return = getPuntReturn(playerStats)
+	kick_return = getKickReturn(playerStats)
+	rushing = getRushing(playerStats)
+
+	stats = [touchdowns, receiving, penalty, punt_return, kick_return, rushing]
+	stats = stats.reduce(&:merge)
+	return stats
 end
 
 def quarterBack(playerStats)

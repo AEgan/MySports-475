@@ -87,3 +87,14 @@ def getExtraPoint(playerStats)
 
 	return extra_point
 end
+
+def getRushing(playerStats)
+	rushing = playerStats.select {|a| !a.rushing.nil?}.first
+	if !rushing.nil?
+		rushing = {:rushing => rushing.rushing}
+	else
+		rushing = {:rushing => {:att =>"0", :yds =>"0", :avg =>"0", :lg =>"0", :td =>"0", :fd =>"0", :fd_pct =>"0", :sfty =>"0", :rz_att =>"0", :fum =>"0"}}
+	end
+
+	return rushing
+end
