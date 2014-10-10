@@ -41,19 +41,26 @@ def getPlayerInfo(playerName, teamName)
 end
 
 def wideReceiver(playerStats)
-	touchdowns = playerStats.find {|s| s.touchdowns}.touchdowns
-	totalTouchDowns = touchdowns.reduce(0) {|total, (key, val)| total += val.to_i}
-	touchdowns = {:touchdowns => {:total => totalTouchDowns}.merge(touchdowns)}
+	
+	touchdowns = getTouchdowns(playerStats)
+	receiving = getReceiving(playerStats)
+	penalty = getPenalty(playerStats)
+	punt_return = getPuntReturn(playerStats)
+	kick_return = getKickReturn(playerStats)
 
-	receiving = {:receiving => playerStats.find {|s| s.receiving}.receiving}
-
-	stats = [touchdowns, receiving]
-	stats = stats.inject(&:merge)
+	stats = [touchdowns, receiving, penalty, punt_return, kick_return]
+	stats = stats.reduce(&:merge)
 	return stats
 end
 
 def kicker(playerStats)
-	true
+	field_goal = getFieldGoal(playerStats)
+	kickoffs = getKickOffs(playerStats)
+	extra_point = getExtraPoint(playerStats)
+
+	stats = [field_goal, kickoffs, extra_point]
+	stats = stats.reduce(&:merge)
+	return stats
 end
 
 def runningBack(playerStats)

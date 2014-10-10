@@ -89,6 +89,25 @@ $(function() {
 		console.log(error);
 	});
 
+	var p4 = "Cody Parkey"
+	var t4 = "PHI"
+	var box4 = '#box4'
+
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+	  url: "/getPlayerInfo",
+	  data: { player: p4, team: t4}
+	}).done(function(data) {
+	  console.log("done");
+	  console.log(data);
+	  $(box4 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Attempts: &nbsp;" + data.field_goal.att+"</b><br /><hr>Made: &nbsp;" + data.field_goal.made+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
+
 	function Popup(boxNum) {
 		return 2;
 	}
