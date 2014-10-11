@@ -98,3 +98,47 @@ def getRushing(playerStats)
 
 	return rushing
 end
+
+def getFirstDowns(playerStats)
+	first_downs = playerStats.select {|a| !a.first_downs.nil?}.first
+	if !first_downs.nil?
+		first_downs = {:first_downs => first_downs.first_downs}
+	else
+		first_downs = {:first_downs => {:num =>"0", :pass =>"0", :rush =>"0"}}
+	end
+
+	return first_downs
+end
+
+def getPassing(playerStats)
+	passing = playerStats.select {|a| !a.passing.nil?}.first
+	if !passing.nil?
+		passing = {:passing => passing.passing}
+	else
+		passing = {:passing => {:att =>"0", :cmp =>"0", :yds =>"0", :lg =>"0", :sk =>"0", :sk_yds =>"0", :td =>"0", :int =>"0", :int_td =>"0", :fd =>"0", :sfty =>"0", :rz_att =>"0", :rating =>"0", :avg =>"0", :cmp_pct =>"0", :cmp_avg =>"0", :td_pct =>"0", :int_pct =>"0", :yds_10_pls =>"0", :yds_20_pls =>"0", :yds_30_pls =>"0", :yds_40_pls =>"0", :yds_50_pls =>"0"}}
+	end
+
+	return passing
+end
+
+def getFumbles(playerStats)
+	fumbles = playerStats.select {|a| !a.fumbles.nil?}.first
+	if !fumbles.nil?
+		fumbles = {:fumbles => fumbles.fumbles}
+	else
+		fumbles = {:fumbles => {:fum =>"0", :lost =>"0", :oob =>"0", :own_rec =>"0", :opp_rec =>"0"}}
+	end
+
+	return fumbles
+end
+
+def getPunting(playerStats)
+	punting = playerStats.select {|a| !a.punting.nil?}.first
+	if !punting.nil?
+		punting = {:punting => punting.punting}
+	else
+		punting = {:punting => {:punts =>"0", :yds =>"0", :net_yds =>"0", :lg =>"0", :blk =>"0", :in20 =>"0", :tb =>"0", :ret =>"0", :avg =>"0", :net_avg =>"0", :ret_yds =>"0", :avg_ret =>"0", :in20_pct =>"0", :tb_pct =>"0"}}
+	end
+
+	return punting
+end

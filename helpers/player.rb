@@ -77,13 +77,34 @@ def runningBack(playerStats)
 end
 
 def quarterBack(playerStats)
-	true
+	touchdowns = getTouchdowns(playerStats)
+	rushing = getRushing(playerStats)
+	penalty = getPenalty(playerStats)
+	fumbles = getFumbles(playerStats)
+	passing = getPassing(playerStats)
+	first_downs = getFirstDowns(playerStats)
+
+	stats = [touchdowns, penalty, rushing, fumbles, passing, first_downs]
+	stats = stats.reduce(&:merge)
+	return stats
 end
 
 def tightEnd(playerStats)
-	true
+	touchdowns = getTouchdowns(playerStats)
+	receiving = getReceiving(playerStats)
+	penalty = getPenalty(playerStats)
+	punt_return = getPuntReturn(playerStats)
+	kick_return = getKickReturn(playerStats)
+
+	stats = [touchdowns, receiving, penalty, punt_return, kick_return]
+	stats = stats.reduce(&:merge)
+	return stats
 end
 
 def punter(playerStats)
-	true
+	punting = getPunting(playerStats)
+
+	stats = [punting]
+	stats = stats.reduce(&:merge)
+	return stats
 end
