@@ -1,6 +1,26 @@
+var boxNumber = "";
+
+function displayData(box, t, data, dataCategory) {
+		switch (dataCategory) {
+			case "player":
+				break;
+			case "team":
+				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br /><b>Offense</b><br/> Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
+				break;
+			case "stats":
+				break;
+			default:
+				break;
+		}
+	}
 
 function popup(box) {
+	$("#teamRadio").prop("checked", true);
+	document.getElementById("players").style.display = "none";
 	document.getElementById("dialog-form").style.display = "block";
+	document.getElementById("submit").style.display = "block";
+	boxNumber = "";
+	boxNumber = box;
 }
 
 function getQueryVariable(variable)
@@ -14,15 +34,17 @@ function getQueryVariable(variable)
        return(false);
 }
 
-
 function populatePlayerList(t){
     var select = document.getElementById("playerList");
+
+    select.options.length = 0;
     $.ajax({
 		type: "POST",
 		dataType: "json",
 	  url: "/getTeamRoster",
 	  data: {teamName: t}
 	}).done(function(data) {
+	  //alert("done");
 	  console.log("done");
 	  console.log(data);
 	   for (var i = 0; i < data.length; i++) {
@@ -33,16 +55,52 @@ function populatePlayerList(t){
         select.appendChild(el);
       }
 	}).fail(function(xhr, status, error){
+		//alert("fail");
 		console.log(xhr);
 		console.log(status);
 		console.log(error);
 	});
-   
+  
 }
+
+function getData (box, urlText, dataCategory, t) {
+		t=t.toUpperCase();
+
+		$.ajax({
+
+		type: "POST",
+		dataType: "json",
+	  	url: "/getTeamInfo",
+	  	data: {team: t}
+		}).done(function(data) {
+		  console.log("done");
+		  console.log(data);
+		  displayData(box, t, data, "team");
+		}).fail(function(xhr, status, error){
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+		return true;
+	}
 
 
 $(function() {
- 
+ 	$( "input" ).on( "click", function() {
+ 		if ($("input[name='category']:checked").val() == "player") {
+ 			document.getElementById("players").style.display = "block";
+ 			var e = document.getElementById("teams");
+			var strUser = e.options[e.selectedIndex].value;
+			populatePlayerList(strUser);
+ 		}
+ 		if ($("input[name='category']:checked").val() == "team") {
+ 			document.getElementById("players").style.display = "none";
+ 		}
+ 		return true;
+ 	});
+
+
+
 	$( "#sortable" ).sortable();
 	$( "#sortable" ).disableSelection();
 
@@ -50,11 +108,29 @@ $(function() {
 	var t3 = "MIA"
 	var box3 = '#box1'
 
-	$('.form').on('submit', function() {
-		event.preventDefault();
-	    var val = $(this).find('input[type="text"]').val();
-	    alert(val);
-	    // I like to use defers :)
+	$('.form').on('submit', function(e) {
+		document.getElementById("dialog-form").style.display = "none";
+		e.preventDefault();
+		console.log("YOYO");
+
+	    var category = $(this).find("input[name='category']:checked").val() //works
+	    var t = $(this).find('select[name="team"]').val(); //works
+		var p = $(this).find('select[name="player"]:selected').val();
+
+	    switch(category) {
+	    	case "team":
+	    		console.log("IN CASE STATEMENT TEAM");
+	    		getData(boxNumber, "/getTeamInfo", category, t);
+	    		break;
+	    	case "player":
+		    	console.log("IN CASE STATEMENT PLAYER");
+	    		break;
+	    	default:
+		    	console.log("IN CASE STATEMENT DEFAULT");
+	    		break;
+
+	    }
+
 	    //deferred = $.post("http://somewhere.com", { val: val });
 
 	    //deferred.success(function () {
@@ -62,15 +138,18 @@ $(function() {
 	    //});
 
 	    //deferred.error(function () {
-        // Handle any errors here.
+        // Handle any errors here.});
 
 	});
 	
-	$('.teamList').on('change', function () {
-	    var e = document.getElementById("teams");
-		var strUser = e.options[e.selectedIndex].value;
-		populatePlayerList(strUser);
-	    return true;
+	$('.teamList').on('change', function () {   
+		if ($("input[name='category']:checked").val() == "player") {
+		    //player is checked so populate team list
+		    var e = document.getElementById("teams");
+			var strUser = e.options[e.selectedIndex].value;
+			populatePlayerList(strUser);
+		}
+		return true
 	});
 
 	// $.ajax({
@@ -235,6 +314,8 @@ $(function() {
 	var t8 = "PHI"
 	var box8 = '#box8'
 
+	
+
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -243,31 +324,15 @@ $(function() {
 	}).done(function(data) {
 	  console.log("done");
 	  console.log(data);
-	  displayData(box8, t8, data, "nflTeam");
+	  displayData(box8, t8, data, "team");
 	}).fail(function(xhr, status, error){
 		console.log(xhr);
 		console.log(status);
 		console.log(error);
 	});
+	
 
-
-
-
-
-
-	function displayData(box, t, data, dataCategory) {
-		switch (dataCategory) {
-			case "nflPlayer":
-				break;
-			case "nflTeam":
-				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br />Offense: Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br />Defense: Total Tackles &nbsp;"+data.defense.force_fum+"<br />Defense: Interceptions &nbsp;"+data.defense.int+"Punts: &nbsp;"+data.punting.punts);
-				break;
-			case "nflStats":
-				break;
-			default:
-				break;
-		}
-	}
+	
 
 
 	

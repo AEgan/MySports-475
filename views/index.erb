@@ -24,18 +24,18 @@
   <div id="wrapper">
     
     <ul id="sortable">
-      <li class="ui-state-default" id="box1"><div class="sportsWrapper"><div class="sportsContent"><a id = "box1" onclick="popup('box1')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box2"><div class="sportsWrapper"><div class="sportsContent"><a id = "box2" onclick="popup('box2')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box3"><div class="sportsWrapper"><div class="sportsContent"><a id = "box3" onclick="popup('box3')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box4"><div class="sportsWrapper"><div class="sportsContent"><a id = "box4" onclick="popup('box4')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box5"><div class="sportsWrapper"><div class="sportsContent"><a id = "box5" onclick="popup('box5')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box6"><div class="sportsWrapper"><div class="sportsContent"><a id = "box6" onclick="popup('box6')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box7"><div class="sportsWrapper"><div class="sportsContent"><a id = "box7" onclick="popup('box7')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box8"><div class="sportsWrapper"><div class="sportsContent"><a id = "box8" onclick="popup('box8')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box9"><div class="sportsWrapper"><div class="sportsContent"><a id = "box9" onclick="popup('box9')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box10"><div class="sportsWrapper"><div class="sportsContent"><a id = "box10" onclick="popup('box10')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box11"><div class="sportsWrapper"><div class="sportsContent"><a id = "box11" onclick="popup('box11')" class="button addNew">Add Sports Data</a></div></div></li>
-      <li class="ui-state-default" id="box12"><div class="sportsWrapper"><div class="sportsContent"><a id = "box12" onclick="popup('box12')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box1"><div class="sportsWrapper"><div class="sportsContent"><a id = "box1" onclick="popup('#box1')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box2"><div class="sportsWrapper"><div class="sportsContent"><a id = "box2" onclick="popup('#box2')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box3"><div class="sportsWrapper"><div class="sportsContent"><a id = "box3" onclick="popup('#box3')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box4"><div class="sportsWrapper"><div class="sportsContent"><a id = "box4" onclick="popup('#box4')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box5"><div class="sportsWrapper"><div class="sportsContent"><a id = "box5" onclick="popup('#box5')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box6"><div class="sportsWrapper"><div class="sportsContent"><a id = "box6" onclick="popup('#box6')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box7"><div class="sportsWrapper"><div class="sportsContent"><a id = "box7" onclick="popup('#box7')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box8"><div class="sportsWrapper"><div class="sportsContent"><a id = "box8" onclick="popup('#box8')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box9"><div class="sportsWrapper"><div class="sportsContent"><a id = "box9" onclick="popup('#box9')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box10"><div class="sportsWrapper"><div class="sportsContent"><a id = "box10" onclick="popup('#box10')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box11"><div class="sportsWrapper"><div class="sportsContent"><a id = "box11" onclick="popup('#box11')" class="button addNew">Add Sports Data</a></div></div></li>
+      <li class="ui-state-default" id="box12"><div class="sportsWrapper"><div class="sportsContent"><a id = "box12" onclick="popup('#box12')" class="button addNew">Add Sports Data</a></div></div></li>
     </ul>
   </div>
 
@@ -44,7 +44,7 @@
     <form class="form">
       <fieldset>
         <div class="radioButtons">
-          <input type="radio" name="category" value="team">Team<br/>
+          <input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/>
           <input type="radio" name="category" value="player">Player<br/>
         </div>
         <div class="field">
@@ -68,8 +68,8 @@
             <option value="kan">Kansas City Chiefs</option>
             <option value="mia">Miami Dolphins</option>          
             <option value="min">Minnesota Vikings</option>
-            <option value="nep">New England Patriots</option>           
-            <option value="nos">New Orleans Saints</option>
+            <option value="ne">New England Patriots</option>           
+            <option value="no">New Orleans Saints</option>
             <option value="nyg">New York Giants</option>          
             <option value="nyj">New York Jets</option>
             <option value="oak">Oakland Raiders</option>           
@@ -85,13 +85,16 @@
           </select>
         </div>
       
-       <div class="field" id="players">
-          <label for="email">Player Name</label>
-          <select id="playerList" type="text" name="player" id="email" value="">
+        <div class="field" id="players">
+          <label for="player">Player Name</label>
+          <select id="playerList" type="text" name="player" id="player" value=""></select>
         </div>
 
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
-        <input type="submit" value="Submit" tabindex="-1">
+        
+        <div id="submit">
+          <input type="submit" value="Submit" tabindex="-1">
+        </div>
       </fieldset>
     </form>
   </div>
