@@ -16,6 +16,7 @@ function displayData(box, t, data, dataCategory) {
 	}
 
 function popup(box) {
+	console.log("HAPPENING");
 	$("#teamRadio").prop("checked", true);
 	document.getElementById("players").style.display = "none";
 	document.getElementById("dialog-form").style.display = "block";
@@ -36,6 +37,7 @@ function getQueryVariable(variable)
 }
 
 function populatePlayerList(t){
+	console.log('populatePlayerList');
     var select = document.getElementById("playerList");
 
     select.options.length = 0;
@@ -76,14 +78,14 @@ function getData (box, urlText, dataCategory, t, d) {
 		}).done(function(data) {
 		  console.log("done");
 		  console.log(data);
-		  displayData(box, t, data, dataCategory);
+		  // displayData(box, t, data, dataCategory);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
 			console.log(error);
 		});
 		return true;
-	}
+}
 
 
 $(function() {
@@ -106,15 +108,15 @@ $(function() {
 	$( "#sortable" ).disableSelection();
 
 
-	$('.form').on('submit', function(e) {
-		document.getElementById("dialog-form").style.display = "none";
+	$('.form').on('submit', function (e) {
 		e.preventDefault();
+		document.getElementById("dialog-form").style.display = "none";
 
-	    var category = $(this).find("input[name='category']:checked").val() 
-	    var t = $(this).find('select[name="team"]').val(); 
-		var p = $(this).find('#playerList option:selected').val();
-
-		p="Antonio Brown";
+    var category = $(this).find("input[name='category']:checked").val() 
+    var t = $(this).find('select[name="team"]').val(); 
+		var e = document.getElementById("playerList");
+		var p = e.options[e.selectedIndex].value
+		console.log(p);
 
 	    switch(category) {
 	    	case "team":
@@ -133,14 +135,14 @@ $(function() {
 
 	    }
 
-	    //deferred = $.post("http://somewhere.com", { val: val });
+	    // deferred = $.post("http://somewhere.com", { val: val });
 
-	    //deferred.success(function () {
-	        // Do your stuff.
-	    //});
+	    // deferred.success(function () {
+	    //     Do your stuff.
+	    // });
 
-	    //deferred.error(function () {
-        // Handle any errors here.});
+	    // deferred.error(function () {
+     //    Handle any errors here.});
 
 	});
 	
@@ -148,8 +150,8 @@ $(function() {
 		if ($("input[name='category']:checked").val() == "player") {
 		    //player is checked so populate team list
 		    var e = document.getElementById("teams");
-			var strUser = e.options[e.selectedIndex].value;
-			populatePlayerList(strUser);
+				var strUser = e.options[e.selectedIndex].value;
+				populatePlayerList(strUser);
 		}
 		return true
 	});

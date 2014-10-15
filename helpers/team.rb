@@ -9,7 +9,7 @@ end
 def getTeamInfo(teamName)
 	# Set API Keys
 	# SportsDataApi.set_key(:nfl, ENV['NFLKEY'])
-	SportsDataApi.set_key(:nfl, '73ugy7k2tshbqhc35hwxyn8h')
+	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	# Get stats for the input player

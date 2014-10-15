@@ -2,14 +2,24 @@
 
 # Get player info
 def getPlayerInfo(playerName, teamName)
+	puts "FUUUUUUCCKCKKKKKKKK"
+	puts playerName
+	puts teamName
+	teamName = teamName.upcase
+	puts "AGAIN"
+	puts "ARI" == teamName
+	puts "Mike Leach" == playerName
+	puts teamName
+
 	# Set API Keys
-	SportsDataApi.set_key(:nfl, '73ugy7k2tshbqhc35hwxyn8h')
+	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	# Get all players in the team
 	all_players = getTeamRoster(teamName)
-
+	puts all_players
 	# Get basic information of input player
+	puts all_players.find {|p| p.player[:name_full] == playerName }
 	basicPlayerInformation = all_players.find {|p| p.player[:name_full] == playerName }.player
 
 	# Get stats for the input player
