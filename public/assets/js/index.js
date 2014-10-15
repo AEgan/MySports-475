@@ -1,10 +1,77 @@
+
+function popup(box) {
+	document.getElementById("dialog-form").style.display = "block";
+}
+
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+
+function populatePlayerList(t){
+    var select = document.getElementById("playerList");
+    $.ajax({
+		type: "POST",
+		dataType: "json",
+	  url: "/getTeamRoster",
+	  data: {teamName: t}
+	}).done(function(data) {
+	  console.log("done");
+	  console.log(data);
+	   for (var i = 0; i < data.length; i++) {
+        var opt = data[i].player.name_full;
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+      }
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
+   
+}
+
+
 $(function() {
+ 
 	$( "#sortable" ).sortable();
 	$( "#sortable" ).disableSelection();
 
 	var p3 = "Brian Hartline"
 	var t3 = "MIA"
 	var box3 = '#box1'
+
+	$('.form').on('submit', function() {
+		event.preventDefault();
+	    var val = $(this).find('input[type="text"]').val();
+	    alert(val);
+	    // I like to use defers :)
+	    //deferred = $.post("http://somewhere.com", { val: val });
+
+	    //deferred.success(function () {
+	        // Do your stuff.
+	    //});
+
+	    //deferred.error(function () {
+        // Handle any errors here.
+
+	});
+	
+	$('.teamList').on('change', function () {
+	    var e = document.getElementById("teams");
+		var strUser = e.options[e.selectedIndex].value;
+		populatePlayerList(strUser);
+	    return true;
+	});
 
 	// $.ajax({
 	// 	type: "POST",
@@ -176,15 +243,33 @@ $(function() {
 	}).done(function(data) {
 	  console.log("done");
 	  console.log(data);
-	  $(box8 + ' .sportsContent').html("<b>"+t8+" &nbsp;" +"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Defense: &nbsp;" + data.defense.tackle + "</b><br /><hr>Punts: &nbsp;" + data.punting.punts);
+	  displayData(box8, t8, data, "nflTeam");
 	}).fail(function(xhr, status, error){
 		console.log(xhr);
 		console.log(status);
 		console.log(error);
 	});
 
-	function Popup(boxNum) {
-		return 2;
+
+
+
+
+
+	function displayData(box, t, data, dataCategory) {
+		switch (dataCategory) {
+			case "nflPlayer":
+				break;
+			case "nflTeam":
+				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br />Offense: Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br />Defense: Total Tackles &nbsp;"+data.defense.force_fum+"<br />Defense: Interceptions &nbsp;"+data.defense.int+"Punts: &nbsp;"+data.punting.punts);
+				break;
+			case "nflStats":
+				break;
+			default:
+				break;
+		}
 	}
+
+
+	
 
 });
