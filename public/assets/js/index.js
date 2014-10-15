@@ -1,4 +1,5 @@
 var boxNumber = "";
+var nextBoxNumber = 2
 
 function displayData(box, t, data, dataCategory) {
 		switch (dataCategory) {
@@ -78,7 +79,7 @@ function getData (box, urlText, dataCategory, t, d) {
 		}).done(function(data) {
 		  console.log("done");
 		  console.log(data);
-		  // displayData(box, t, data, dataCategory);
+		  displayData(box, t, data, dataCategory);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -114,8 +115,8 @@ $(function() {
 
     var category = $(this).find("input[name='category']:checked").val() 
     var t = $(this).find('select[name="team"]').val(); 
-		var e = document.getElementById("playerList");
-		var p = e.options[e.selectedIndex].value
+    var p = $(this).find('select[name="player"]').val(); 
+
 		console.log(p);
 
 	    switch(category) {
@@ -134,6 +135,10 @@ $(function() {
 	    		break;
 
 	    }
+
+	    nextBoxID = "box" + nextBoxNumber;
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
+	    nextBoxNumber += 1;
 
 	    // deferred = $.post("http://somewhere.com", { val: val });
 
