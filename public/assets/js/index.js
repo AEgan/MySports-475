@@ -76,9 +76,10 @@ function getData (box, urlText, dataCategory, t, d) {
 	  	url: urlText,
 	  	data: d
 		}).done(function(data) {
+
 		  console.log("done");
 		  console.log(data);
-		  // displayData(box, t, data, dataCategory);
+		  displayData(box, t, data, dataCategory);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -112,12 +113,11 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 
-
 	    var category = $(this).find("input[name='category']:checked").val() 
-    	var t = $(this).find('select[name="team"]').val(); 
-		var e = document.getElementById("playerList");
-		var p = e.options[e.selectedIndex].value
+	    var t = $(this).find('select[name="team"]').val(); 
+		var p = $(this).find('select[name="player"]').val();
 
+		alert(p);
 
 	    switch(category) {
 	    	case "team":
