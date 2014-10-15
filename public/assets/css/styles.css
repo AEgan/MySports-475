@@ -99,3 +99,23 @@ html {
 .sportsContent {
 	text-align: left;
 }
+
+#dialog-form {
+	display: none;
+	background-color: white;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #334;
+    border-radius: 2px;
+    color: #334;
+
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form fieldset input {
+	clear: right;
+}
