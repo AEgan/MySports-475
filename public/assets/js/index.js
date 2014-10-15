@@ -3,7 +3,7 @@ var boxNumber = "";
 function displayData(box, t, data, dataCategory) {
 		switch (dataCategory) {
 			case "player":
-				
+				$(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
 				break;
 			case "team":
 				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br /><b>Offense</b><br/> Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
@@ -112,7 +112,10 @@ $(function() {
 
 	    var category = $(this).find("input[name='category']:checked").val() 
 	    var t = $(this).find('select[name="team"]').val(); 
-		var p = $(this).find('#playerList option:selected').val();
+		var p = $(this).find('select[name="player"]').val();
+
+
+		alert(p);
 
 		p="Antonio Brown";
 
@@ -181,7 +184,9 @@ $(function() {
 	// 	console.log(error);
 	// });
 	
-	// var p = "Brian Hartline"
+	// var p3 = "Brian Hartline";
+	// var t3 = "MIA";
+	// var box3 = "#box1";
 	// $.ajax({
 	// 	type: "POST",
 	// 	dataType: "json",
@@ -312,8 +317,5 @@ $(function() {
 	// 	console.log(status);
 	// 	console.log(error);
 	// });
-
-
-	
-
 });
+
