@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/AEgan/sports_data_api.git
-  revision: 37a2aa3fa8d535e23516e55851dc14a50989a5a2
-  branch: nfl_standings
+  revision: 86c9971a869e370dd1500d75e6d2828f6bde972a
+  branch: all_updates
   specs:
     sports_data_api (0.1.0)
       nokogiri (~> 1.5.5)

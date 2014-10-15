@@ -3,6 +3,7 @@ var boxNumber = "";
 function displayData(box, t, data, dataCategory) {
 		switch (dataCategory) {
 			case "player":
+				
 				break;
 			case "team":
 				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br /><b>Offense</b><br/> Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
@@ -47,7 +48,7 @@ function populatePlayerList(t){
 	  //alert("done");
 	  console.log("done");
 	  console.log(data);
-	   for (var i = 0; i < data.length; i++) {
+	   for (var i = 0; i < data.length - 1; i++) {
         var opt = data[i].player.name_full;
         var el = document.createElement("option");
         el.textContent = opt;
@@ -63,19 +64,19 @@ function populatePlayerList(t){
   
 }
 
-function getData (box, urlText, dataCategory, t) {
-		t=t.toUpperCase();
+function getData (box, urlText, dataCategory, t, d) {
+		t = t.toUpperCase();
 
 		$.ajax({
 
 		type: "POST",
 		dataType: "json",
-	  	url: "/getTeamInfo",
-	  	data: {team: t}
+	  	url: urlText,
+	  	data: d
 		}).done(function(data) {
 		  console.log("done");
 		  console.log(data);
-		  displayData(box, t, data, "team");
+		  displayData(box, t, data, dataCategory);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -104,26 +105,27 @@ $(function() {
 	$( "#sortable" ).sortable();
 	$( "#sortable" ).disableSelection();
 
-	var p3 = "Brian Hartline"
-	var t3 = "MIA"
-	var box3 = '#box1'
 
 	$('.form').on('submit', function(e) {
 		document.getElementById("dialog-form").style.display = "none";
 		e.preventDefault();
-		console.log("YOYO");
 
-	    var category = $(this).find("input[name='category']:checked").val() //works
-	    var t = $(this).find('select[name="team"]').val(); //works
-		var p = $(this).find('select[name="player"]:selected').val();
+	    var category = $(this).find("input[name='category']:checked").val() 
+	    var t = $(this).find('select[name="team"]').val(); 
+		var p = $(this).find('#playerList option:selected').val();
+
+		p="Antonio Brown";
 
 	    switch(category) {
 	    	case "team":
 	    		console.log("IN CASE STATEMENT TEAM");
-	    		getData(boxNumber, "/getTeamInfo", category, t);
+	    		d = {team: t}
+	    		getData(boxNumber, "/getTeamInfo", category, t, d);
 	    		break;
 	    	case "player":
 		    	console.log("IN CASE STATEMENT PLAYER");
+		    	d = { player: p, team: t};
+		    	getData(boxNumber, "/getPlayerInfo", category, t, d);
 	    		break;
 	    	default:
 		    	console.log("IN CASE STATEMENT DEFAULT");
@@ -310,29 +312,6 @@ $(function() {
 	// 	console.log(status);
 	// 	console.log(error);
 	// });
-
-	var t8 = "PHI"
-	var box8 = '#box8'
-
-	
-
-	$.ajax({
-		type: "POST",
-		dataType: "json",
-	  url: "/getTeamInfo",
-	  data: {team: t8}
-	}).done(function(data) {
-	  console.log("done");
-	  console.log(data);
-	  displayData(box8, t8, data, "team");
-	}).fail(function(xhr, status, error){
-		console.log(xhr);
-		console.log(status);
-		console.log(error);
-	});
-	
-
-	
 
 
 	
