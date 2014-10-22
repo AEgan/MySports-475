@@ -2,8 +2,10 @@ var boxNumber = "";
 var nextBoxNumber = 2
 
 function displayData(box, t, data, dataCategory) {
+	console.log("ASDASDASDASDASDASDASDASDASD");
 		switch (dataCategory) {
 			case "player":
+				console.log("ASDASDASD");
 				$(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
 				break;
 			case "team":
