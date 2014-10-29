@@ -2,6 +2,7 @@ html {
 	background-color: #036ea9;
 	font-family: Arial, sans-serif;
 	padding: 0px;
+	background-color: #DDD;
 }
 
 #header{
@@ -36,19 +37,19 @@ html {
 	width: 100%;
 }
 
-#sortable li {
-	margin: 5px 5px 5px 0;
-	padding: 1px;
-	float: left;
-	width: 360px;
-	height: 180px;
-	font-size: 16px;
-	text-align: center;
+
+#sortable li { 
+	margin: 5px 5px 5px 0; 
+	padding: 1px; 
+	float: left; 
+	width: 360px; 
+	height: 220px; 
+	font-size: 16px; 
+	text-align: center; 
 	background-color: #fff;
 	border: 1px solid #334;
     border-radius: 2px;
     color: #334;
-    overflow: scroll;
 
 }
 
@@ -72,6 +73,7 @@ html {
    font-size: 15px;
    font-family: Helvetica, Arial, Sans-Serif;
    text-decoration: none;
+   cursor: pointer;
 }
 
 .button:hover {
@@ -88,30 +90,57 @@ html {
 .addNew{
 	vertical-align: bottom;
 	display: inline-block;
-	margin-top: 130px;
+	margin-top: 150px;
 }
 .sportsWrapper {
 	margin: 10px;
+	background-repeat: no-repeat;
+	background-size: 80px auto;
+	background-position: 100% 40%;
+	height: 200px;
+	overflow: scroll;
 
 }
 .sportsContent {
 	text-align: left;
+	opacity: 1 !important;
+	color: #334;
 }
+
 
 #dialog-form {
 	display: none;
 	background-color: white;
 	padding: 20px;
-	background-color: #fff;
+	background-color: #016684;
 	border: 1px solid #334;
     border-radius: 2px;
-    color: #334;
+    color: #fff;
+    width: 322px; 
+	height: 182px; 
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
 
-	position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.radioButtons {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.radio {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+
+form {
+	line-height: 25px;
+}
+#submit button {
+	border: 0px;
+	outline: 0;
+	box-shadow: none;
+	margin: 10px 0px 0px 75px;
 }
 
 .form fieldset input {
