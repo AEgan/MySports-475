@@ -2,13 +2,15 @@ var boxNumber = "";
 var nextBoxNumber = 2
 
 function displayData(box, t, data, dataCategory) {
+	console.log("ASDASDASDASDASDASDASDASDASD");
 		switch (dataCategory) {
 			case "player":
-				$(box + ' #logo').html("<img src=assets/images/logos/"+t.toLowerCase()+".png/>");
+				console.log("ASDASDASD");
+				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 				$(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
 				break;
 			case "team":
-				$(box + ' #logo').html("<img src=assets/images/logos/"+t.toLowerCase()+".png/>");
+				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
 				break;
 			case "stats":
@@ -21,7 +23,13 @@ function displayData(box, t, data, dataCategory) {
 function popup(box) {
 	console.log("HAPPENING");
 	$("#teamRadio").prop("checked", true);
+	box2 = box.substr(1);
+	console.log(box2);
+	var p = getElementTopLeft(box2);
+	console.log(p.top);
 	document.getElementById("players").style.display = "none";
+	document.getElementById("dialog-form").style.left = p.left +"px";
+	document.getElementById("dialog-form").style.top = p.top + "px";
 	document.getElementById("dialog-form").style.display = "block";
 	document.getElementById("submit").style.display = "block";
 	boxNumber = "";
@@ -162,45 +170,20 @@ $(function() {
 		return true
 	});
 
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getTeamRoster",
-	//   data: {teamName: "MIA"}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
+	// var boxOne = "#box1";
 	// $.ajax({
 	// 	type: "GET",
 	// 	dataType: "json",
-	//   url: "/nfl_teams"
+	//   url: "/getNFLStandings"
 	// }).done(function(data) {
-	//   console.log("done");
+	//   console.log("standings done yo");
 	//   console.log(data);
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-	
-	// var p3 = "Brian Hartline";
-	// var t3 = "MIA";
-	// var box3 = "#box1";
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p3, team: t3}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box3 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
+	//   team0 = data.teams[0]['name']
+	//   team1 = data.teams[1]['name']
+	//   team2 = data.teams[2]['name']
+	//   team3 = data.teams[3]['name']
+	//   console.log(team0)
+	//   $(boxOne + ' .sportsContent').html("<b><u> Standings </u></b><br />" + team0 + "<br />" + team1 + "<br />" + team2 + "<br />" + team3);
 	// }).fail(function(xhr, status, error){
 	// 	console.log(xhr);
 	// 	console.log(status);
@@ -370,4 +353,17 @@ function displayTeamName (team) {
 function roundToTwo(num) {    
     return +(Math.round(num + "e+2")  + "e-2");
 }
+
+function getElementTopLeft(id) {
+    var ele = document.getElementById(id);
+    var top = 0;
+    var left = 0;
+    while(ele.tagName != "BODY") {
+        top += ele.offsetTop;
+        left += ele.offsetLeft;
+        ele = ele.offsetParent;
+    }
+    return { top: top, left: left };
+}
+
 

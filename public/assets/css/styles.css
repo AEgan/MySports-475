@@ -1,4 +1,5 @@
 html {
+	background-color: #036ea9; 
 	font-family: Arial, sans-serif;
 	padding: 0px;
 	background-color: #DDD;
@@ -7,10 +8,8 @@ html {
 #header{
 	height: 68px;
 	font-size: 34px;
-	background-color: #346;
+	background-color: #016684;
 	border-bottom: 2px solid #334;
-	border-left: 2px solid #334;
-	border-right: 2px solid #334;
 	margin-top: 0px;
 	padding-top: 0px;
 }
@@ -18,7 +17,7 @@ html {
 #wrapper {
 	width: 100%;
 	margin: 0px auto;
-	background-color: #ddd;
+	background-color: #17C7CA;
 	overflow: auto;
 	min-height: 100%;
 	padding-bottom: 10px;
@@ -28,7 +27,6 @@ html {
 	padding-left: 70px;
 	padding-top: 15px;
 	color: #fff;
-	text-shadow: -2px 0 #334, 0 2px #334, 2px 0 #334, 0 -2px #334;
 }
 
 
@@ -51,7 +49,6 @@ html {
 	border: 1px solid #334;
     border-radius: 2px;
     color: #334;
-    overflow: scroll;
 
 }
 
@@ -75,6 +72,7 @@ html {
    font-size: 15px;
    font-family: Helvetica, Arial, Sans-Serif;
    text-decoration: none;
+   cursor: pointer;
 }
 
 .button:hover {
@@ -91,40 +89,54 @@ html {
 .addNew{
 	vertical-align: bottom;
 	display: inline-block;
-	margin-top: 130px;
+	margin-top: 150px;
 }
 .sportsWrapper {
 	margin: 10px;
+	background-repeat: no-repeat;
+	background-size: 80px auto;
+	background-position: 100% 40%;
+	height: 200px;
+	overflow: scroll;
 
 }
 .sportsContent {
 	text-align: left;
-	z-index: 1;
+	opacity: 1 !important;
+	color: #334;
 }
 
-#logo {
-	float: right;
-	width: 100%;
-	opacity: .7;
-	z-index: -1;
-}
 
 #dialog-form {
 	display: none;
 	background-color: white;
 	padding: 20px;
-	background-color: #fff;
+	background-color: #016684;
 	border: 1px solid #334;
     border-radius: 2px;
-    color: #334;
-
-	position: fixed;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    color: #fff;
+    width: 322px; 
+	height: 182px; 
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }
 
-.form fieldset input {
-	clear: right;
+.radioButtons {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.radio {
+	display: inline-block;
+	margin-right: 15px;
+}
+
+form {
+	line-height: 25px;
+}
+#submit button {
+	border: 0px;
+	outline: 0;
+	box-shadow: none;
+	margin: 10px 0px 0px 75px;
 }

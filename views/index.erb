@@ -36,12 +36,12 @@
   </div>
 
   <div id="dialog-form" title="Create new user">
-    <p class="validateTips">All form fields are required.</p>
+    <p class="validateTips">Choose which information to display</p>
     <form class="form">
       <fieldset>
         <div class="radioButtons">
-          <input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/>
-          <input type="radio" name="category" value="player">Player<br/>
+          <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
+          <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
         </div>
         <div class="field">
           <label for="name">Team</label>
@@ -89,7 +89,7 @@
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
         
         <div id="submit">
-          <button type="submit" tabindex="-1">Submit</button>
+          <button class= 'button' type="submit" tabindex="-1">Submit</button>
         </div>
       </fieldset>
     </form>

@@ -2,13 +2,9 @@
 
 # Get player info
 def getPlayerInfo(playerName, teamName)
-	puts "FUUUUUUCCKCKKKKKKKK"
 	puts playerName
 	puts teamName
 	teamName = teamName.upcase
-	puts "AGAIN"
-	puts "ARI" == teamName
-	puts "Mike Leach" == playerName
 	puts teamName
 
 	# Set API Keys
