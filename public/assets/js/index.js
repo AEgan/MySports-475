@@ -2,11 +2,8 @@ var boxNumber = "";
 var nextBoxNumber = 2
 
 function displayData(box, t, data, dataCategory) {
-	console.log("ASDASDASDASDASDASDASDASDASD");
 		switch (dataCategory) {
 			case "player":
-				console.log("PLAYER DATA HERE");
-				console.log(data);
 				thatData = data;
 				var statsHTML = setHTML(data);
 				$(box + ' .sportsContent').html(statsHTML);
@@ -58,7 +55,6 @@ function setHTML(data) {
 }
 
 function popup(box) {
-	console.log("HAPPENING");
 	$("#teamRadio").prop("checked", true);
 	document.getElementById("players").style.display = "none";
 	document.getElementById("dialog-form").style.display = "block";
