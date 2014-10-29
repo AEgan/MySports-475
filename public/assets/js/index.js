@@ -1,7 +1,7 @@
 var boxNumber = "";
 var nextBoxNumber = 2
 
-function displayData(box, t, data, dataCategory) {
+function displayData(box, data, dataCategory, t) {
 		switch (dataCategory) {
 			case "player":
 
@@ -17,6 +17,8 @@ function displayData(box, t, data, dataCategory) {
 				break;
 			case "stats":
 				break;
+			case "standings":
+				console.log("STANDINGSSTANDINGSSTANDINGSSTANDINGSSTANDINGS");
 			default:
 				break;
 		}
@@ -65,6 +67,7 @@ function popup(box) {
 	var p = getElementTopLeft(box2);
 	console.log(p.top);
 	document.getElementById("players").style.display = "none";
+	document.getElementById("standingsDropdowns").style.display = "none";
 	document.getElementById("dialog-form").style.left = p.left +"px";
 	document.getElementById("dialog-form").style.top = p.top + "px";
 	document.getElementById("dialog-form").style.display = "block";
@@ -99,10 +102,10 @@ function populatePlayerList(t){
 	  console.log("done");
 	  console.log(data);
 	   for (var i = 0; i < data.length - 1; i++) {
-        var opt = data[i].player.name_full;
+        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
         var el = document.createElement("option");
         el.textContent = opt;
-        el.value = opt;
+        el.value = data[i].player.name_full;
         select.appendChild(el);
       }
 	}).fail(function(xhr, status, error){
@@ -114,8 +117,10 @@ function populatePlayerList(t){
 
 }
 
-function getData (box, urlText, dataCategory, t, d) {
-		t = t.toUpperCase();
+function getData (box, urlText, dataCategory, d, t) {
+		if(t) {
+			t = t.toUpperCase();
+		}
 
 		$.ajax({
 
@@ -127,7 +132,7 @@ function getData (box, urlText, dataCategory, t, d) {
 
 		  console.log("done");
 		  console.log(data);
-		  displayData(box, t, data, dataCategory);
+		  displayData(box, data, dataCategory, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -148,6 +153,11 @@ $(function() {
  		if ($("input[name='category']:checked").val() == "team") {
  			document.getElementById("players").style.display = "none";
  		}
+		if ($("input[name='category']:checked").val() == "standings") {
+			document.getElementById("standingsDropdowns").style.display = "block";
+			document.getElementById("players").style.display = "none";
+			document.getElementById("teams").style.display = "none";
+		}
  		return true;
  	});
 
@@ -164,18 +174,24 @@ $(function() {
     var category = $(this).find("input[name='category']:checked").val()
     var t = $(this).find('select[name="team"]').val();
     var p = $(this).find('select[name="player"]').val();
+		var c = $(this).find('select[name="conference"]').val();
+		var d = c + "_" + $(this).find('select[name="division"]').val();
 
 	    switch(category) {
 	    	case "team":
 	    		console.log("IN CASE STATEMENT TEAM");
-	    		d = {team: t}
-	    		getData(boxNumber, "/getTeamInfo", category, t, d);
+	    		data = {team: t}
+	    		getData(boxNumber, "/getTeamInfo", category, data, t);
 	    		break;
 	    	case "player":
 		    	console.log("IN CASE STATEMENT PLAYER");
-		    	d = { player: p, team: t};
-		    	getData(boxNumber, "/getPlayerInfo", category, t, d);
+		    	data = { player: p, team: t};
+		    	getData(boxNumber, "/getPlayerInfo", category, data, t);
 	    		break;
+				case "standings":
+					console.log("IN CASE STATEMENT PLAYER");
+					data = { conference: c, division: d };
+					getData(boxNumber, "/getNFLStandings", category, data);
 	    	default:
 		    	console.log("IN CASE STATEMENT DEFAULT");
 	    		break;

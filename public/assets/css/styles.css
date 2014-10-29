@@ -148,12 +148,17 @@ form {
 }
 
 table.player-stats-table {
-	/*width: 100%;
-	border-color: #cecece;
+	width: 75%;
+	/*border-color: #cecece;
 	border-width: 1px;
 	border-style: solid;*/
 }
 
-/*table.player-stats-table tr:nth-child(even) {
-	background-color: #cecece;
+table.player-stats-table tr:nth-child(even) {
+	background-color: #17C7CA;
+}
+
+/*table.player-stats-table tr:nth-child(odd) {
+	background-color: #016684;
+	color: #ffffff;
 }*/

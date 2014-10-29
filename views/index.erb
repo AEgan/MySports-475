@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <title>MySports</title>
-  
+
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 
@@ -20,9 +20,9 @@
       My Sports
     </div>
   </div>
-  
+
   <div id="wrapper">
-    
+
     <ul id="sortable">
       <li class="ui-state-default" id="box1">
           <div class="sportsWrapper">
@@ -31,7 +31,7 @@
                 <a id = "box1" onclick="popup('#box1')" class="button addNew">Add Sports Data</a>
              </div>
           </div>
-      </li>  
+      </li>
     </ul>
   </div>
 
@@ -42,52 +42,66 @@
         <div class="radioButtons">
           <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
           <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
+          <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
         </div>
         <div class="field">
           <label for="name">Team</label>
           <select class="teamList" id="teams" name="team" value ="">
-            <option value="ari">Arizona Cardinals</option>                 
+            <option value="ari">Arizona Cardinals</option>
             <option value="atl">Atlanta Falcons</option>
-            <option value="bal">Baltimore Ravens</option>             
+            <option value="bal">Baltimore Ravens</option>
             <option value="buf">Buffalo Bills</option>
-            <option value="car">Carolina Panthers</option>               
+            <option value="car">Carolina Panthers</option>
             <option value="chi">Chicago Bears</option>
-            <option value="cin">Cincinnati Bengals</option>               
+            <option value="cin">Cincinnati Bengals</option>
             <option value="cle">Cleveland Browns</option>
-            <option value="dal">Dallas Cowboys</option>            
+            <option value="dal">Dallas Cowboys</option>
             <option value="den">Denver Broncos</option>
-            <option value="det">Detroit Lions</option>              
+            <option value="det">Detroit Lions</option>
             <option value="gb">Green Bay Packers</option>
-            <option value="hou">Houston Texans</option>           
+            <option value="hou">Houston Texans</option>
             <option value="ind">Indianapolis Colts</option>
-            <option value="jac">Jacksonville Jaguars</option>          
+            <option value="jac">Jacksonville Jaguars</option>
             <option value="kc">Kansas City Chiefs</option>
-            <option value="mia">Miami Dolphins</option>          
+            <option value="mia">Miami Dolphins</option>
             <option value="min">Minnesota Vikings</option>
-            <option value="ne">New England Patriots</option>           
+            <option value="ne">New England Patriots</option>
             <option value="no">New Orleans Saints</option>
-            <option value="nyg">New York Giants</option>          
+            <option value="nyg">New York Giants</option>
             <option value="nyj">New York Jets</option>
-            <option value="oak">Oakland Raiders</option>           
+            <option value="oak">Oakland Raiders</option>
             <option value="phi">Philadelphia Eagles</option>
-            <option value="pit">Pittsburgh Steelers</option>         
+            <option value="pit">Pittsburgh Steelers</option>
             <option value="sd">San Diego Chargers</option>
             <option value="sf">San Francisco 49ers</option>
             <option value="sea">Seattle Seahawks</option>
-            <option value="stl">St Louis Rams</option>            
+            <option value="stl">St Louis Rams</option>
             <option value="tb">Tampa Bay Buccaneers</option>
-            <option value="ten">Tennessee Titans</option>        
+            <option value="ten">Tennessee Titans</option>
             <option value="was">Washington Redskins</option>
           </select>
         </div>
-      
+
         <div class="field" id="players">
           <label for="player">Player Name</label>
           <select id="playerList" type="text" name="player" id="player" value=""></select>
         </div>
+        <div class="field" id="standingsDropdowns">
+          <label for="conference">Conference</label>
+          <select class="conferenceList" id="conferences" name="conference" value ="">
+            <option value="AFC">AFC</option>
+            <option value="AFC">NFC</option>
+          </select>
+          <select class="divisionList" id="divisions" name="division" value ="">
+            <option value="NORTH">North</option>
+            <option value="SOUTH">South</option>
+            <option value="EAST">East</option>
+            <option value="WEST">West</option>
+          </select>
+        </div>
 
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
-        
+
         <div id="submit">
           <button class= 'button' type="submit" tabindex="-1">Submit</button>
         </div>
