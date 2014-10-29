@@ -5,8 +5,11 @@ function displayData(box, t, data, dataCategory) {
 	console.log("ASDASDASDASDASDASDASDASDASD");
 		switch (dataCategory) {
 			case "player":
-				console.log("ASDASDASD");
-				$(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
+				console.log("PLAYER DATA HERE");
+				console.log(data);
+				thatData = data;
+				var statsHTML = setHTML(data);
+				$(box + ' .sportsContent').html(statsHTML);
 				break;
 			case "team":
 				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br /><b>Offense</b><br/> Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
@@ -17,6 +20,42 @@ function displayData(box, t, data, dataCategory) {
 				break;
 		}
 	}
+
+function setHTML(data) {
+	var position = data.position;
+	var str = "<b>"+data.position+" &nbsp;" + data.name_full+"</b><br />";
+	str += "<table class='player-stats-table'>";
+	switch(position) {
+		case "WR":
+			str += "<tr><td>Total TDs: </td><td>" + data.touchdowns.total + "</td></tr>";
+			str += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
+			str += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
+			str += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
+			str += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
+			break;
+		case "QB":
+			str += "<tr><td>Passing Attempts: </td><td>" + data.passing.att + "</td></tr>";
+			str += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
+			str += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
+			str += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
+			str += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
+			str += "<tr><td>QBR: </td><td>" + data.passing.rating + "</td></tr>";
+			break;
+		case "RB":
+			str += "<tr><td>Rushing Attempts: </td><td>" + data.rushing.att + "</td></tr>";
+			str += "<tr><td>Rushing Yards: </td><td>" + data.rushing.yds + "</td></tr>";
+			str += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
+			str += "<tr><td>Rushing TDs: </td><td>" + data.rushing.td + "</td></tr>";
+			str += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
+			str += "<tr><td>Receiving Yards: </td><td>" + data.receiving.yds + "</td></tr>";
+			str += "<tr><td>Receiving TDs: </td><td>" + data.receiving.td + "</td></tr>";
+			break;
+		default:
+			break;
+	}
+	str += "</table>";
+	return str;
+}
 
 function popup(box) {
 	console.log("HAPPENING");
@@ -66,7 +105,7 @@ function populatePlayerList(t){
 		console.log(status);
 		console.log(error);
 	});
-  
+
 }
 
 function getData (box, urlText, dataCategory, t, d) {
@@ -116,9 +155,9 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 
-    var category = $(this).find("input[name='category']:checked").val() 
-    var t = $(this).find('select[name="team"]').val(); 
-    var p = $(this).find('select[name="player"]').val(); 
+    var category = $(this).find("input[name='category']:checked").val()
+    var t = $(this).find('select[name="team"]').val();
+    var p = $(this).find('select[name="player"]').val();
 
 	    switch(category) {
 	    	case "team":
@@ -151,8 +190,8 @@ $(function() {
      //    Handle any errors here.});
 
 	});
-	
-	$('.teamList').on('change', function () {   
+
+	$('.teamList').on('change', function () {
 		if ($("input[name='category']:checked").val() == "player") {
 		    //player is checked so populate team list
 		    var e = document.getElementById("teams");
@@ -298,4 +337,3 @@ $(function() {
 	// 	console.log(error);
 	// });
 });
-

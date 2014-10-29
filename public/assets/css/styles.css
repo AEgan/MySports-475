@@ -1,5 +1,5 @@
 html {
-	background-color: #ddd; 
+	background-color: #ddd;
 	font-family: Arial, sans-serif;
 	padding: 0px;
 }
@@ -14,7 +14,7 @@ html {
 	margin-top: 0px;
 	padding-top: 0px;
 }
- 
+
 #wrapper {
 	width: 100%;
 	margin: 0px auto;
@@ -32,21 +32,21 @@ html {
 }
 
 
-#sortable { 
-	list-style-type: none; 
-	margin-left: 30px; 
-	padding: 0; 
-	width: 100%; 
+#sortable {
+	list-style-type: none;
+	margin-left: 30px;
+	padding: 0;
+	width: 100%;
 }
 
-#sortable li { 
-	margin: 5px 5px 5px 0; 
-	padding: 1px; 
-	float: left; 
-	width: 360px; 
-	height: 180px; 
-	font-size: 16px; 
-	text-align: center; 
+#sortable li {
+	margin: 5px 5px 5px 0;
+	padding: 1px;
+	float: left;
+	width: 360px;
+	height: 180px;
+	font-size: 16px;
+	text-align: center;
 	background-color: #fff;
 	border: 1px solid #334;
     border-radius: 2px;
@@ -119,4 +119,15 @@ html {
 
 .form fieldset input {
 	clear: right;
+}
+
+table.player-stats-table {
+	width: 100%;
+	border-color: #cecece;
+	border-width: 1px;
+	border-style: solid;
+}
+
+table.player-stats-table tr:nth-child(even) {
+	background-color: #cecece;
 }
