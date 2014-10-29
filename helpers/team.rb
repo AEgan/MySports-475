@@ -3,7 +3,7 @@
 def getTeamRoster(teamName)
 	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
 	SportsDataApi.set_access_level(:nfl, 't')
-	all_players = SportsDataApi::Nfl.team_roster(teamName).players
+	all_players = SportsDataApi::Nfl.team_roster(teamName).players.select{|play| !play.player.nil?}.sort_by!{|play| play.player[:name_last]}
 	return all_players
 end
 
