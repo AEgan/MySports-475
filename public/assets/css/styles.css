@@ -1,5 +1,5 @@
 html {
-	background-color: #ddd;
+	background-color: #036ea9;
 	font-family: Arial, sans-serif;
 	padding: 0px;
 }
@@ -7,10 +7,8 @@ html {
 #header{
 	height: 68px;
 	font-size: 34px;
-	background-color: #346;
+	background-color: #016684;
 	border-bottom: 2px solid #334;
-	border-left: 2px solid #334;
-	border-right: 2px solid #334;
 	margin-top: 0px;
 	padding-top: 0px;
 }
@@ -18,7 +16,7 @@ html {
 #wrapper {
 	width: 100%;
 	margin: 0px auto;
-	background-color: #ddd;
+	background-color: #17C7CA;
 	overflow: auto;
 	min-height: 100%;
 	padding-bottom: 10px;
@@ -28,7 +26,6 @@ html {
 	padding-left: 70px;
 	padding-top: 15px;
 	color: #fff;
-	text-shadow: -2px 0 #334, 0 2px #334, 2px 0 #334, 0 -2px #334;
 }
 
 

@@ -1,6 +1,8 @@
 # ---------------- NFL ----------------------
 # Get all players for a team
 def getTeamRoster(teamName)
+	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+	SportsDataApi.set_access_level(:nfl, 't')
 	all_players = SportsDataApi::Nfl.team_roster(teamName).players
 	return all_players
 end
