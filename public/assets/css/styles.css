@@ -38,14 +38,14 @@ html {
 }
 
 
-#sortable li { 
-	margin: 5px 5px 5px 0; 
-	padding: 1px; 
-	float: left; 
-	width: 360px; 
-	height: 220px; 
-	font-size: 16px; 
-	text-align: center; 
+#sortable li {
+	margin: 5px 5px 5px 0;
+	padding: 1px;
+	float: left;
+	width: 360px;
+	height: 220px;
+	font-size: 16px;
+	text-align: center;
 	background-color: #fff;
 	border: 1px solid #334;
     border-radius: 2px;
@@ -116,8 +116,8 @@ html {
 	border: 1px solid #334;
     border-radius: 2px;
     color: #fff;
-    width: 322px; 
-	height: 182px; 
+    width: 322px;
+	height: 182px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -148,12 +148,12 @@ form {
 }
 
 table.player-stats-table {
-	width: 100%;
+	/*width: 100%;
 	border-color: #cecece;
 	border-width: 1px;
-	border-style: solid;
+	border-style: solid;*/
 }
 
-table.player-stats-table tr:nth-child(even) {
+/*table.player-stats-table tr:nth-child(even) {
 	background-color: #cecece;
-}
+}*/
