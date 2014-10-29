@@ -1,6 +1,7 @@
 html {
 	font-family: Arial, sans-serif;
 	padding: 0px;
+	background-color: #DDD;
 }
 
 #header{
@@ -43,7 +44,7 @@ html {
 	padding: 1px; 
 	float: left; 
 	width: 360px; 
-	height: 180px; 
+	height: 220px; 
 	font-size: 16px; 
 	text-align: center; 
 	background-color: #fff;
@@ -98,6 +99,14 @@ html {
 }
 .sportsContent {
 	text-align: left;
+	z-index: 1;
+}
+
+#logo {
+	float: right;
+	width: 100%;
+	opacity: .7;
+	z-index: -1;
 }
 
 #dialog-form {

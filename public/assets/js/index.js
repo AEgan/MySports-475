@@ -4,10 +4,12 @@ var nextBoxNumber = 2
 function displayData(box, t, data, dataCategory) {
 		switch (dataCategory) {
 			case "player":
+				$(box + ' #logo').html("<img src=assets/images/logos/"+t.toLowerCase()+".png/>");
 				$(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
 				break;
 			case "team":
-				$(box + ' .sportsContent').html("<b>"+t+" &nbsp;" +"</b><br /><b>Offense</b><br/> Total Touchdowns: &nbsp;" + data.touchdowns.total+"<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
+				$(box + ' #logo').html("<img src=assets/images/logos/"+t.toLowerCase()+".png/>");
+				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
 				break;
 			case "stats":
 				break;
@@ -91,7 +93,7 @@ function getData (box, urlText, dataCategory, t, d) {
 
 
 $(function() {
- 	$( "input" ).on( "click", function() {
+ 	$( ".radioButtons" ).on( "click", function() {
  		if ($("input[name='category']:checked").val() == "player") {
  			document.getElementById("players").style.display = "block";
  			var e = document.getElementById("teams");
@@ -136,7 +138,7 @@ $(function() {
 	    }
 
 	    nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
 	    nextBoxNumber += 1;
 
 	    // deferred = $.post("http://somewhere.com", { val: val });
@@ -321,4 +323,51 @@ $(function() {
 	// 	console.log(error);
 	// });
 });
+
+
+
+
+
+function displayTeamName (team) {
+	var t = team.toLowerCase();
+	switch (t) {
+		case "ari": return "Arizona Cardinals"; break;  
+        case "atl": return "Atlanta Falcons"; break;
+        case "bal": return "Baltimore Ravens"; break;
+        case "buf": return "Buffalo Bills"; break;
+        case "car": return "Carolina Panthers"; break;  
+        case "chi": return "Chicago Bears"; break;
+        case "cin": return "Cincinnati Bengals"; break;
+        case "cle": return "Cleveland Browns"; break;
+        case "dal": return "Dallas Cowboys"; break;
+        case "den": return "Denver Broncos"; break;
+        case "det": return "Detroit Lions"; break;
+        case "gb": return "Green Bay Packers"; break;
+        case "hou": return "Houston Texans"; break;
+        case "ind": return "Indianapolis Colts"; break;
+        case "jac": return "Jacksonville Jaguars"; break;    
+        case "kc": return "Kansas City Chiefs"; break;
+        case "mia": return "Miami Dolphins"; break;
+        case "min": return "Minnesota Vikings"; break;
+        case "ne": return "New England Patriots"; break;    
+        case "no": return "New Orleans Saints"; break;
+        case "nyg": return "New York Giants"; break;     
+        case "nyj": return "New York Jets"; break;
+        case "oak": return "Oakland Raiders"; break;      
+        case "phi": return "Philadelphia Eagles"; break;
+        case "pit": return "Pittsburgh Steelers"; break;    
+        case "sd": return "San Diego Chargers"; break;
+        case "sf": return "San Francisco 49ers"; break;
+        case "sea": return "Seattle Seahawks"; break;
+        case "stl": return "St Louis Rams"; break;
+        case "tb": return "Tampa Bay Buccaneers"; break;
+        case "ten": return "Tennessee Titans"; break;    
+        case "was": return "Washington Redskins"; break;
+        default: return team.toUpperCase(); break;
+    }
+}
+
+function roundToTwo(num) {    
+    return +(Math.round(num + "e+2")  + "e-2");
+}
 
