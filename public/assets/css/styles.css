@@ -158,6 +158,13 @@ table.player-stats-table tr:nth-child(even) {
 	background-color: #17C7CA;
 }
 
+table.standings-table {
+	width: 100%;
+}
+
+table.standings-table tr:nth-child(even) {
+	background-color: #17C7CA;
+}
 /*table.player-stats-table tr:nth-child(odd) {
 	background-color: #016684;
 	color: #ffffff;

@@ -3,6 +3,5 @@ def getNFLStandings(conference, division)
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	standings = SportsDataApi::Nfl.standings('2014', 'REG')
-
-	group = standings[conference][:divisions][division]
+	group = standings[conference][division]
 end

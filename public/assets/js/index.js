@@ -18,7 +18,19 @@ function displayData(box, data, dataCategory, t) {
 			case "stats":
 				break;
 			case "standings":
-				console.log("STANDINGSSTANDINGSSTANDINGSSTANDINGSSTANDINGS");
+				  team0 = data.teams[0]['name']
+				  team1 = data.teams[1]['name']
+				  team2 = data.teams[2]['name']
+				  team3 = data.teams[3]['name']
+					var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th></thead><tbody>";
+					for(var i = 0; i < data.teams.length; i++) {
+						str += "<tr><td>" + data.teams[i]['name'] + "</td>";
+						str += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
+						str += "<td>" + data.teams[i]['overall']['losses'] + "</td>";
+						str += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
+					}
+					str += "</tbody></table>"
+				  $(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + str);
 			default:
 				break;
 		}
@@ -157,6 +169,7 @@ $(function() {
 			document.getElementById("standingsDropdowns").style.display = "block";
 			document.getElementById("players").style.display = "none";
 			document.getElementById("teams").style.display = "none";
+			document.getElementById("team-select-fields").style.display = "none";
 		}
  		return true;
  	});
