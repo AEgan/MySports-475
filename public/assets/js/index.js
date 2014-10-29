@@ -19,7 +19,7 @@ function displayData(box, t, data, dataCategory) {
 	}
 
 function popup(box) {
-	console.log("HAPPENING");
+	console.log("POPUP");
 	$("#teamRadio").prop("checked", true);
 	document.getElementById("players").style.display = "none";
 	document.getElementById("dialog-form").style.display = "block";
