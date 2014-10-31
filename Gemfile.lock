@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/AEgan/sports_data_api.git
-  revision: a2018619a98fa974ff012b9db536ba29c5b54c1a
+  revision: e7cc121f9e5c14e34b8213d9611069ac593ce4bc
   branch: all_updates
   specs:
     sports_data_api (0.1.0)

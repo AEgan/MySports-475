@@ -22,10 +22,9 @@ end
 get '/' do
   @word = "MySports"
   SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+  SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
   SportsDataApi.set_access_level(:nfl, 't')
-  # @teams = SportsDataApi::Nfl.teams
-  # @all_teams = @teams.map { |t| t }
-  # @all_teams_names = @all_teams.map { |t| t.name }
+  SportsDataApi.set_access_level(:nhl, 't')
   erb :index
 end
 

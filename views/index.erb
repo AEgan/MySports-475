@@ -43,6 +43,7 @@
           <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
           <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
           <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
+          <div class="radio"><input type="radio" id="nhlStandings" name="category" value="nhlStandings">NHL Standings</div>
         </div>
         <div class="field">
           <div id="team-select-fields">
@@ -99,6 +100,15 @@
             <option value="SOUTH">South</option>
             <option value="EAST">East</option>
             <option value="WEST">West</option>
+          </select>
+        </div>
+        <div id="nhlStandingsDropdowns">
+          <label for="nhlConference">Conference</label>
+          <select class="nhlConferenceList" id="nhlConferences" name="nhlConference" value ="">
+            <option value="ATLANTIC">Atlantic</option>
+            <option value="METROPOLITAN">Metropolitan</option>
+            <option value="CENTRAL">Central</option>
+            <option value="PACIFIC">Pacific</option>
           </select>
         </div>
 
