@@ -157,18 +157,23 @@ function getData (box, urlText, dataCategory, d, t) {
 $(function() {
  	$( ".radioButtons" ).on( "click", function() {
  		if ($("input[name='category']:checked").val() == "player") {
+			document.getElementById("team-select-fields").style.display = "";
+			// document.getElementById("teams").style.display = "block";
  			document.getElementById("players").style.display = "block";
+			document.getElementById("standingsDropdowns").style.display = "none";
  			var e = document.getElementById("teams");
 			var strUser = e.options[e.selectedIndex].value;
 			populatePlayerList(strUser);
  		}
  		if ($("input[name='category']:checked").val() == "team") {
+			document.getElementById("teams").style.display = "block";
+			document.getElementById("team-select-fields").style.display = "";
  			document.getElementById("players").style.display = "none";
+			document.getElementById("standingsDropdowns").style.display = "none";
  		}
 		if ($("input[name='category']:checked").val() == "standings") {
 			document.getElementById("standingsDropdowns").style.display = "block";
 			document.getElementById("players").style.display = "none";
-			document.getElementById("teams").style.display = "none";
 			document.getElementById("team-select-fields").style.display = "none";
 		}
  		return true;
