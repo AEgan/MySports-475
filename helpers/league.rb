@@ -4,7 +4,7 @@ def getNFLStandings(conference, division)
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	standings = SportsDataApi::Nfl.standings('2014', 'REG')
-	group = standings[conference][division]
+	group = standings[conference][:divisions][division]
 end
 
 # gets the standings for NHL
@@ -13,9 +13,9 @@ def getNHLStandings(conference)
 	SportsDataApi.set_access_level(:nhl, 't')
 	standings = SportsDataApi::Nhl.standings('2014', 'REG')
 	if(conference.eql?("ATLANTIC") || conference.eql?("METROPOLITAN"))
-		group = standings.east[conference]
+		group = standings.east[:divisions][conference]
 	else
-		group = standings.west[conference]
+		group = standings.west[:divisions][conference]
 	end
 	group
 end
