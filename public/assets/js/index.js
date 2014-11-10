@@ -9,11 +9,14 @@ function displayData(box, data, dataCategory, t) {
 				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 				var statsHTML = setHTML(data);
 				$(box + ' .sportsContent').html(statsHTML);
-
+				$(box + ' > .modal').html("here it is");
 				break;
 			case "team":
 				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
+				var boxNum = box.charAt(box.length -1);
+				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts + "<br/><a href='#modal" + boxNum + "' class='modal-trigger'>See More</a>");
+				$(box + ' > .modal').html("here it is");
+				setModals();
 				break;
 			case "stats":
 				break;
@@ -29,8 +32,9 @@ function displayData(box, data, dataCategory, t) {
 						str += "<td>" + data.teams[i]['overall']['losses'] + "</td>";
 						str += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
 					}
-					str += "</tbody></table>"
+					str += "</tbody></table>";
 				  $(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + str);
+					$(box + ' > .modal').html("here it is");
 					break;
 			case "nhlStandings":
 				var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";
@@ -43,6 +47,7 @@ function displayData(box, data, dataCategory, t) {
 				}
 				str += "</tbody></table>";
 				$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
+				$(box + ' > .modal').html("here it is");
 				break;
 			default:
 				break;
@@ -246,7 +251,7 @@ $(function() {
 	    }
 
 	    nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
+	   	$('#sortable').append('<li class="ui-state-default modal-trigger" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
 	    nextBoxNumber += 1;
 
 	    // deferred = $.post("http://somewhere.com", { val: val });
