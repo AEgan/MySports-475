@@ -4,12 +4,12 @@ var nextBoxNumber = 2
 function displayData(box, data, dataCategory, t) {
 		switch (dataCategory) {
 			case "player":
-
 				console.log("ASDASDASD");
 				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-				var statsHTML = setHTML(data);
+				var statsHTML = setBoxHTML(data);
+				var modalHTML = setModalHTML(data);
 				$(box + ' .sportsContent').html(statsHTML);
-				$(box + ' > .modal').html("here it is");
+				$(box + ' > .modal').html(modalHTML);
 				break;
 			case "team":
 				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
@@ -21,10 +21,10 @@ function displayData(box, data, dataCategory, t) {
 			case "stats":
 				break;
 			case "standings":
-				setNFLStandingsHTML(data, function(theString) {
+				setNFLStandingsHTML(data, function(tableString, modalString) {
 					var displayModalText = "<a href="
-					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + theString);
-					$(box + ' > .modal').html("<b><u> Standings for " + data.name + "</u></b><br />" + theString);
+					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + tableString);
+					$(box + ' > .modal').html("<b><u> Standings for " + data.name + "</u></b><br />" + modalString);
 				});
 					break;
 			case "nhlStandings":
@@ -57,10 +57,23 @@ function setNFLStandingsHTML(data, callback) {
 		tableStr += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
 	}
 	tableStr += "</tbody></table>";
-	return callback(tableStr);
+	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Point Differential</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
+	for(var i = 0; i < data.teams.length; i++) {
+		modalString += "<tr><td>" + data.teams[i]['name'] + "</td>";
+		modalString += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
+		modalString += "<td>" + data.teams[i]['overall']['losses'] + "</td>";
+		modalString += "<td>" + data.teams[i]['overall']['ties'] + "</td>";
+		modalString += "<td>" + data.teams[i]['last_5']['wins'] + '-' + data.teams[i]['last_5']['losses'] + "-" + data.teams[i]['last_5']['ties'] + "</td>";
+		modalString += "<td>" + data.teams[i]['streak']['type'] + " " + data.teams[i]['streak']['length'] + "</td>";
+		modalString += "<td>" + data.teams[i]['points']['net'] + "</td>";
+		modalString += "<td>" + data.teams[i]['scored_first']['wins'] + '-' + data.teams[i]['scored_first']['losses'] + "-" + data.teams[i]['scored_first']['ties'] + "</td>";
+		modalString += "<td>" + data.teams[i]['leading_at_half']['wins'] + '-' + data.teams[i]['leading_at_half']['losses'] + "-" + data.teams[i]['leading_at_half']['ties'] + "</td>";
+		modalString += "<td>" + data.teams[i]['decided_by_7_points']['wins'] + '-' + data.teams[i]['decided_by_7_points']['losses'] + "-" + data.teams[i]['decided_by_7_points']['ties'] + "</td></tr>";
+	}
+	return callback(tableStr, modalString);
 }
 
-function setHTML(data) {
+function setBoxHTML(data) {
 	var position = data.position;
 	var str = "<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr />";
 	str += "<table class='player-stats-table'>";
@@ -73,12 +86,7 @@ function setHTML(data) {
 			str += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
 			break;
 		case "QB":
-			str += "<tr><td>Passing Attempts: </td><td>" + data.passing.att + "</td></tr>";
-			str += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
-			str += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
-			str += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
-			str += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
-			str += "<tr><td>QBR: </td><td>" + data.passing.rating + "</td></tr>";
+			str = getQBDataStrings(data);
 			break;
 		case "RB":
 			str += "<tr><td>Rushing Attempts: </td><td>" + data.rushing.att + "</td></tr>";
@@ -94,6 +102,78 @@ function setHTML(data) {
 	}
 	str += "</table>";
 	return str;
+}
+
+function setModalHTML(data) {
+	var position = data.position;
+	if(position === "QB") {
+		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
+		modalString += "<h2>Background</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
+		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
+		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
+		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
+		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
+		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
+		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
+		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
+		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
+
+		modalString += "<h2>Passing</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Attempts: </td><td>" + data.passing.att + "</td></tr>";
+		modalString += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
+		modalString += "<tr><td>Completion Percentage: </td><td>" + data.passing.cmp_pct + "</td></tr>";
+		modalString += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
+		modalString += "<tr><td>Yards/Reception: </td><td>" + data.passing.cmp_avg + "</td></tr>";
+		modalString += "<tr><td>Long: </td><td>" + data.passing.lg + "</td></tr>";
+		modalString += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
+		modalString += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
+		modalString += "<tr><td>Pick-6: </td><td>" + data.passing.int_td + "</td></tr>";
+		modalString += "<tr><td>Sacks: </td><td>" + data.passing.sk + "</td></tr>";
+		modalString += "<tr><td>Sack yards lost: </td><td>" + data.passing.sk_yds + "</td></tr>";
+		modalString += "</table>";
+
+		modalString += "<h2>Rushing</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Attempts: </td><td>" + data.rushing.att + "</td></tr>";
+		modalString += "<tr><td>Yards: </td><td>" + data.rushing.yds + "</td></tr>";
+		modalString += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
+		modalString += "<tr><td>Long: </td><td>" + data.rushing.lg + "</td></tr>";
+		modalString += "<tr><td>Touchdowns: </td><td>" + data.rushing.td + "</td></tr>";
+		modalString += "</table>";
+
+		modalString += "<h2>Fumbles</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Total: </td><td>" + data.fumbles.fum + "</td></tr>";
+		modalString += "<tr><td>Lost: </td><td>" + data.fumbles.lost + "</td></tr>";
+		modalString += "</table>";
+
+		return modalString;
+	} else {
+		return "We're working on it";
+	}
+}
+
+function inchesToHeight(inchString) {
+	var inchInt = parseInt(inchString);
+	var feet = Math.floor(inchInt / 12);
+	var inches = inchInt % 12;
+	return "" + feet + "'" + inches + "\"";
+}
+
+function getQBDataStrings(data) {
+	var position = data.position;
+	var tableString = "<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr />";
+	tableString += "<table class='player-stats-table'>";
+	tableString += "<tr><td>Passing Attempts: </td><td>" + data.passing.att + "</td></tr>";
+	tableString += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
+	tableString += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
+	tableString += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
+	tableString += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
+	tableString += "<tr><td>QBR: </td><td>" + data.passing.rating + "</td></tr>";
+	return tableString;
 }
 
 function popup(box) {

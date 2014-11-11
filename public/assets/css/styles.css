@@ -173,3 +173,8 @@ table.standings-table tr:nth-child(even) {
 [type="radio"]:not(:checked), [type="radio"]:checked {
 	position: inherit;
 }
+
+.modal {
+	bottom: 25px;
+	overflow: scroll;
+}
