@@ -169,3 +169,7 @@ table.standings-table tr:nth-child(even) {
 	background-color: #016684;
 	color: #ffffff;
 }*/
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+	position: inherit;
+}
