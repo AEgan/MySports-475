@@ -331,6 +331,7 @@ function getQueryVariable(variable)
 function populatePlayerList(t){
 	console.log('populatePlayerList');
     var select = document.getElementById("playerList");
+		select.className += select.className ? ' chosen-select' : 'chosen-select';
 
     select.options.length = 0;
     $.ajax({
@@ -349,6 +350,9 @@ function populatePlayerList(t){
         el.value = data[i].player.name_full;
         select.appendChild(el);
       }
+			setChosen();
+			console.log("here");
+			$(".chosen-select").trigger("chosen:updated");
 	}).fail(function(xhr, status, error){
 		//alert("fail");
 		console.log(xhr);
@@ -402,7 +406,7 @@ $(function() {
  			var e = document.getElementById("teams");
 			var strUser = e.options[e.selectedIndex].value;
 			populatePlayerList(strUser);
- 		}
+		}
  		if ($("input[name='category']:checked").val() == "team") {
 			document.getElementById("teams").style.display = "block";
 			document.getElementById("team-select-fields").style.display = "";

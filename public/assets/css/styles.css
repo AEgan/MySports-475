@@ -224,3 +224,7 @@ p {
 .filterOption:hover {
 	background: #17C7CA;
 }
+
+.chosen-search {
+	color: #000000;
+}
