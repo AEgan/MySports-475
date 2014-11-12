@@ -226,9 +226,10 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 
-    var category = $(this).find("input[name='category']:checked").val()
-    var t = $(this).find('select[name="team"]').val();
-    var p = $(this).find('select[name="player"]').val();
+    	var category = $(this).find("input[name='category']:checked").val()
+    	console.log(category);
+    	var t = $(this).find('select[name="team"]').val();
+    	var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
@@ -244,21 +245,22 @@ $(function() {
 		    	data = { player: p, team: t};
 		    	getData(boxNumber, "/getPlayerInfo", category, data, t);
 	    		break;
-				case "standings":
-					console.log("IN CASE STATEMENT PLAYER");
-					data = { conference: c, division: d };
-					getData(boxNumber, "/getNFLStandings", category, data);
-					break;
-				case "nhlStandings":
-					console.log("IN CASE STATEMENT NHL STANDINGS");
-					data = { conference: nhlConference };
-					getData(boxNumber, "/getNHLStandings", category, data);
-					break;
-				case "nhlTeam":
-					console.log("IN CASE STATEMENT NHL TEAM");
-					data = { team: nhlTeam };
-					getData(boxNumber, "/getNHLTeamInfo", category, data, nhlTeam);
-					break;
+			case "standings":
+				console.log("IN CASE STATEMENT standings");
+				data = { conference: c, division: d };
+				console.log(data);
+				getData(boxNumber, "/getNFLStandings", category, data);
+				break;
+			case "nhlStandings":
+				console.log("IN CASE STATEMENT NHL STANDINGS");
+				data = { conference: nhlConference };
+				getData(boxNumber, "/getNHLStandings", category, data);
+				break;
+			case "nhlTeam":
+				console.log("IN CASE STATEMENT NHL TEAM");
+				data = { team: nhlTeam };
+				getData(boxNumber, "/getNHLTeamInfo", category, data, nhlTeam);
+				break;
 	    	default:
 		    	console.log("IN CASE STATEMENT DEFAULT");
 	    		break;
@@ -268,15 +270,6 @@ $(function() {
 	    nextBoxID = "box" + nextBoxNumber;
 	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
 	    nextBoxNumber += 1;
-
-	    // deferred = $.post("http://somewhere.com", { val: val });
-
-	    // deferred.success(function () {
-	    //     Do your stuff.
-	    // });
-
-	    // deferred.error(function () {
-     //    Handle any errors here.});
 
 	});
 
