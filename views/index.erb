@@ -43,6 +43,8 @@
           <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
           <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
           <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
+          <div class="radio"><input type="radio" id="nhlStandings" name="category" value="nhlStandings">NHL Standings</div>
+          <div class="radio"><input type="radio" id="nhlTeam" name="category" value="nhlTeam">NHL Team</div>
         </div>
         <div class="field">
           <div id="team-select-fields">
@@ -100,6 +102,58 @@
             <option value="EAST">East</option>
             <option value="WEST">West</option>
           </select>
+        </div>
+        <div id="nhlStandingsDropdowns">
+          <label for="nhlConference">Conference</label>
+          <select class="nhlConferenceList" id="nhlConferences" name="nhlConference" value ="">
+            <option value="ATLANTIC">Atlantic</option>
+            <option value="METROPOLITAN">Metropolitan</option>
+            <option value="CENTRAL">Central</option>
+            <option value="PACIFIC">Pacific</option>
+          </select>
+        </div>
+        <div id="nhlTeamDropdown">
+          <label for="name">Team</label>
+          <select class="nhlTeamList" id="nhlTeams" name="nhlTeam" value="">
+            <optgroup label="Pacific">
+              <option value="4415b0a7-0f24-11e2-8525-18a905767e44">Canucks</option>
+              <option value="44153da1-0f24-11e2-8525-18a905767e44">Coyotes</option>
+              <option value="441862de-0f24-11e2-8525-18a905767e44">Ducks</option>
+              <option value="44159241-0f24-11e2-8525-18a905767e44">Flames</option>
+              <option value="44151f7a-0f24-11e2-8525-18a905767e44">Kings</option>
+              <option value="4415ea6c-0f24-11e2-8525-18a905767e44">Oilers</option>
+              <option value="44155909-0f24-11e2-8525-18a905767e44">Sharks</option>
+            </optgroup>
+            <optgroup label="Central">
+              <option value="4415ce44-0f24-11e2-8525-18a905767e44">Avalanche</option>
+              <option value="4416272f-0f24-11e2-8525-18a905767e44">Blackhawks</option>
+              <option value="441660ea-0f24-11e2-8525-18a905767e44">Blues</option>
+              <option value="44180e55-0f24-11e2-8525-18a905767e44">Jets</option>
+              <option value="441643b7-0f24-11e2-8525-18a905767e44">Predators</option>
+              <option value="44157522-0f24-11e2-8525-18a905767e44">Stars</option>
+              <option value="4416091c-0f24-11e2-8525-18a905767e44">Wild</option>
+            </optgroup>
+            <optgroup label="Atlantic">
+              <option value="4416ba1a-0f24-11e2-8525-18a905767e44">Bruins</option>
+              <option value="441713b7-0f24-11e2-8525-18a905767e44">Canadiens</option>
+              <option value="4417d3cb-0f24-11e2-8525-18a905767e44">Lightning</option>
+              <option value="441730a9-0f24-11e2-8525-18a905767e44">Maple Leafs</option>
+              <option value="4418464d-0f24-11e2-8525-18a905767e44">Panthers</option>
+              <option value="44169bb9-0f24-11e2-8525-18a905767e44">Red Wings</option>
+              <option value="4416d559-0f24-11e2-8525-18a905767e44">Sabres</option>
+              <option value="4416f5e2-0f24-11e2-8525-18a905767e44">Senators</option>
+            </optgroup>
+            <optgroup label="Metropolitan">
+              <option value="44167db4-0f24-11e2-8525-18a905767e44">Blue Jackets</option>
+              <option value="4417eede-0f24-11e2-8525-18a905767e44">Capitals</option>
+              <option value="44174b0c-0f24-11e2-8525-18a905767e44">Devils</option>
+              <option value="44179d47-0f24-11e2-8525-18a905767e44">Flyers</option>
+              <option value="44182a9d-0f24-11e2-8525-18a905767e44">Hurricanes</option>
+              <option value="441766b9-0f24-11e2-8525-18a905767e44">Islanders</option>
+              <option value="4417b7d7-0f24-11e2-8525-18a905767e44">Penguins</option>
+              <option value="441781b9-0f24-11e2-8525-18a905767e44">Rangers</option>
+            </optgroup>
+          <select>
         </div>
 
         <!-- Allow form submission with keyboard without duplicating the dialog button -->

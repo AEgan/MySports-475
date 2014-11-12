@@ -6,3 +6,9 @@ post '/getNFLStandings' do
 	content_type :json
 	getNFLStandings(conference, division).to_json
 end
+
+post '/getNHLStandings' do
+	conference = request["conference"]
+	content_type :json
+	getNHLStandings(conference).to_json
+end

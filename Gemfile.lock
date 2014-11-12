@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/AEgan/sports_data_api.git
-  revision: a2018619a98fa974ff012b9db536ba29c5b54c1a
+  revision: 2ad717e65711db634fcf9bd89458a7f2bf410e40
   branch: all_updates
   specs:
     sports_data_api (0.1.0)
@@ -10,10 +10,10 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (3.2.19)
-      activesupport (= 3.2.19)
+    activemodel (3.2.20)
+      activesupport (= 3.2.20)
       builder (~> 3.0.0)
-    activesupport (3.2.19)
+    activesupport (3.2.20)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     bond (0.5.1)
@@ -62,7 +62,7 @@ GEM
       sinatra (>= 1.0.0)
     sinatra-redirect-with-flash (0.2.1)
       sinatra (>= 1.0.0)
-    sqlite3 (1.3.9)
+    sqlite3 (1.3.10)
     tilt (1.4.1)
     tux (0.3.0)
       ripl (>= 0.3.5)

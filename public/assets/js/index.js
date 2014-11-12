@@ -31,6 +31,22 @@ function displayData(box, data, dataCategory, t) {
 					}
 					str += "</tbody></table>"
 				  $(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + str);
+					break;
+			case "nhlStandings":
+				var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";
+				for(var i = 0; i < data.teams.length; i++) {
+					str += "<tr><td>" + data.teams[i]['name'] + "</td>";
+					str += "<td>" + data.teams[i]['wins'] + "</td>";
+					str += "<td>" + data.teams[i]['losses'] + "</td>";
+					str += "<td>" + data.teams[i]['overtime_losses'] + "</td>";
+					str += "<td>" + data.teams[i]['points'] + "</td></tr>"
+				}
+				str += "</tbody></table>";
+				$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
+				break;
+			case "nhlTeam":
+				$(box + ' .sportsContent').html("we out here");
+				break;
 			default:
 				break;
 		}
@@ -80,10 +96,12 @@ function popup(box) {
 	console.log(p.top);
 	document.getElementById("players").style.display = "none";
 	document.getElementById("standingsDropdowns").style.display = "none";
+	document.getElementById("nhlStandingsDropdowns").style.display = "none";
 	document.getElementById("dialog-form").style.left = p.left +"px";
 	document.getElementById("dialog-form").style.top = p.top + "px";
 	document.getElementById("dialog-form").style.display = "block";
 	document.getElementById("submit").style.display = "block";
+	document.getElementById("nhlTeamDropdown").style.display = "none";
 	boxNumber = "";
 	boxNumber = box;
 }
@@ -157,19 +175,43 @@ function getData (box, urlText, dataCategory, d, t) {
 $(function() {
  	$( ".radioButtons" ).on( "click", function() {
  		if ($("input[name='category']:checked").val() == "player") {
+			document.getElementById("team-select-fields").style.display = "";
  			document.getElementById("players").style.display = "block";
+			document.getElementById("standingsDropdowns").style.display = "none";
+			document.getElementById("nhlStandingsDropdowns").style.display = "none";
+			document.getElementById("nhlTeamDropdown").style.display = "none";
  			var e = document.getElementById("teams");
 			var strUser = e.options[e.selectedIndex].value;
 			populatePlayerList(strUser);
  		}
  		if ($("input[name='category']:checked").val() == "team") {
+			document.getElementById("teams").style.display = "block";
+			document.getElementById("team-select-fields").style.display = "";
  			document.getElementById("players").style.display = "none";
+			document.getElementById("standingsDropdowns").style.display = "none";
+			document.getElementById("nhlStandingsDropdowns").style.display = "none";
+			document.getElementById("nhlTeamDropdown").style.display = "none";
  		}
 		if ($("input[name='category']:checked").val() == "standings") {
 			document.getElementById("standingsDropdowns").style.display = "block";
 			document.getElementById("players").style.display = "none";
-			document.getElementById("teams").style.display = "none";
 			document.getElementById("team-select-fields").style.display = "none";
+			document.getElementById("nhlStandingsDropdowns").style.display = "none";
+			document.getElementById("nhlTeamDropdown").style.display = "none";
+		}
+		if ($("input[name='category']:checked").val() == "nhlStandings") {
+			document.getElementById("standingsDropdowns").style.display = "none";
+			document.getElementById("players").style.display = "none";
+			document.getElementById("team-select-fields").style.display = "none";
+			document.getElementById("nhlStandingsDropdowns").style.display = "block";
+			document.getElementById("nhlTeamDropdown").style.display = "none";
+		}
+		if ($("input[name='category']:checked").val() == "nhlTeam") {
+			document.getElementById("standingsDropdowns").style.display = "none";
+			document.getElementById("players").style.display = "none";
+			document.getElementById("team-select-fields").style.display = "none";
+			document.getElementById("nhlStandingsDropdowns").style.display = "none";
+			document.getElementById("nhlTeamDropdown").style.display = "block";
 		}
  		return true;
  	});
@@ -189,7 +231,8 @@ $(function() {
     var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
 		var d = c + "_" + $(this).find('select[name="division"]').val();
-
+		var nhlConference = $(this).find('select[name="nhlConference"]').val();
+		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
 	    switch(category) {
 	    	case "team":
 	    		console.log("IN CASE STATEMENT TEAM");
@@ -205,6 +248,17 @@ $(function() {
 					console.log("IN CASE STATEMENT PLAYER");
 					data = { conference: c, division: d };
 					getData(boxNumber, "/getNFLStandings", category, data);
+					break;
+				case "nhlStandings":
+					console.log("IN CASE STATEMENT NHL STANDINGS");
+					data = { conference: nhlConference };
+					getData(boxNumber, "/getNHLStandings", category, data);
+					break;
+				case "nhlTeam":
+					console.log("IN CASE STATEMENT NHL TEAM");
+					data = { team: nhlTeam };
+					getData(boxNumber, "/getNHLTeamInfo", category, data, nhlTeam);
+					break;
 	    	default:
 		    	console.log("IN CASE STATEMENT DEFAULT");
 	    		break;
