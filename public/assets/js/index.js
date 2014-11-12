@@ -1,5 +1,7 @@
 var boxNumber = "";
 var nextBoxNumber = 2
+var box_team = new Array();
+
 
 function displayData(box, data, dataCategory, t) {
 		switch (dataCategory) {
@@ -16,8 +18,10 @@ function displayData(box, data, dataCategory, t) {
 				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 				var boxNum = box.charAt(box.length -1);
 				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts + "<br/><a href='#modal" + boxNum + "' class='modal-trigger'>See More</a>");
+				$('.modal-trigger-area').css("display", "block");
 				$(box + ' > .modal').html("here it is");
 				setModals();
+				$('.modal-trigger-area').css("display", "block");
 				break;
 			case "stats":
 				break;
@@ -43,6 +47,7 @@ function displayData(box, data, dataCategory, t) {
 				break;
 			case "nhlTeam":
 				$(box + ' .sportsContent').html("we out here");
+				$('.modal-trigger-area').css("display", "block");
 				break;
 			default:
 				break;
@@ -358,6 +363,14 @@ function getData (box, urlText, dataCategory, d, t) {
 			t = t.toUpperCase();
 		}
 
+		var arrayNew = new Array();
+		arrayNew.push(box);
+		arrayNew.push(dataCategory);
+		box_team.push(arrayNew);
+		console.log("arrayNew");
+		console.log(arrayNew);
+		console.log(box_team);
+
 		$.ajax({
 
 		type: "POST",
@@ -475,8 +488,10 @@ $(function() {
 
 	    nextBoxID = "box" + nextBoxNumber;
 	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+	   	
 	    nextBoxNumber += 1;
-			setModals();
+		setModals();
+	
 	    // deferred = $.post("http://somewhere.com", { val: val });
 
 	    // deferred.success(function () {
@@ -495,6 +510,43 @@ $(function() {
 				populatePlayerList(strUser);
 		}
 		return true
+	});
+
+	$( ".filterOption" ).on( "click", function() {
+		$( ".filterOption" ).css("background-color", "#DDD");
+		$( ".filterOption" ).css("border-bottom", "2px solid #334");
+		$(this).css("background-color", "#17C7CA");
+		$(this).css("border-bottom", "none");
+
+		var filter = $(this).prop('id');
+		console.log(filter);
+		switch(filter) {
+			case "nfl":
+				console.log("NFL");
+				for (var i = 0; i < box_team.length; i++) {
+					if (box_team[i][1] == "team" || box_team[i][1] == "player" || box_team[i][1] == "standings") {
+						console.log("TEAM");
+					}
+					else {
+						box2 = box_team[i][0].substr(1);
+						$(box2).css("display", "none");
+					}
+
+				};
+				break;
+			case "nhl":
+				console.log("NHL");
+				for (var i = 0; i < box_team.length; i++) {
+					if (box_team[i][1] == "team" || box_team[i][1] == "player" || box_team[i][1] == "standings") {
+						box2 = box_team[i][0].substr(1);
+						$(box2).css("display", "none");
+					} 
+				};
+				break;
+			default:
+				break;
+		}
+
 	});
 
 	// var boxOne = "#box1";
