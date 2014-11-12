@@ -74,6 +74,9 @@ html {
    font-family: Helvetica, Arial, Sans-Serif;
    text-decoration: none;
    cursor: pointer;
+   height: auto;
+   width: auto;
+   padding: 0px 10px 0px 10px;
 }
 
 .button:hover {
@@ -90,7 +93,10 @@ html {
 .addNew{
 	vertical-align: bottom;
 	display: inline-block;
-	margin-top: 150px;
+	margin-top: 130px;
+	width: auto;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 .sportsWrapper {
 	margin: 10px;
@@ -169,3 +175,20 @@ table.standings-table tr:nth-child(even) {
 	background-color: #016684;
 	color: #ffffff;
 }*/
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+	position: inherit;
+}
+
+.modal {
+	bottom: 25px;
+	overflow: scroll;
+}
+
+.modal-trigger-area {
+	display: none;
+}
+p {
+	margin: 0px;
+	padding: 0px 5px 5px 5px;
+}
