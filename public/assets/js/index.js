@@ -151,6 +151,123 @@ function setModalHTML(data) {
 		modalString += "</table>";
 
 		return modalString;
+	} else if(position === "WR") {
+		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
+		modalString += "<h2>Background</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
+		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
+		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
+		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
+		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
+		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
+		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
+		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
+		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
+
+		modalString += "<h2>Receiving</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
+		modalString += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
+		modalString += "<tr><td>Average: </td><td>" + data.receiving.avg + "</td></tr>";
+		modalString += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
+		modalString += "<tr><td>Touchdowns: </td><td>" + data.receiving.td + "</td></tr>";
+		modalString += "<tr><td>Yards After Catch: </td><td>" + data.receiving.yac + "</td></tr>";
+		modalString += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
+		modalString += "</table>";
+
+		if(parseInt(data.penalty.num) != 0) {
+			modalString += "<h2>Penalties</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.penalty.num + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.penalty.yds + "</td></tr>";
+			modalString += "</table>";
+		}
+		if(parseInt(data.kick_return.returns) != 0) {
+			modalString += "<h2>Kick Returns</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.kick_return.returns + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.kick_return.yds + "</td></tr>";
+			modalString += "<tr><td>Touchdowns: </td><td>" + data.kick_return.td + "</td></tr>";
+			modalString += "<tr><td>Average: </td><td>" + data.kick_return.avg + "</td></tr>";
+			modalString += "<tr><td>Long: </td><td>" + data.kick_return.lg + "</td></tr>";
+			modalString += "</table>";
+		}
+		if(parseInt(data.punt_return.returns) != 0) {
+			modalString += "<h2>Kick Returns</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.punt_return.returns + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.punt_return.yds + "</td></tr>";
+			modalString += "<tr><td>Touchdowns: </td><td>" + data.punt_return.td + "</td></tr>";
+			modalString += "<tr><td>Average: </td><td>" + data.punt_return.avg + "</td></tr>";
+			modalString += "<tr><td>Long: </td><td>" + data.punt_return.lg + "</td></tr>";
+			modalString += "<tr><td>Fair Catches: </td><td>" + data.punt_return.fc + "</td></tr>";
+			modalString += "</table>";
+		}
+		return modalString;
+	} else if(position === "RB") {
+		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
+		modalString += "<h2>Background</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
+		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
+		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
+		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
+		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
+		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
+		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
+		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
+		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
+
+		modalString += "<h2>Rushing</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Attempts: </td><td>" + data.rushing.att + "</td></tr>";
+		modalString += "<tr><td>Yards: </td><td>" + data.rushing.yds + "</td></tr>";
+		modalString += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
+		modalString += "<tr><td>Long: </td><td>" + data.rushing.lg + "</td></tr>";
+		modalString += "<tr><td>Touchdowns: </td><td>" + data.rushing.td + "</td></tr>";
+		modalString += "</table>";
+
+		modalString += "<h2>Receiving</h2>";
+		modalString += "<table class='player-stats-table'>";
+		modalString += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
+		modalString += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
+		modalString += "<tr><td>Average: </td><td>" + data.receiving.avg + "</td></tr>";
+		modalString += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
+		modalString += "<tr><td>Touchdowns: </td><td>" + data.receiving.td + "</td></tr>";
+		modalString += "<tr><td>Yards After Catch: </td><td>" + data.receiving.yac + "</td></tr>";
+		modalString += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
+		modalString += "</table>";
+
+		if(parseInt(data.penalty.num) != 0) {
+			modalString += "<h2>Penalties</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.penalty.num + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.penalty.yds + "</td></tr>";
+			modalString += "</table>";
+		}
+		if(parseInt(data.kick_return.returns) != 0) {
+			modalString += "<h2>Kick Returns</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.kick_return.returns + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.kick_return.yds + "</td></tr>";
+			modalString += "<tr><td>Touchdowns: </td><td>" + data.kick_return.td + "</td></tr>";
+			modalString += "<tr><td>Average: </td><td>" + data.kick_return.avg + "</td></tr>";
+			modalString += "<tr><td>Long: </td><td>" + data.kick_return.lg + "</td></tr>";
+			modalString += "</table>";
+		}
+		if(parseInt(data.punt_return.returns) != 0) {
+			modalString += "<h2>Kick Returns</h2>"
+			modalString += "<table class='player-stats-table'>";
+			modalString += "<tr><td>Number: </td><td>" + data.punt_return.returns + "</td></tr>";
+			modalString += "<tr><td>Yards: </td><td>" + data.punt_return.yds + "</td></tr>";
+			modalString += "<tr><td>Touchdowns: </td><td>" + data.punt_return.td + "</td></tr>";
+			modalString += "<tr><td>Average: </td><td>" + data.punt_return.avg + "</td></tr>";
+			modalString += "<tr><td>Long: </td><td>" + data.punt_return.lg + "</td></tr>";
+			modalString += "<tr><td>Fair Catches: </td><td>" + data.punt_return.fc + "</td></tr>";
+			modalString += "</table>";
+		}
+		return modalString;
 	} else {
 		return "We're working on it";
 	}
@@ -354,9 +471,9 @@ $(function() {
 	    }
 
 	    nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default modal-trigger" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div></div></li>')
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
 	    nextBoxNumber += 1;
-
+			setModals();
 	    // deferred = $.post("http://somewhere.com", { val: val });
 
 	    // deferred.success(function () {
