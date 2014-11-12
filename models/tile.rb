@@ -1,10 +1,10 @@
-class User
+class Tile
 	include Mongoid::Document
 	field :name, :type => String
-	field :password, :type => String
+	field :info
 	has_many :customs
 end
 
-get '/users' do
-	@users = Users.all
+get '/tile' do
+
 end
