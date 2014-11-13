@@ -104,7 +104,7 @@ function setBoxHTML(data) {
 	str += "</table>";
 	return str;
 }
-
+// var modalString = render('modalTemplate', data);
 function setModalHTML(data) {
 	var position = data.position;
 	if(position === "QB") {
