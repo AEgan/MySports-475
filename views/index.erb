@@ -8,6 +8,7 @@
 
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
   <script type="text/javascript" src="assets/js/materialize.js"></script>
   <script type="text/javascript" src="assets/js/chosen.jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/chosen.proto.min.js"></script>
@@ -176,3 +177,19 @@
   </div>
 </body>
 </html>
+
+<script id="basicInfo" type="text/x-handlebars-template">​
+ <h1> position data.name_full </h1>
+<h2>Background</h2>
+<table class='player-stats-table'>
+  <tr><td>Home Town: </td><td> {{data.birth_place}} </td></tr>
+  <tr><td>Birthdate: </td><td> {{data.birthdate}} </td></tr>
+  <tr><td>High School: </td><td> {{data.high_school}} </td></tr>
+  <tr><td>College: </td><td> {{data.college}} </td></tr>
+  <tr><td>Draft: </td><td>Round {{data.draft_round}}, {{data.draft_pick}} overall</td></tr>
+  <tr><td>Years in League: </td><td> {{data.experience}} </td></tr>
+  <tr><td>Height: </td><td> inchesToHeight({{data.height}})</td></tr>
+  <tr><td>Weight: </td><td> {{data.weight}} lbs</td></tr>
+  <tr><td>Jersey Number: </td><td>{{data.jersey_number}}</td></tr>
+</table>
+​</script>

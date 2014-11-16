@@ -108,6 +108,11 @@ function setBoxHTML(data) {
 function setModalHTML(data) {
 	var position = data.position;
 	if(position === "QB") {
+		var theData = {headerTitle:"Shop Page", weekDay:"Wednesday"};  
+		var theTemplateScript = $("#basicInfo").html();  
+		var theTemplate = Handlebars.compile (theTemplateScript);  
+		 $('#header').append (theTemplate (theData));
+		
 		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
 		modalString += "<h2>Background</h2>";
 		modalString += "<table class='player-stats-table'>";
@@ -381,8 +386,9 @@ function getData (box, urlText, dataCategory, d, t) {
 		return true;
 }
 
-
+// Main Function
 $(function() {
+	console.log("BLIII");
  	$( ".radioButtons" ).on( "click", function() {
  		if ($("input[name='category']:checked").val() == "player") {
 			document.getElementById("team-select-fields").style.display = "";
