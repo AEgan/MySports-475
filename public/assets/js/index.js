@@ -109,7 +109,7 @@ function setBoxHTML(data) {
 	str += "</table>";
 	return str;
 }
-
+// var modalString = render('modalTemplate', data);
 function setModalHTML(data) {
 	var position = data.position;
 	if(position === "QB") {
@@ -438,7 +438,28 @@ $(function() {
 		}
  		return true;
  	});
-
+	
+	// Login button
+	$('#login').on('click', function (e) {
+		e.preventDefault();
+		var username = $('#username').val()
+		var password = $('#password').val()
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+		  	url: "/login",
+		  	data: {username: username, password: password}
+			}).done(function(data) {
+			  console.log("done");
+			  console.log(data);
+			  
+			}).fail(function(xhr, status, error){
+				console.log("NOOOOOO");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+		});
+	});
 
 
 	$( "#sortable" ).sortable();
