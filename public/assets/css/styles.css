@@ -122,7 +122,8 @@ html {
     border-radius: 2px;
     color: #fff;
     width: 322px;
-	height: 182px;
+	min-height: 182px;
+	height: auto;
 	position: absolute;
 	top: 0px;
 	left: 0px;

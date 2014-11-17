@@ -530,10 +530,12 @@ $(function() {
 				for (var i = 0; i < box_team.length; i++) {
 					if (box_team[i][1] == "team" || box_team[i][1] == "player" || box_team[i][1] == "standings") {
 						console.log("TEAM");
+						$(box_team[i][0]).css("display", "block");
 					}
 					else {
-						box2 = box_team[i][0].substr(1);
-						$(box2).css("display", "none");
+						$(box_team[i][0]).css("display", "none");
+						console.log(box_team[i][0])
+						console.log("removing");
 					}
 
 				};
@@ -542,11 +544,22 @@ $(function() {
 				console.log("NHL");
 				for (var i = 0; i < box_team.length; i++) {
 					if (box_team[i][1] == "team" || box_team[i][1] == "player" || box_team[i][1] == "standings") {
-						box2 = box_team[i][0].substr(1);
-						$(box2).css("display", "none");
+						$(box_team[i][0]).css("display", "none");
 					} 
+					else {
+						$(box_team[i][0]).css("display", "block");
+					}
 				};
 				break;
+			case "noFilter":
+				console.log("NoFilter");
+				for (var i = 0; i < box_team.length; i++) {
+					$(box_team[i][0]).css("display", "block");
+					
+				};
+				break;
+
+
 			default:
 				break;
 		}
