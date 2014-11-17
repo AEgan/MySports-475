@@ -76,33 +76,22 @@ function setNFLStandingsHTML(data, callback) {
 
 function setBoxHTML(data) {
 	var position = data.position;
-	var str = "<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr />";
-	str += "<table class='player-stats-table'>";
+	var summary = render("summary_header", data);
 	switch(position) {
-		case "WR":
-			str += "<tr><td>Total TDs: </td><td>" + data.touchdowns.total + "</td></tr>";
-			str += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
-			str += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
-			str += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
-			str += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
-			break;
 		case "QB":
-			str = getQBDataStrings(data);
+			summary += render("summary_quarterback", data);
+			break;
+		case "WR":
+			summary += render("summary_wide_receiver", data);
 			break;
 		case "RB":
-			str += "<tr><td>Rushing Attempts: </td><td>" + data.rushing.att + "</td></tr>";
-			str += "<tr><td>Rushing Yards: </td><td>" + data.rushing.yds + "</td></tr>";
-			str += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
-			str += "<tr><td>Rushing TDs: </td><td>" + data.rushing.td + "</td></tr>";
-			str += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
-			str += "<tr><td>Receiving Yards: </td><td>" + data.receiving.yds + "</td></tr>";
-			str += "<tr><td>Receiving TDs: </td><td>" + data.receiving.td + "</td></tr>";
+			summary += render("summary_running_back", data);
 			break;
 		default:
+			summary += "Working on it"
 			break;
 	}
-	str += "</table>";
-	return str;
+	return summary;
 }
 
 function render (tmpl, data) {
@@ -150,19 +139,6 @@ function setModalHTML(data) {
 	} else {
 		return "We're working on it";
 	}
-}
-
-function getQBDataStrings(data) {
-	var position = data.position;
-	var tableString = "<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr />";
-	tableString += "<table class='player-stats-table'>";
-	tableString += "<tr><td>Passing Attempts: </td><td>" + data.passing.att + "</td></tr>";
-	tableString += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
-	tableString += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
-	tableString += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
-	tableString += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
-	tableString += "<tr><td>QBR: </td><td>" + data.passing.rating + "</td></tr>";
-	return tableString;
 }
 
 function popup(box) {

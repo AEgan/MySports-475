@@ -46,141 +46,16 @@
     </ul>
   </div>
 
-  <div id="dialog-form" title="Create new user">
-    <p>Choose which information to display</p>
-    <form class="form">
-      <fieldset>
-        <div class="radioButtons">
-          <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
-          <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
-          <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
-          <div class="radio"><input type="radio" id="nhlStandings" name="category" value="nhlStandings">NHL Standings</div>
-          <div class="radio"><input type="radio" id="nhlTeam" name="category" value="nhlTeam">NHL Team</div>
-        </div>
-        <div class="field">
-          <div id="team-select-fields">
-            <label for="name">Team</label>
-            <select class="teamList chosen-select" id="teams" name="team" value ="">
-              <option value="ari">Arizona Cardinals</option>
-              <option value="atl">Atlanta Falcons</option>
-              <option value="bal">Baltimore Ravens</option>
-              <option value="buf">Buffalo Bills</option>
-              <option value="car">Carolina Panthers</option>
-              <option value="chi">Chicago Bears</option>
-              <option value="cin">Cincinnati Bengals</option>
-              <option value="cle">Cleveland Browns</option>
-              <option value="dal">Dallas Cowboys</option>
-              <option value="den">Denver Broncos</option>
-              <option value="det">Detroit Lions</option>
-              <option value="gb">Green Bay Packers</option>
-              <option value="hou">Houston Texans</option>
-              <option value="ind">Indianapolis Colts</option>
-              <option value="jac">Jacksonville Jaguars</option>
-              <option value="kc">Kansas City Chiefs</option>
-              <option value="mia">Miami Dolphins</option>
-              <option value="min">Minnesota Vikings</option>
-              <option value="ne">New England Patriots</option>
-              <option value="no">New Orleans Saints</option>
-              <option value="nyg">New York Giants</option>
-              <option value="nyj">New York Jets</option>
-              <option value="oak">Oakland Raiders</option>
-              <option value="phi">Philadelphia Eagles</option>
-              <option value="pit">Pittsburgh Steelers</option>
-              <option value="sd">San Diego Chargers</option>
-              <option value="sf">San Francisco 49ers</option>
-              <option value="sea">Seattle Seahawks</option>
-              <option value="stl">St Louis Rams</option>
-              <option value="tb">Tampa Bay Buccaneers</option>
-              <option value="ten">Tennessee Titans</option>
-              <option value="was">Washington Redskins</option>
-            </select>
-          </div>
-        </div>
+  <!-- ADD SPORTS DATA FORM -->
+  <%= erb :form %>
 
-        <div class="field" id="players">
-          <label for="player">Player Name</label>
-          <select id="playerList" type="text" name="player" id="player" value=""></select>
-        </div>
-        <div class="field" id="standingsDropdowns">
-          <label for="conference">Conference</label>
-          <select class="conferenceList chosen-select" id="conferences" name="conference" value ="">
-            <option value="AFC">AFC</option>
-            <option value="NFC">NFC</option>
-          </select>
-          <select class="divisionList chosen-select" id="divisions" name="division" value ="">
-            <option value="NORTH">North</option>
-            <option value="SOUTH">South</option>
-            <option value="EAST">East</option>
-            <option value="WEST">West</option>
-          </select>
-        </div>
-        <div id="nhlStandingsDropdowns">
-          <label for="nhlConference">Conference</label>
-          <select class="nhlConferenceList chosen-select" id="nhlConferences" name="nhlConference" value ="">
-            <option value="ATLANTIC">Atlantic</option>
-            <option value="METROPOLITAN">Metropolitan</option>
-            <option value="CENTRAL">Central</option>
-            <option value="PACIFIC">Pacific</option>
-          </select>
-        </div>
-        <div id="nhlTeamDropdown">
-          <label for="name">Team</label>
-          <select class="nhlTeamList chosen-select" id="nhlTeams" name="nhlTeam" value="">
-            <optgroup label="Pacific">
-              <option value="4415b0a7-0f24-11e2-8525-18a905767e44">Canucks</option>
-              <option value="44153da1-0f24-11e2-8525-18a905767e44">Coyotes</option>
-              <option value="441862de-0f24-11e2-8525-18a905767e44">Ducks</option>
-              <option value="44159241-0f24-11e2-8525-18a905767e44">Flames</option>
-              <option value="44151f7a-0f24-11e2-8525-18a905767e44">Kings</option>
-              <option value="4415ea6c-0f24-11e2-8525-18a905767e44">Oilers</option>
-              <option value="44155909-0f24-11e2-8525-18a905767e44">Sharks</option>
-            </optgroup>
-            <optgroup label="Central">
-              <option value="4415ce44-0f24-11e2-8525-18a905767e44">Avalanche</option>
-              <option value="4416272f-0f24-11e2-8525-18a905767e44">Blackhawks</option>
-              <option value="441660ea-0f24-11e2-8525-18a905767e44">Blues</option>
-              <option value="44180e55-0f24-11e2-8525-18a905767e44">Jets</option>
-              <option value="441643b7-0f24-11e2-8525-18a905767e44">Predators</option>
-              <option value="44157522-0f24-11e2-8525-18a905767e44">Stars</option>
-              <option value="4416091c-0f24-11e2-8525-18a905767e44">Wild</option>
-            </optgroup>
-            <optgroup label="Atlantic">
-              <option value="4416ba1a-0f24-11e2-8525-18a905767e44">Bruins</option>
-              <option value="441713b7-0f24-11e2-8525-18a905767e44">Canadiens</option>
-              <option value="4417d3cb-0f24-11e2-8525-18a905767e44">Lightning</option>
-              <option value="441730a9-0f24-11e2-8525-18a905767e44">Maple Leafs</option>
-              <option value="4418464d-0f24-11e2-8525-18a905767e44">Panthers</option>
-              <option value="44169bb9-0f24-11e2-8525-18a905767e44">Red Wings</option>
-              <option value="4416d559-0f24-11e2-8525-18a905767e44">Sabres</option>
-              <option value="4416f5e2-0f24-11e2-8525-18a905767e44">Senators</option>
-            </optgroup>
-            <optgroup label="Metropolitan">
-              <option value="44167db4-0f24-11e2-8525-18a905767e44">Blue Jackets</option>
-              <option value="4417eede-0f24-11e2-8525-18a905767e44">Capitals</option>
-              <option value="44174b0c-0f24-11e2-8525-18a905767e44">Devils</option>
-              <option value="44179d47-0f24-11e2-8525-18a905767e44">Flyers</option>
-              <option value="44182a9d-0f24-11e2-8525-18a905767e44">Hurricanes</option>
-              <option value="441766b9-0f24-11e2-8525-18a905767e44">Islanders</option>
-              <option value="4417b7d7-0f24-11e2-8525-18a905767e44">Penguins</option>
-              <option value="441781b9-0f24-11e2-8525-18a905767e44">Rangers</option>
-            </optgroup>
-          <select>
-        </div>
-
-        <!-- Allow form submission with keyboard without duplicating the dialog button -->
-
-        <div id="submit">
-          <button class= 'button' type="submit" tabindex="-1">Submit</button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
 </body>
 </html>
 
 
 <!-- HANDLEBAR TEMPLATES -->
 
+<!-- MODAL -->
 <script id="basicInfo" type="text/x-handlebars-template">​
  <h1> {{name_full}} </h1>
 <h2>Background</h2>
@@ -277,3 +152,41 @@
 </table>
 </script>
 
+<!-- BOX SUMMARY -->
+
+<script id="summary_header" type="text/x-handlebars-template">​
+<b>{{position}} &nbsp; {{name_full}}</b><br /><hr />
+</script>
+
+<script id="summary_quarterback" type="text/x-handlebars-template">​
+<table class='player-stats-table'>
+  <tr><td>Passing Attempts: </td><td>{{passing.att}}</td></tr>
+  <tr><td>Completions: </td><td>{{passing.cmp}}</td></tr>
+  <tr><td>Yards: </td><td>{{passing.yds}}</td></tr>
+  <tr><td>Touchdowns: </td><td>{{passing.td}}</td></tr>
+  <tr><td>INTs: </td><td>{{passing.int}}</td></tr>
+  <tr><td>QBR: </td><td>{{passing.rating}}</td></tr>
+</table>
+</script>
+
+<script id="summary_wide_receiver" type="text/x-handlebars-template">​
+<table class='player-stats-table'>
+  <tr><td>Total TDs: </td><td> {{touchdowns.total}}</td></tr>
+  <tr><td>Receptions: </td><td> {{receiving.rec}}</td></tr>
+  <tr><td>Yards: </td><td> {{receiving.yds}}</td></tr>
+  <tr><td>Long: </td><td> {{receiving.lg}}</td></tr>
+  <tr><td>First Downs: </td><td> {{receiving.fd}}</td></tr>
+</table>
+</script>
+
+<script id="summary_running_back" type="text/x-handlebars-template">​
+<table class='player-stats-table'>
+  <tr><td>Rushing Attempts: </td><td>{{rushing.att}}</td></tr>
+  <tr><td>Rushing Yards: </td><td>{{rushing.yds}}</td></tr>
+  <tr><td>Average: </td><td>{{rushing.avg}}</td></tr>
+  <tr><td>Rushing TDs: </td><td>{{rushing.td}}</td></tr>
+  <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
+  <tr><td>Receiving Yards: </td><td>{{receiving.yds}}</td></tr>
+  <tr><td>Receiving TDs: </td><td>{{receiving.td}}</td></tr>
+</table>
+</script>
