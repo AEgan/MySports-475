@@ -104,186 +104,52 @@ function setBoxHTML(data) {
 	str += "</table>";
 	return str;
 }
-// var modalString = render('modalTemplate', data);
+
+function render (tmpl, data) {
+	var div = $("#" + tmpl);
+	var html = div.html();
+	var template = Handlebars.compile(html);
+	return template(data);
+}
+
+// MODAL
 function setModalHTML(data) {
 	var position = data.position;
+	// QUARTERBACK
 	if(position === "QB") {
-		var theData = {headerTitle:"Shop Page", weekDay:"Wednesday"};  
-		var theTemplateScript = $("#basicInfo").html();  
-		var theTemplate = Handlebars.compile (theTemplateScript);  
-		 $('#header').append (theTemplate (theData));
-		
-		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
-		modalString += "<h2>Background</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
-		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
-		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
-		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
-		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
-		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
-		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
-		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
-		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
-
-		modalString += "<h2>Passing</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Attempts: </td><td>" + data.passing.att + "</td></tr>";
-		modalString += "<tr><td>Completions: </td><td>" + data.passing.cmp + "</td></tr>";
-		modalString += "<tr><td>Completion Percentage: </td><td>" + data.passing.cmp_pct + "</td></tr>";
-		modalString += "<tr><td>Yards: </td><td>" + data.passing.yds + "</td></tr>";
-		modalString += "<tr><td>Yards/Reception: </td><td>" + data.passing.cmp_avg + "</td></tr>";
-		modalString += "<tr><td>Long: </td><td>" + data.passing.lg + "</td></tr>";
-		modalString += "<tr><td>Touchdowns: </td><td>" + data.passing.td + "</td></tr>";
-		modalString += "<tr><td>INTs: </td><td>" + data.passing.int + "</td></tr>";
-		modalString += "<tr><td>Pick-6: </td><td>" + data.passing.int_td + "</td></tr>";
-		modalString += "<tr><td>Sacks: </td><td>" + data.passing.sk + "</td></tr>";
-		modalString += "<tr><td>Sack yards lost: </td><td>" + data.passing.sk_yds + "</td></tr>";
-		modalString += "</table>";
-
-		modalString += "<h2>Rushing</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Attempts: </td><td>" + data.rushing.att + "</td></tr>";
-		modalString += "<tr><td>Yards: </td><td>" + data.rushing.yds + "</td></tr>";
-		modalString += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
-		modalString += "<tr><td>Long: </td><td>" + data.rushing.lg + "</td></tr>";
-		modalString += "<tr><td>Touchdowns: </td><td>" + data.rushing.td + "</td></tr>";
-		modalString += "</table>";
-
-		modalString += "<h2>Fumbles</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Total: </td><td>" + data.fumbles.fum + "</td></tr>";
-		modalString += "<tr><td>Lost: </td><td>" + data.fumbles.lost + "</td></tr>";
-		modalString += "</table>";
-
-		return modalString;
-	} else if(position === "WR") {
-		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
-		modalString += "<h2>Background</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
-		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
-		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
-		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
-		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
-		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
-		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
-		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
-		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
-
-		modalString += "<h2>Receiving</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
-		modalString += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
-		modalString += "<tr><td>Average: </td><td>" + data.receiving.avg + "</td></tr>";
-		modalString += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
-		modalString += "<tr><td>Touchdowns: </td><td>" + data.receiving.td + "</td></tr>";
-		modalString += "<tr><td>Yards After Catch: </td><td>" + data.receiving.yac + "</td></tr>";
-		modalString += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
-		modalString += "</table>";
+		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data);
+	} else if(position === "WR") { // WIDE RECEIVER
+		var modalString = render("basicInfo", data) + render("receiving", data);
 
 		if(parseInt(data.penalty.num) != 0) {
-			modalString += "<h2>Penalties</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.penalty.num + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.penalty.yds + "</td></tr>";
-			modalString += "</table>";
+			console.log("IM HERE");
+			modalString += render("penalties", data);
 		}
 		if(parseInt(data.kick_return.returns) != 0) {
-			modalString += "<h2>Kick Returns</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.kick_return.returns + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.kick_return.yds + "</td></tr>";
-			modalString += "<tr><td>Touchdowns: </td><td>" + data.kick_return.td + "</td></tr>";
-			modalString += "<tr><td>Average: </td><td>" + data.kick_return.avg + "</td></tr>";
-			modalString += "<tr><td>Long: </td><td>" + data.kick_return.lg + "</td></tr>";
-			modalString += "</table>";
+			modalString += render("kick_returns", data);
 		}
 		if(parseInt(data.punt_return.returns) != 0) {
-			modalString += "<h2>Kick Returns</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.punt_return.returns + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.punt_return.yds + "</td></tr>";
-			modalString += "<tr><td>Touchdowns: </td><td>" + data.punt_return.td + "</td></tr>";
-			modalString += "<tr><td>Average: </td><td>" + data.punt_return.avg + "</td></tr>";
-			modalString += "<tr><td>Long: </td><td>" + data.punt_return.lg + "</td></tr>";
-			modalString += "<tr><td>Fair Catches: </td><td>" + data.punt_return.fc + "</td></tr>";
-			modalString += "</table>";
+			modalString += render("punt_returns", data);
 		}
 		return modalString;
-	} else if(position === "RB") {
-		var modalString = "<h1>" + position + " " + data.name_full + "</h1>";
-		modalString += "<h2>Background</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Home Town: </td><td>" + data.birth_place + "</td></tr>";
-		modalString += "<tr><td>Birthdate: </td><td>" + data.birthdate + "</td></tr>";
-		modalString += "<tr><td>High School: </td><td>" + data.high_school + "</td></tr>";
-		modalString += "<tr><td>College: </td><td>" + data.college + "</td></tr>";
-		modalString += "<tr><td>Draft: </td><td>" + "Round " + data.draft_round + ", " + data.draft_pick + " overall" + "</td></tr>";
-		modalString += "<tr><td>Years in League: </td><td>" + data.experience + "</td></tr>";
-		modalString += "<tr><td>Height: </td><td>" + inchesToHeight(data.height) + "</td></tr>";
-		modalString += "<tr><td>Weight: </td><td>" + data.weight + "lbs" + "</td></tr>";
-		modalString += "<tr><td>Jersey Number: </td><td>" + data.jersey_number + "</td></tr></table>";
 
-		modalString += "<h2>Rushing</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Attempts: </td><td>" + data.rushing.att + "</td></tr>";
-		modalString += "<tr><td>Yards: </td><td>" + data.rushing.yds + "</td></tr>";
-		modalString += "<tr><td>Average: </td><td>" + data.rushing.avg + "</td></tr>";
-		modalString += "<tr><td>Long: </td><td>" + data.rushing.lg + "</td></tr>";
-		modalString += "<tr><td>Touchdowns: </td><td>" + data.rushing.td + "</td></tr>";
-		modalString += "</table>";
-
-		modalString += "<h2>Receiving</h2>";
-		modalString += "<table class='player-stats-table'>";
-		modalString += "<tr><td>Receptions: </td><td>" + data.receiving.rec + "</td></tr>";
-		modalString += "<tr><td>Yards: </td><td>" + data.receiving.yds + "</td></tr>";
-		modalString += "<tr><td>Average: </td><td>" + data.receiving.avg + "</td></tr>";
-		modalString += "<tr><td>Long: </td><td>" + data.receiving.lg + "</td></tr>";
-		modalString += "<tr><td>Touchdowns: </td><td>" + data.receiving.td + "</td></tr>";
-		modalString += "<tr><td>Yards After Catch: </td><td>" + data.receiving.yac + "</td></tr>";
-		modalString += "<tr><td>First Downs: </td><td>" + data.receiving.fd + "</td></tr>";
-		modalString += "</table>";
+	} else if(position === "RB") { // RUNNING BACK
+		var modalString = render("basicInfo", data) + render("rushing", data) + render("receiving", data);
 
 		if(parseInt(data.penalty.num) != 0) {
-			modalString += "<h2>Penalties</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.penalty.num + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.penalty.yds + "</td></tr>";
-			modalString += "</table>";
+			modalString += render("penalties", data);
 		}
 		if(parseInt(data.kick_return.returns) != 0) {
-			modalString += "<h2>Kick Returns</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.kick_return.returns + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.kick_return.yds + "</td></tr>";
-			modalString += "<tr><td>Touchdowns: </td><td>" + data.kick_return.td + "</td></tr>";
-			modalString += "<tr><td>Average: </td><td>" + data.kick_return.avg + "</td></tr>";
-			modalString += "<tr><td>Long: </td><td>" + data.kick_return.lg + "</td></tr>";
-			modalString += "</table>";
+			modalString += render("kick_returns", data);
 		}
 		if(parseInt(data.punt_return.returns) != 0) {
-			modalString += "<h2>Kick Returns</h2>"
-			modalString += "<table class='player-stats-table'>";
-			modalString += "<tr><td>Number: </td><td>" + data.punt_return.returns + "</td></tr>";
-			modalString += "<tr><td>Yards: </td><td>" + data.punt_return.yds + "</td></tr>";
-			modalString += "<tr><td>Touchdowns: </td><td>" + data.punt_return.td + "</td></tr>";
-			modalString += "<tr><td>Average: </td><td>" + data.punt_return.avg + "</td></tr>";
-			modalString += "<tr><td>Long: </td><td>" + data.punt_return.lg + "</td></tr>";
-			modalString += "<tr><td>Fair Catches: </td><td>" + data.punt_return.fc + "</td></tr>";
-			modalString += "</table>";
+			modalString += render("punt_returns", data);
 		}
 		return modalString;
+
 	} else {
 		return "We're working on it";
 	}
-}
-
-function inchesToHeight(inchString) {
-	var inchInt = parseInt(inchString);
-	var feet = Math.floor(inchInt / 12);
-	var inches = inchInt % 12;
-	return "" + feet + "'" + inches + "\"";
 }
 
 function getQBDataStrings(data) {
@@ -527,142 +393,6 @@ $(function() {
 		}
 		return true
 	});
-
-	// var boxOne = "#box1";
-	// $.ajax({
-	// 	type: "GET",
-	// 	dataType: "json",
-	//   url: "/getNFLStandings"
-	// }).done(function(data) {
-	//   console.log("standings done yo");
-	//   console.log(data);
-	//   team0 = data.teams[0]['name']
-	//   team1 = data.teams[1]['name']
-	//   team2 = data.teams[2]['name']
-	//   team3 = data.teams[3]['name']
-	//   console.log(team0)
-	//   $(boxOne + ' .sportsContent').html("<b><u> Standings </u></b><br />" + team0 + "<br />" + team1 + "<br />" + team2 + "<br />" + team3);
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-
-	// var p = "Antonio Brown"
-	// var t = "PIT"
-	// var box = '#box3'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p, team: t}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-
-	// var p2 = "Sammy Watkins"
-	// var t2 = "BUF"
-	// var box2 = '#box2'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p2, team: t2}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box2 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p4 = "Cody Parkey"
-	// var t4 = "PHI"
-	// var box4 = '#box4'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p4, team: t4}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box4 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Attempts: &nbsp;" + data.field_goal.att+"</b><br /><hr>Made: &nbsp;" + data.field_goal.made+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p5 = "DeMarco Murray"
-	// var t5 = "DAL"
-	// var box5 = '#box5'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p5, team: t5}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box5 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Rushing Yards: &nbsp;" + data.rushing.yds+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p6 = "Andrew Luck"
-	// var t6 = "IND"
-	// var box6 = '#box6'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p6, team: t6}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box6 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Passing Touchdowns: &nbsp;" + data.passing.td+"</b><br /><hr>Passing Yards: &nbsp;" + data.passing.yds+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p7 = "Donnie Jones"
-	// var t7 = "PHI"
-	// var box7 = '#box7'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p7, team: t7}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box7 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Punts: &nbsp;" + data.punting.punts+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
 });
 
 
@@ -724,3 +454,13 @@ function getElementTopLeft(id) {
     }
     return { top: top, left: left };
 }
+
+// Handlebars helper
+
+Handlebars.registerHelper("inchesToHeight", function (inchString) {
+  console.log("Inches: " + inchString);
+  var inchInt = parseInt(inchString);
+	var feet = Math.floor(inchInt / 12);
+	var inches = inchInt % 12;
+	return "" + feet + "'" + inches + "\"";
+});

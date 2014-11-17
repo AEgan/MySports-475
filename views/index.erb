@@ -178,18 +178,102 @@
 </body>
 </html>
 
+
+<!-- HANDLEBAR TEMPLATES -->
+
 <script id="basicInfo" type="text/x-handlebars-template">​
- <h1> position data.name_full </h1>
+ <h1> {{name_full}} </h1>
 <h2>Background</h2>
 <table class='player-stats-table'>
-  <tr><td>Home Town: </td><td> {{data.birth_place}} </td></tr>
-  <tr><td>Birthdate: </td><td> {{data.birthdate}} </td></tr>
-  <tr><td>High School: </td><td> {{data.high_school}} </td></tr>
-  <tr><td>College: </td><td> {{data.college}} </td></tr>
-  <tr><td>Draft: </td><td>Round {{data.draft_round}}, {{data.draft_pick}} overall</td></tr>
-  <tr><td>Years in League: </td><td> {{data.experience}} </td></tr>
-  <tr><td>Height: </td><td> inchesToHeight({{data.height}})</td></tr>
-  <tr><td>Weight: </td><td> {{data.weight}} lbs</td></tr>
-  <tr><td>Jersey Number: </td><td>{{data.jersey_number}}</td></tr>
+  <tr><td>Home Town: </td><td> {{birth_place}} </td></tr>
+  <tr><td>Birthdate: </td><td> {{birthdate}} </td></tr>
+  <tr><td>High School: </td><td> {{high_school}} </td></tr>
+  <tr><td>College: </td><td> {{college}} </td></tr>
+  <tr><td>Draft: </td><td>Round {{draft_round}}, {{draft_pick}} overall</td></tr>
+  <tr><td>Years in League: </td><td> {{experience}} </td></tr>
+  <tr><td>Height: </td><td> {{inchesToHeight height}}</td></tr>
+  <tr><td>Weight: </td><td> {{weight}} lbs</td></tr>
+  <tr><td>Jersey Number: </td><td>{{jersey_number}}</td></tr>
 </table>
 ​</script>
+
+<script id="passing" type="text/x-handlebars-template">​
+<h2>Passing</h2>
+<table class='player-stats-table'>
+  <tr><td>Attempts: </td><td> {{passing.att}}</td></tr>
+  <tr><td>Completions: </td><td> {{passing.cmp}}</td></tr>
+  <tr><td>Completion Percentage: </td><td> {{passing.cmp_pct}}</td></tr>
+  <tr><td>Yards: </td><td> {{passing.yds}}</td></tr>
+  <tr><td>Yards/Reception: </td><td> {{passing.cmp_avg}}</td></tr>
+  <tr><td>Long: </td><td> {{passing.lg}}</td></tr>
+  <tr><td>Touchdowns: </td><td> {{passing.td}}</td></tr>
+  <tr><td>INTs: </td><td> {{passing.int}}</td></tr>
+  <tr><td>Pick-6: </td><td> {{passing.int_td}}</td></tr>
+  <tr><td>Sacks: </td><td> {{passing.sk}}</td></tr>
+  <tr><td>Sack yards lost: </td><td> {{passing.sk_yds}}</td></tr>
+</table>
+</script>
+
+<script id="rushing" type="text/x-handlebars-template">​
+<h2>Rushing</h2>
+<table class='player-stats-table'>
+  <tr><td>Attempts: </td><td> {{rushing.att}}</td></tr>
+  <tr><td>Yards: </td><td> {{rushing.yds}}</td></tr>
+  <tr><td>Average: </td><td> {{rushing.avg}}</td></tr>
+  <tr><td>Long: </td><td> {{rushing.lg}}</td></tr>
+  <tr><td>Touchdowns: </td><td> {{rushing.td}}</td></tr>
+</table>
+</script>
+
+<script id="fumbles" type="text/x-handlebars-template">​
+<h2>Fumbles</h2>
+<table class='player-stats-table'>
+  <tr><td>Total: </td><td>{{fumbles.fum}}</td></tr>
+  <tr><td>Lost: </td><td>{{fumbles.lost}}</td></tr>
+</table>
+</script>
+
+<script id="receiving" type="text/x-handlebars-template">​
+<h2>Receiving</h2>
+<table class='player-stats-table'>
+  <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
+  <tr><td>Yards: </td><td>{{receiving.yds}}</td></tr>
+  <tr><td>Average: </td><td>{{receiving.avg}}</td></tr>
+  <tr><td>Long: </td><td>{{receiving.lg}}</td></tr>
+  <tr><td>Touchdowns: </td><td>{{receiving.td}}</td></tr>
+  <tr><td>Yards After Catch: </td><td>{{receiving.yac}}</td></tr>
+  <tr><td>First Downs: </td><td>{{receiving.fd}}</td></tr>
+</table>
+</script>
+
+<script id="penalties" type="text/x-handlebars-template">​
+<h2>Penalties</h2>
+<table class='player-stats-table'>
+  <tr><td>Number: </td><td> {{penalty.num}}</td></tr>
+  <tr><td>Yards: </td><td> {{penalty.yds}}</td></tr>
+</table>
+</script>
+
+<script id="kick_returns" type="text/x-handlebars-template">​
+<h2>Kick Returns</h2>
+<table class='player-stats-table'>
+  <tr><td>Number: </td><td> {{kick_return.returns}}</td></tr>
+  <tr><td>Yards: </td><td> {{kick_return.yds}}</td></tr>
+  <tr><td>Touchdowns: </td><td> {{kick_return.td}}</td></tr>
+  <tr><td>Average: </td><td> {{kick_return.avg}}</td></tr>
+  <tr><td>Long: </td><td> {{kick_return.lg}}</td></tr>
+</table>
+</script>
+
+<script id="punt_returns" type="text/x-handlebars-template">​
+<h2>Punt Returns</h2>
+<table class='player-stats-table'>
+  <tr><td>Number: </td><td>{{punt_return.returns}}</td></tr>
+  <tr><td>Yards: </td><td>{{punt_return.yds}}</td></tr>
+  <tr><td>Touchdowns: </td><td>{{punt_return.td}}</td></tr>
+  <tr><td>Average: </td><td>{{punt_return.avg}}</td></tr>
+  <tr><td>Long: </td><td>{{punt_return.lg}}</td></tr>
+  <tr><td>Fair Catches: </td><td>{{punt_return.fc}}</td></tr>
+</table>
+</script>
+
