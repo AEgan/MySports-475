@@ -255,10 +255,10 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 
-    	var category = $(this).find("input[name='category']:checked").val()
-    	console.log(category);
-    	var t = $(this).find('select[name="team"]').val();
-    	var p = $(this).find('select[name="player"]').val();
+  	var category = $(this).find("input[name='category']:checked").val()
+  	console.log(category);
+  	var t = $(this).find('select[name="team"]').val();
+  	var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
