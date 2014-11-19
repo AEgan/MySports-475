@@ -99,13 +99,6 @@ function setBoxHTML(data) {
 	return summary;
 }
 
-function render (tmpl, data) {
-	var div = $("#" + tmpl);
-	var html = div.html();
-	var template = Handlebars.compile(html);
-	return template(data);
-}
-
 // MODAL
 function setModalHTML(data) {
 	var position = data.position;
@@ -243,49 +236,6 @@ function getData (box, urlText, dataCategory, d, t) {
 
 // Main Function
 $(function() {
-	console.log("BLIII");
- 	$( ".radioButtons" ).on( "click", function() {
- 		if ($("input[name='category']:checked").val() == "player") {
-			document.getElementById("team-select-fields").style.display = "";
- 			document.getElementById("players").style.display = "block";
-			document.getElementById("standingsDropdowns").style.display = "none";
-			document.getElementById("nhlStandingsDropdowns").style.display = "none";
-			document.getElementById("nhlTeamDropdown").style.display = "none";
- 			var e = document.getElementById("teams");
-			var strUser = e.options[e.selectedIndex].value;
-			populatePlayerList(strUser);
-		}
- 		if ($("input[name='category']:checked").val() == "team") {
-			document.getElementById("teams").style.display = "block";
-			document.getElementById("team-select-fields").style.display = "";
- 			document.getElementById("players").style.display = "none";
-			document.getElementById("standingsDropdowns").style.display = "none";
-			document.getElementById("nhlStandingsDropdowns").style.display = "none";
-			document.getElementById("nhlTeamDropdown").style.display = "none";
- 		}
-		if ($("input[name='category']:checked").val() == "standings") {
-			document.getElementById("standingsDropdowns").style.display = "block";
-			document.getElementById("players").style.display = "none";
-			document.getElementById("team-select-fields").style.display = "none";
-			document.getElementById("nhlStandingsDropdowns").style.display = "none";
-			document.getElementById("nhlTeamDropdown").style.display = "none";
-		}
-		if ($("input[name='category']:checked").val() == "nhlStandings") {
-			document.getElementById("standingsDropdowns").style.display = "none";
-			document.getElementById("players").style.display = "none";
-			document.getElementById("team-select-fields").style.display = "none";
-			document.getElementById("nhlStandingsDropdowns").style.display = "block";
-			document.getElementById("nhlTeamDropdown").style.display = "none";
-		}
-		if ($("input[name='category']:checked").val() == "nhlTeam") {
-			document.getElementById("standingsDropdowns").style.display = "none";
-			document.getElementById("players").style.display = "none";
-			document.getElementById("team-select-fields").style.display = "none";
-			document.getElementById("nhlStandingsDropdowns").style.display = "none";
-			document.getElementById("nhlTeamDropdown").style.display = "block";
-		}
- 		return true;
- 	});
 	
 	// Login button
 	$('#login').on('click', function (e) {
@@ -576,49 +526,6 @@ $(function() {
 });
 
 
-
-
-
-
-function displayTeamName (team) {
-	var t = team.toLowerCase();
-	switch (t) {
-		case "ari": return "Arizona Cardinals"; break;
-        case "atl": return "Atlanta Falcons"; break;
-        case "bal": return "Baltimore Ravens"; break;
-        case "buf": return "Buffalo Bills"; break;
-        case "car": return "Carolina Panthers"; break;
-        case "chi": return "Chicago Bears"; break;
-        case "cin": return "Cincinnati Bengals"; break;
-        case "cle": return "Cleveland Browns"; break;
-        case "dal": return "Dallas Cowboys"; break;
-        case "den": return "Denver Broncos"; break;
-        case "det": return "Detroit Lions"; break;
-        case "gb": return "Green Bay Packers"; break;
-        case "hou": return "Houston Texans"; break;
-        case "ind": return "Indianapolis Colts"; break;
-        case "jac": return "Jacksonville Jaguars"; break;
-        case "kc": return "Kansas City Chiefs"; break;
-        case "mia": return "Miami Dolphins"; break;
-        case "min": return "Minnesota Vikings"; break;
-        case "ne": return "New England Patriots"; break;
-        case "no": return "New Orleans Saints"; break;
-        case "nyg": return "New York Giants"; break;
-        case "nyj": return "New York Jets"; break;
-        case "oak": return "Oakland Raiders"; break;
-        case "phi": return "Philadelphia Eagles"; break;
-        case "pit": return "Pittsburgh Steelers"; break;
-        case "sd": return "San Diego Chargers"; break;
-        case "sf": return "San Francisco 49ers"; break;
-        case "sea": return "Seattle Seahawks"; break;
-        case "stl": return "St Louis Rams"; break;
-        case "tb": return "Tampa Bay Buccaneers"; break;
-        case "ten": return "Tennessee Titans"; break;
-        case "was": return "Washington Redskins"; break;
-        default: return team.toUpperCase(); break;
-    }
-}
-
 function roundToTwo(num) {
     return +(Math.round(num + "e+2")  + "e-2");
 }
@@ -634,13 +541,3 @@ function getElementTopLeft(id) {
     }
     return { top: top, left: left };
 }
-
-// Handlebars helper
-
-Handlebars.registerHelper("inchesToHeight", function (inchString) {
-  console.log("Inches: " + inchString);
-  var inchInt = parseInt(inchString);
-	var feet = Math.floor(inchInt / 12);
-	var inches = inchInt % 12;
-	return "" + feet + "'" + inches + "\"";
-});
