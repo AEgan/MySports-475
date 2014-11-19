@@ -321,7 +321,7 @@ $(function() {
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
-	    
+	  createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
 	
 	    // deferred = $.post("http://somewhere.com", { val: val });
 
