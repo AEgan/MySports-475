@@ -2,7 +2,7 @@ html {
 	background-color: #036ea9;
 	font-family: Arial, sans-serif;
 	padding: 0px;
-	background-color: #DDD;
+	background-color: #17C7CA;
 }
 
 #header{
@@ -137,6 +137,10 @@ html {
 	display: inline-block;
 	margin-right: 15px;
 }
+.leagueRadio {
+	display: inline-block;
+	margin-right: 15px;
+}
 
 
 form {
@@ -203,7 +207,6 @@ p {
 #filterNav ul {
 	padding: 0px;
 	margin: 0px 0px 0px 30px;
-	width: 100%;
 
 }
 
@@ -228,4 +231,7 @@ p {
 
 .chosen-search {
 	color: #000000;
+}
+.center {
+	text-align: center;
 }
