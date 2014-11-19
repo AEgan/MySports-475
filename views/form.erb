@@ -2,13 +2,27 @@
     <p>Choose which information to display</p>
     <form class="form">
       <fieldset>
-        <div class="radioButtons">
-          <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
-          <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
-          <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
-          <div class="radio"><input type="radio" id="nhlStandings" name="category" value="nhlStandings">NHL Standings</div>
-          <div class="radio"><input type="radio" id="nhlTeam" name="category" value="nhlTeam">NHL Team</div>
+        
+        <div class="center">
+          <div class="radioButtons">
+            <div class="radio"><input id = "leagueNFL" type="radio" name="league" value="nfl" checked>NFL<br/></div>
+            <div class="radio"><input id = "leagueNHL" type="radio" name="league" value="nhl">NHL<br/></div>
+            <div class="radio"><input id = "leagueNBA" type="radio" name="league" value="nba">NBA<br/></div>
+            <div class="radio"><input id = "leagueMLB" type="radio" name="league" value="mlb">MLB<br/></div>
+          </div>
+       
+
+          <hr/>
+
+          <div class="radioButtons">
+            <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
+            <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
+            <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
+          </div>
+
         </div>
+
+
         <div class="field">
           <div id="team-select-fields">
             <label for="name">Team</label>
@@ -46,6 +60,8 @@
               <option value="ten">Tennessee Titans</option>
               <option value="was">Washington Redskins</option>
             </select>
+
+
           </div>
         </div>
 

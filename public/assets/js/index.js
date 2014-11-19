@@ -1,55 +1,130 @@
+
 var boxNumber = "";
-var nextBoxNumber = 2;
 var mainUser = "Varun";
 var mainPassword = "test";
+var nextBoxNumber = 1;
+var box_team = new Array();
 
-function displayData(box, data, dataCategory, t) {
-		switch (dataCategory) {
-			case "player":
-				console.log("ASDASDASD");
-				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-				var statsHTML = setBoxHTML(data);
-				var modalHTML = setModalHTML(data);
-				$(box + ' .sportsContent').html(statsHTML);
-				$('.modal-trigger-area').css("display", "block");
-				$(box + ' > .modal').html(modalHTML);
-				break;
-			case "team":
-				$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-				var boxNum = box.charAt(box.length -1);
-				$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts + "<br/><a href='#modal" + boxNum + "' class='modal-trigger'>See More</a>");
-				$(box + ' > .modal').html("here it is");
-				setModals();
-				break;
-			case "stats":
-				break;
-			case "standings":
-				setNFLStandingsHTML(data, function(tableString, modalString) {
-					var displayModalText = "<a href="
-					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + tableString);
-					$(box + ' > .modal').html("<b><u> Standings for " + data.name + "</u></b><br />" + modalString);
-				});
-					break;
-			case "nhlStandings":
-				var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";
-				for(var i = 0; i < data.teams.length; i++) {
-					str += "<tr><td>" + data.teams[i]['name'] + "</td>";
-					str += "<td>" + data.teams[i]['wins'] + "</td>";
-					str += "<td>" + data.teams[i]['losses'] + "</td>";
-					str += "<td>" + data.teams[i]['overtime_losses'] + "</td>";
-					str += "<td>" + data.teams[i]['points'] + "</td></tr>"
-				}
-				str += "</tbody></table>";
-				$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
-				$(box + ' > .modal').html("here it is");
-				break;
-			case "nhlTeam":
-				$(box + ' .sportsContent').html("we out here");
-				break;
-			default:
-				break;
+function getData (box, urlText, league, category, d, t) {
+		if(t) {
+			t = t.toUpperCase();
 		}
+
+		var arrayNew = new Array();
+		arrayNew.push("#box" + String(box));
+		arrayNew.push(league);
+		box_team.push(arrayNew);
+		console.log(box_team);
+		console.log(d);
+		console.log(urlText);
+
+		$.ajax({
+
+		type: "POST",
+		dataType: "json",
+	  	url: urlText,
+	  	data: d
+		}).done(function(data) {
+
+		  console.log("done");
+		  console.log(data);
+		  console.log("bro cmon");
+		  console.log(box);
+		  displayData(box, data, league, category, t);
+		}).fail(function(xhr, status, error){
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+		return true;
+}
+
+function displayData(box, data, league, category, t) {
+	box = "#box" + String(box);
+	console.log("DISPLAY DATA");
+	console.log(box);
+	console.log(data);
+	console.log(league);
+	console.log(category);
+	console.log(t);
+	switch (league) {
+		case "nfl":
+			switch (category) {
+				case "player":
+					console.log("ASDASDASD");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
+					var statsHTML = setBoxHTML(data);
+					var modalHTML = setModalHTML(data);
+					$(box + ' .sportsContent').html(statsHTML);
+					$(box + ' > .modal').html(modalHTML);
+					break;
+				case "team":
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
+					$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
+					$('.modal-trigger-area').css("display", "block");
+					$(box + ' > .modal').html("here it is");
+					setModals();
+					break;
+				case "standings":
+					setNFLStandingsHTML(data, function(tableString, modalString) {
+						var displayModalText = "<a href="
+						$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + tableString);
+						$(box + ' > .modal').html("<b><u> Standings for " + data.name + "</u></b><br />" + modalString);
+					});
+					break;
+			}
+			break;
+		case "nhl":
+			switch (category) {
+				case "team":
+					$(box + ' .sportsContent').html("we out here");
+					break;
+				case "player":
+					//implement nhl player stats here
+					break;
+				case "standings":
+					var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";
+					for(var i = 0; i < data.teams.length; i++) {
+						str += "<tr><td>" + data.teams[i]['name'] + "</td>";
+						str += "<td>" + data.teams[i]['wins'] + "</td>";
+						str += "<td>" + data.teams[i]['losses'] + "</td>";
+						str += "<td>" + data.teams[i]['overtime_losses'] + "</td>";
+						str += "<td>" + data.teams[i]['points'] + "</td></tr>"
+					}
+					str += "</tbody></table>";
+					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
+					$(box + ' > .modal').html("here it is");
+					break;
+			}
+			break;
+		case "nba":
+			switch (category) {
+				case "team":
+					//implement nba team stats here
+					break;
+				case "player":
+					//implement nba player stats here
+					break;
+				case "standings":
+					//implement nba standings stats here
+					break;
+			}
+			break;
+		case "mlb":
+			switch (category) {
+				case "team":
+					//implement mlb team stats here
+					break;
+				case "player":
+					//implement mlb player stats here
+					break;
+				case "standings":
+					//implement mlb standings stats here
+					break;
+			}
+			break;
 	}
+}
 
 function setNFLStandingsHTML(data, callback) {
 	var tableStr = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th></thead><tbody>";
@@ -150,7 +225,6 @@ function popup(box) {
 	document.getElementById("dialog-form").style.display = "block";
 	document.getElementById("submit").style.display = "block";
 	document.getElementById("nhlTeamDropdown").style.display = "none";
-	boxNumber = "";
 	boxNumber = box;
 }
 
@@ -180,7 +254,7 @@ function populatePlayerList(t){
 	  //alert("done");
 	  console.log("done");
 	  console.log(data);
-	   for (var i = 0; i < data.length - 1; i++) {
+	   for (var i = 0; i < data.length; i++) {
         var opt = data[i].player.name_last + ", " + data[i].player.name_first;
         var el = document.createElement("option");
         el.textContent = opt;
@@ -199,29 +273,25 @@ function populatePlayerList(t){
 
 }
 
-function getData (box, urlText, dataCategory, d, t) {
-		if(t) {
-			t = t.toUpperCase();
+//function to set styling on filtering by league
+function set_filter(league) {
+	console.log("FILTERING")
+	for (var i = 0; i < box_team.length; i++) {
+		console.log("BOX TEAM");
+		console.log(box_team[i]);
+		console.log(box_team[i][1]);
+		console.log(box_team[i][0]);
+		if (box_team[i][1] == league) {
+			$(box_team[i][0]).css("display", "block");
 		}
-
-		$.ajax({
-
-		type: "POST",
-		dataType: "json",
-	  	url: urlText,
-	  	data: d
-		}).done(function(data) {
-
-		  console.log("done");
-		  console.log(data);
-		  displayData(box, data, dataCategory, t);
-		}).fail(function(xhr, status, error){
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
-		return true;
-}
+		else {
+			$(box_team[i][0]).css("display", "none");
+		}
+		if (league == "noFilter") {
+			$(box_team[i][0]).css("display", "block");
+		}
+	};
+};
 
 // Main Function
 $(function() {
@@ -232,6 +302,19 @@ $(function() {
 			}).done(function(data) {
 			  console.log("USERS MAN");
 			  console.log(data);
+			  // data.forEach(function (newtile, index, array) {
+		  	for (var i = 0; i < data.length; i++) {
+			  	var newtile = data[i];
+			  	console.log("IM HERE BITCHESSS");
+			  	console.log(newtile);
+			  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
+			  	nextBoxID = "box" + nextBoxNumber;
+		   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+		   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+			  }//);
+			  console.log("DAMN");
+			  // nextBoxNumber += 1;
+			  
 			  
 			}).fail(function(xhr, status, error){
 				console.log("NOOOOOO");
@@ -269,7 +352,7 @@ $(function() {
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
-
+		var league = $(this).find("input[name='league']:checked").val()
   	var category = $(this).find("input[name='category']:checked").val()
   	console.log(category);
   	var t = $(this).find('select[name="team"]').val();
@@ -278,16 +361,28 @@ $(function() {
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
+	  createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
+	  nextBoxID = "box" + nextBoxNumber;
+   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
 
-		createTile(category, t, p, c, d, nhlConference, nhlTeam);
-	    // deferred = $.post("http://somewhere.com", { val: val });
+    
 
-	    // deferred.success(function () {
-	    //     Do your stuff.
-	    // });
-
-	    // deferred.error(function () {
-     //    Handle any errors here.});
+	  $.ajax({
+			type: "POST",
+			dataType: "json",
+		  	url: "/create_tile",
+		  	data: {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam}
+			}).done(function(data) {
+			  console.log("created tile");
+			  console.log(data);
+			  
+			}).fail(function(xhr, status, error){
+				console.log("NOOOOOO");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+		});
 	});
 
 	$('.teamList').on('change', function () {
@@ -299,44 +394,93 @@ $(function() {
 		}
 		return true
 	});
+
+	$( ".filterOption" ).on( "click", function() {
+		$( ".filterOption" ).css("background-color", "#DDD");
+		$( ".filterOption" ).css("border-bottom", "2px solid #334");
+		$(this).css("background-color", "#17C7CA");
+		$(this).css("border-bottom", "none");
+
+		var filter = $(this).prop('id');
+		console.log(filter);
+		set_filter(filter);
+	});
+
 });
 
-function createTile(category, t, p, c, d, nhlConference, nhlTeam) {
-	switch(category) {
-	    	case "team":
-	    		console.log("IN CASE STATEMENT TEAM");
-	    		data = {team: t}
-	    		getData(boxNumber, "/getTeamInfo", category, data, t);
-	    		break;
-	    	case "player":
-		    	console.log("IN CASE STATEMENT PLAYER");
-		    	data = { player: p, team: t};
-		    	getData(boxNumber, "/getPlayerInfo", category, data, t);
-	    		break;
-			case "standings":
-				console.log("IN CASE STATEMENT standings");
-				data = { conference: c, division: d };
-				console.log(data);
-				getData(boxNumber, "/getNFLStandings", category, data);
+function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
+	switch(league) {
+	    	case "nfl":
+	    		switch (category) {
+			    	case "team":
+			    		console.log("IN CASE STATEMENT TEAM");
+			    		data = {team: t}
+			    		getData(nextBoxNumber, "/getTeamInfo", league, category, data, t);
+			    		break;
+			    	case "player":
+				    	console.log("IN CASE STATEMENT PLAYER");
+				    	data = { player: p, team: t};
+				    	getData(nextBoxNumber, "/getPlayerInfo", league, category, data, t);
+			    		break;
+					case "standings":
+						console.log("IN CASE STATEMENT standings");
+						data = { conference: c, division: d };
+						console.log(data);
+						getData(nextBoxNumber, "/getNFLStandings", league, category, data);
+						break;
+				}
 				break;
-			case "nhlStandings":
-				console.log("IN CASE STATEMENT NHL STANDINGS");
-				data = { conference: nhlConference };
-				getData(boxNumber, "/getNHLStandings", category, data);
+			case "nhl": 
+				switch (category) {
+					case "team":
+						console.log("IN CASE STATEMENT NHL TEAM");
+						console.log(nhlTeam);
+						console.log(category);
+						console.log(league);
+						data = { team: nhlTeam };
+						getData(nextBoxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam);
+						break;
+					case "player":
+						console.log("IN CASE STATEMENT NHL PLAYER");
+						//add nhl player info here
+						break;
+					case "standings":
+						console.log("IN CASE STATEMENT NHL STANDINGS");
+						data = { conference: nhlConference };
+						getData(nextBoxNumber, "/getNHLStandings", league, category, data);
+						break;
+				}
 				break;
-			case "nhlTeam":
-				console.log("IN CASE STATEMENT NHL TEAM");
-				data = { team: nhlTeam };
-				getData(boxNumber, "/getNHLTeamInfo", category, data, nhlTeam);
+			case "nba": 
+				switch (category) {
+					case "team":
+						console.log("IN CASE STATEMENT NBA TEAM");
+						break;
+					case "player":
+						console.log("IN CASE STATEMENT NBA PLAYER");
+						break;
+					case "standings":
+						console.log("IN CASE STATEMENT NBA STANDINGS");
+						break;	
+				}
+				break;
+			case "mlb": 
+				switch (category) {
+					case "team":
+						console.log("IN CASE STATEMENT MLB TEAM");
+						break;
+					case "player":
+						console.log("IN CASE STATEMENT MLB PLAYER");
+						break;
+					case "standings":
+						console.log("IN CASE STATEMENT MLB STANDINGS");
+						break;	
+				}
 				break;
 	    	default:
 		    	console.log("IN CASE STATEMENT DEFAULT");
 	    		break;
-
 	    }
-
-	    nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
 	    nextBoxNumber += 1;
 			setModals();
 }

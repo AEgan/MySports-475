@@ -22,6 +22,7 @@
   <script src="assets/js/constants.js" type="text/javascript"></script>
   <script src="assets/js/form.js" type="text/javascript"></script>
   <script src="assets/js/handlebars_helpers.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -31,12 +32,22 @@
     </div>
   </div>
 
+  <div id="filterNav">
+    <ul>
+        <li class="filterOption" id="noFilter">No Filter</li>
+        <li class="filterOption" id="nfl">NFL</li>
+        <li class="filterOption" id="nhl">NHL</li>
+        <li class="filterOption" id="nba">NBA</li>
+        <li class="filterOption" id="mlb">MLB</li>
+    </ul>
+  </div>
+
   <div id="wrapper">
 
     <ul id="sortable">
       <li class="ui-state-default" id="box1">
           <div class="sportsWrapper">
-             <div id="logo">&nbsp;</div>
+             <div id="logo"></div>
              <div class="sportsContent">
                 <a id = "box1" onclick="popup('#box1')" class="button addNew">Add Sports Data</a><br />
             </div>
