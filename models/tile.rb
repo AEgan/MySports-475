@@ -5,6 +5,4 @@ class Tile
 	has_many :customs
 end
 
-get '/tile' do
-
-end
+                                                                                                                                                                                                                              

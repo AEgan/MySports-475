@@ -1,5 +1,7 @@
 var boxNumber = "";
-var nextBoxNumber = 2
+var nextBoxNumber = 2;
+var mainUser = "Varun";
+var mainPassword = "test";
 
 function displayData(box, data, dataCategory, t) {
 		switch (dataCategory) {
@@ -223,7 +225,20 @@ function getData (box, urlText, dataCategory, d, t) {
 
 // Main Function
 $(function() {
-	
+	$.ajax({
+			type: "GET",
+			dataType: "json",
+		  	url: "/users",
+			}).done(function(data) {
+			  console.log("USERS MAN");
+			  console.log(data);
+			  
+			}).fail(function(xhr, status, error){
+				console.log("NOOOOOO");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+		});
 	// Login button
 	$('#login').on('click', function (e) {
 		e.preventDefault();
@@ -263,7 +278,31 @@ $(function() {
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
-	    switch(category) {
+
+		createTile(category, t, p, c, d, nhlConference, nhlTeam);
+	    // deferred = $.post("http://somewhere.com", { val: val });
+
+	    // deferred.success(function () {
+	    //     Do your stuff.
+	    // });
+
+	    // deferred.error(function () {
+     //    Handle any errors here.});
+	});
+
+	$('.teamList').on('change', function () {
+		if ($("input[name='category']:checked").val() == "player") {
+		    //player is checked so populate team list
+		    var e = document.getElementById("teams");
+				var strUser = e.options[e.selectedIndex].value;
+				populatePlayerList(strUser);
+		}
+		return true
+	});
+});
+
+function createTile(category, t, p, c, d, nhlConference, nhlTeam) {
+	switch(category) {
 	    	case "team":
 	    		console.log("IN CASE STATEMENT TEAM");
 	    		data = {team: t}
@@ -300,26 +339,7 @@ $(function() {
 	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo">&nbsp;</div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
 	    nextBoxNumber += 1;
 			setModals();
-	    // deferred = $.post("http://somewhere.com", { val: val });
-
-	    // deferred.success(function () {
-	    //     Do your stuff.
-	    // });
-
-	    // deferred.error(function () {
-     //    Handle any errors here.});
-	});
-
-	$('.teamList').on('change', function () {
-		if ($("input[name='category']:checked").val() == "player") {
-		    //player is checked so populate team list
-		    var e = document.getElementById("teams");
-				var strUser = e.options[e.selectedIndex].value;
-				populatePlayerList(strUser);
-		}
-		return true
-	});
-});
+}
 
 
 function roundToTwo(num) {
