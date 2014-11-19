@@ -4,7 +4,7 @@ function setModals() {
 
 function setChosen() {
   $(".chosen-select").chosen({
-    width: "100%",
+    width: "60%",
     search_contains: true
    });
 }

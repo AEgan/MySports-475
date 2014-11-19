@@ -16,3 +16,5 @@ post '/getNHLTeamInfo' do
   content_type :json
   getNHLTeamInfo(request["team"]).to_json
 end
+
+

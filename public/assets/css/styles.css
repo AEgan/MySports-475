@@ -137,20 +137,20 @@ html {
 	display: inline-block;
 	margin-right: 15px;
 }
+.radio2 {
+	display: inline-block;
+	margin-top: 3px;
+}
 .leagueRadio {
 	display: inline-block;
 	margin-right: 15px;
 }
 
-
-form {
-	line-height: 25px;
-}
 #submit button {
 	border: 0px;
 	outline: 0;
 	box-shadow: none;
-	margin: 10px 0px 0px 75px;
+	margin: 10px 0px 0px 0px;
 }
 
 .form fieldset input {
@@ -234,4 +234,20 @@ p {
 }
 .center {
 	text-align: center;
+}
+
+#conferences_chosen {
+	width: 30% !important;
+}
+
+#divisions_chosen {
+	width: 30% !important;
+}
+
+#players {
+	margin-top: 5px;
+}
+label.ui-button {
+	margin-right: 0px;
+	padding-bottom: 5px;
 }

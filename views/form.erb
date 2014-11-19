@@ -4,28 +4,28 @@
       <fieldset>
         
         <div class="center">
-          <div class="radioButtons">
-            <div class="radio"><input id = "leagueNFL" type="radio" name="league" value="nfl" checked>NFL<br/></div>
-            <div class="radio"><input id = "leagueNHL" type="radio" name="league" value="nhl">NHL<br/></div>
-            <div class="radio"><input id = "leagueNBA" type="radio" name="league" value="nba">NBA<br/></div>
-            <div class="radio"><input id = "leagueMLB" type="radio" name="league" value="mlb">MLB<br/></div>
+          <div class="radioButtons" id="league">
+            <div class="radio2"><input id = "leagueNFL" type="radio" name="league" value="nfl" checked><label for="leagueNFL">NFL</label><br/></div>
+            <div class="radio2"><input id = "leagueNHL" type="radio" name="league" value="nhl"><label for="leagueNHL">NHL</label><br/></div>
+            <div class="radio2"><input id = "leagueNBA" type="radio" name="league" value="nba"><label for="leagueNBA">NBA</label><br/></div>
+            <div class="radio2"><input id = "leagueMLB" type="radio" name="league" value="mlb"><label for="leagueMLB">MLB</label><br/></div>
           </div>
-       
+          <script type="text/javascript">$(function() { $( "#league" ).buttonset();});</script>
 
           <hr/>
-
+          </div>
           <div class="radioButtons">
             <div class="radio"><input id = "teamRadio" type="radio" name="category" value="team" checked>Team<br/></div>
             <div class="radio"><input type="radio" name="category" value="player">Player<br/></div>
             <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
           </div>
 
-        </div>
+        
 
 
         <div class="field">
           <div id="team-select-fields">
-            <label for="name">Team</label>
+            <label for="name">Team: </label>
             <select class="teamList chosen-select" id="teams" name="team" value ="">
               <option value="ari">Arizona Cardinals</option>
               <option value="atl">Atlanta Falcons</option>
@@ -60,39 +60,10 @@
               <option value="ten">Tennessee Titans</option>
               <option value="was">Washington Redskins</option>
             </select>
-
-
           </div>
         </div>
-
-        <div class="field" id="players">
-          <label for="player">Player Name</label>
-          <select id="playerList" type="text" name="player" id="player" value=""></select>
-        </div>
-        <div class="field" id="standingsDropdowns">
-          <label for="conference">Conference</label>
-          <select class="conferenceList chosen-select" id="conferences" name="conference" value ="">
-            <option value="AFC">AFC</option>
-            <option value="NFC">NFC</option>
-          </select>
-          <select class="divisionList chosen-select" id="divisions" name="division" value ="">
-            <option value="NORTH">North</option>
-            <option value="SOUTH">South</option>
-            <option value="EAST">East</option>
-            <option value="WEST">West</option>
-          </select>
-        </div>
-        <div id="nhlStandingsDropdowns">
-          <label for="nhlConference">Conference</label>
-          <select class="nhlConferenceList chosen-select" id="nhlConferences" name="nhlConference" value ="">
-            <option value="ATLANTIC">Atlantic</option>
-            <option value="METROPOLITAN">Metropolitan</option>
-            <option value="CENTRAL">Central</option>
-            <option value="PACIFIC">Pacific</option>
-          </select>
-        </div>
         <div id="nhlTeamDropdown">
-          <label for="name">Team</label>
+          <label for="name">Team: </label>
           <select class="nhlTeamList chosen-select" id="nhlTeams" name="nhlTeam" value="">
             <optgroup label="Pacific">
               <option value="4415b0a7-0f24-11e2-8525-18a905767e44">Canucks</option>
@@ -133,6 +104,33 @@
               <option value="441781b9-0f24-11e2-8525-18a905767e44">Rangers</option>
             </optgroup>
           <select>
+        </div>
+
+        <div class="field" id="players">
+          <label for="player">Player Name: </label>
+          <select id="playerList" type="text" name="player" id="player" value=""></select>
+        </div>
+        <div class="field" id="standingsDropdowns">
+          <label for="conference">Conference: </label>
+          <select class="conferenceList chosen-select" id="conferences" name="conference" value ="">
+            <option value="AFC">AFC</option>
+            <option value="NFC">NFC</option>
+          </select>
+          <select class="divisionList chosen-select" id="divisions" name="division" value ="">
+            <option value="NORTH">North</option>
+            <option value="SOUTH">South</option>
+            <option value="EAST">East</option>
+            <option value="WEST">West</option>
+          </select>
+        </div>
+        <div id="nhlStandingsDropdowns">
+          <label for="nhlConference">Conference: </label>
+          <select class="nhlConferenceList chosen-select" id="nhlConferences" name="nhlConference" value ="">
+            <option value="ATLANTIC">Atlantic</option>
+            <option value="METROPOLITAN">Metropolitan</option>
+            <option value="CENTRAL">Central</option>
+            <option value="PACIFIC">Pacific</option>
+          </select>
         </div>
         <!-- Allow form submission with keyboard without duplicating the dialog button -->
 

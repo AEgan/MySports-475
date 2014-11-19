@@ -14,7 +14,7 @@ $(function() {
 							document.getElementById("nhlTeamDropdown").style.display = "none";
 				 			var e = document.getElementById("teams");
 							var strUser = e.options[e.selectedIndex].value;
-							populatePlayerList(strUser);
+							populatePlayerList(strUser, "nfl");
 							break;
 						case "team":
 							console.log("nflTeam");
@@ -37,7 +37,15 @@ $(function() {
 			case "nhl":
 					switch ($("input[name='category']:checked").val()) {
 						case "player":
-
+							console.log("nhlPlayer");
+							document.getElementById("nhlTeamDropdown").style.display = "block";
+							document.getElementById("team-select-fields").style.display = "none";
+				 			document.getElementById("players").style.display = "block";
+							document.getElementById("standingsDropdowns").style.display = "none";
+							document.getElementById("nhlStandingsDropdowns").style.display = "none";
+				 			var e = document.getElementById("teams");
+							var strUser = e.options[e.selectedIndex].value;
+							populatePlayerList(strUser, "nhl");
 							break;
 						case "team":
 							document.getElementById("standingsDropdowns").style.display = "none";

@@ -230,37 +230,70 @@ function getQueryVariable(variable)
        return(false);
 }
 
-function populatePlayerList(t){
+function populatePlayerList(t, league){
 	console.log('populatePlayerList');
     var select = document.getElementById("playerList");
 		select.className += select.className ? ' chosen-select' : 'chosen-select';
 
     select.options.length = 0;
-    $.ajax({
-		type: "POST",
-		dataType: "json",
-	  url: "/getTeamRoster",
-	  data: {teamName: t}
-	}).done(function(data) {
-	  //alert("done");
-	  console.log("done");
-	  console.log(data);
-	   for (var i = 0; i < data.length - 1; i++) {
-        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = data[i].player.name_full;
-        select.appendChild(el);
-      }
-			setChosen();
-			console.log("here");
-			$(".chosen-select").trigger("chosen:updated");
-	}).fail(function(xhr, status, error){
-		//alert("fail");
-		console.log(xhr);
-		console.log(status);
-		console.log(error);
-	});
+
+    console.log(t);
+    switch (league) {
+    	case "nfl":
+		    $.ajax({
+				type: "POST",
+				dataType: "json",
+			  url: "/getTeamRoster",
+			  data: {teamName: t}
+			}).done(function(data) {
+			  //alert("done");
+			  console.log("done");
+			  console.log(data);
+			   for (var i = 0; i < data.length - 1; i++) {
+		        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
+		        var el = document.createElement("option");
+		        el.textContent = opt;
+		        el.value = data[i].player.name_full;
+		        select.appendChild(el);
+		      }
+					setChosen();
+					console.log("here");
+					$(".chosen-select").trigger("chosen:updated");
+			}).fail(function(xhr, status, error){
+				//alert("fail");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			});
+    		break;
+    	case "nhl":
+    		$.ajax({
+				type: "POST",
+				dataType: "json",
+			  url: "/getNHLTeamRoster",
+			  data: {teamName: t}
+			}).done(function(data) {
+			  //alert("done");
+			  console.log("done");
+			  console.log(data);
+			   for (var i = 0; i < data.length - 1; i++) {
+		        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
+		        var el = document.createElement("option");
+		        el.textContent = opt;
+		        el.value = data[i].player.name_full;
+		        select.appendChild(el);
+		      }
+					setChosen();
+					console.log("here");
+					$(".chosen-select").trigger("chosen:updated");
+			}).fail(function(xhr, status, error){
+				//alert("fail");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			});
+    		break;
+    }
 
 }
 
@@ -414,9 +447,18 @@ $(function() {
 	$('.teamList').on('change', function () {
 		if ($("input[name='category']:checked").val() == "player") {
 		    //player is checked so populate team list
-		    var e = document.getElementById("teams");
-				var strUser = e.options[e.selectedIndex].value;
-				populatePlayerList(strUser);
+		    var league = $("input[name='league']:checked").val();
+		    var team = "";
+		    switch (league){
+		    	case "nfl":
+		    		var e = document.getElementById("teams");
+					team = e.options[e.selectedIndex].value;
+					break;
+				case "nhl":
+					var e = document.getElementById("nhlTeamDropdown");
+					team = e.options[e.selectedIndex].value;
+		    }    
+			populatePlayerList(team, league);
 		}
 		return true
 	});

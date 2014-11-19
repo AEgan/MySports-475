@@ -7,6 +7,13 @@ def getTeamRoster(teamName)
 	return all_players
 end
 
+def getNHLTeamRoster(teamName)
+	SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
+	SportsDataApi.set_access_level(:nhl, 't')
+	all_players = SportsDataApi::Nhl.team_roster(teamName).players.select{|play| !play.player.nil?}.sort_by!{|play| play.player[:name_last]}
+	return all_players
+end
+
 # Get Team Stats
 def getTeamInfo(teamName)
 	# Set API Keys
