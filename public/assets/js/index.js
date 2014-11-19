@@ -1,6 +1,8 @@
 
 var boxNumber = "";
-var nextBoxNumber = 2
+var mainUser = "Varun";
+var mainPassword = "test";
+var nextBoxNumber = 1;
 var box_team = new Array();
 
 function getData (box, urlText, league, category, d, t) {
@@ -9,7 +11,7 @@ function getData (box, urlText, league, category, d, t) {
 		}
 
 		var arrayNew = new Array();
-		arrayNew.push(box);
+		arrayNew.push("#box" + String(box));
 		arrayNew.push(league);
 		box_team.push(arrayNew);
 		console.log(box_team);
@@ -26,6 +28,8 @@ function getData (box, urlText, league, category, d, t) {
 
 		  console.log("done");
 		  console.log(data);
+		  console.log("bro cmon");
+		  console.log(box);
 		  displayData(box, data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
@@ -36,6 +40,13 @@ function getData (box, urlText, league, category, d, t) {
 }
 
 function displayData(box, data, league, category, t) {
+	box = "#box" + String(box);
+	console.log("DISPLAY DATA");
+	console.log(box);
+	console.log(data);
+	console.log(league);
+	console.log(category);
+	console.log(t);
 	switch (league) {
 		case "nfl":
 			switch (category) {
@@ -49,7 +60,6 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "team":
 					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-					var boxNum = box.charAt(box.length -1);
 					$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
 					$('.modal-trigger-area').css("display", "block");
 					$(box + ' > .modal').html("here it is");
@@ -215,7 +225,6 @@ function popup(box) {
 	document.getElementById("dialog-form").style.display = "block";
 	document.getElementById("submit").style.display = "block";
 	document.getElementById("nhlTeamDropdown").style.display = "none";
-	boxNumber = "";
 	boxNumber = box;
 }
 
@@ -237,69 +246,42 @@ function populatePlayerList(t, league){
 
     select.options.length = 0;
 
-    console.log(t);
-    switch (league) {
-    	case "nfl":
-		    $.ajax({
-				type: "POST",
-				dataType: "json",
-			  url: "/getTeamRoster",
-			  data: {teamName: t}
-			}).done(function(data) {
-			  //alert("done");
-			  console.log("done");
-			  console.log(data);
-			   for (var i = 0; i < data.length - 1; i++) {
-		        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
-		        var el = document.createElement("option");
-		        el.textContent = opt;
-		        el.value = data[i].player.name_full;
-		        select.appendChild(el);
-		      }
-					setChosen();
-					console.log("here");
-					$(".chosen-select").trigger("chosen:updated");
-			}).fail(function(xhr, status, error){
-				//alert("fail");
-				console.log(xhr);
-				console.log(status);
-				console.log(error);
-			});
-    		break;
-    	case "nhl":
-    		$.ajax({
-				type: "POST",
-				dataType: "json",
-			  url: "/getNHLTeamRoster",
-			  data: {teamName: t}
-			}).done(function(data) {
-			  //alert("done");
-			  console.log("done");
-			  console.log(data);
-			   for (var i = 0; i < data.length - 1; i++) {
-		        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
-		        var el = document.createElement("option");
-		        el.textContent = opt;
-		        el.value = data[i].player.name_full;
-		        select.appendChild(el);
-		      }
-					setChosen();
-					console.log("here");
-					$(".chosen-select").trigger("chosen:updated");
-			}).fail(function(xhr, status, error){
-				//alert("fail");
-				console.log(xhr);
-				console.log(status);
-				console.log(error);
-			});
-    		break;
-    }
+    $.ajax({
+		type: "POST",
+		dataType: "json",
+	  url: "/getTeamRoster",
+	  data: {teamName: t}
+	}).done(function(data) {
+	  //alert("done");
+	  console.log("done");
+	  console.log(data);
+	   for (var i = 0; i < data.length; i++) {
+        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = data[i].player.name_full;
+        select.appendChild(el);
+      }
+			setChosen();
+			console.log("here");
+			$(".chosen-select").trigger("chosen:updated");
+	}).fail(function(xhr, status, error){
+		//alert("fail");
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
 
 }
 
 //function to set styling on filtering by league
 function set_filter(league) {
+	console.log("FILTERING")
 	for (var i = 0; i < box_team.length; i++) {
+		console.log("BOX TEAM");
+		console.log(box_team[i]);
+		console.log(box_team[i][1]);
+		console.log(box_team[i][0]);
 		if (box_team[i][1] == league) {
 			$(box_team[i][0]).css("display", "block");
 		}
@@ -314,7 +296,33 @@ function set_filter(league) {
 
 // Main Function
 $(function() {
-	
+	$.ajax({
+			type: "GET",
+			dataType: "json",
+		  	url: "/users",
+			}).done(function(data) {
+			  console.log("USERS MAN");
+			  console.log(data);
+			  // data.forEach(function (newtile, index, array) {
+		  	for (var i = 0; i < data.length; i++) {
+			  	var newtile = data[i];
+			  	console.log("IM HERE BITCHESSS");
+			  	console.log(newtile);
+			  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
+			  	nextBoxID = "box" + nextBoxNumber;
+		   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+		   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+			  }//);
+			  console.log("DAMN");
+			  // nextBoxNumber += 1;
+			  
+			  
+			}).fail(function(xhr, status, error){
+				console.log("NOOOOOO");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+		});
 	// Login button
 	$('#login').on('click', function (e) {
 		e.preventDefault();
@@ -346,32 +354,80 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 		var league = $(this).find("input[name='league']:checked").val()
-    	var category = $(this).find("input[name='category']:checked").val()
-    	console.log(category);
-    	var t = $(this).find('select[name="team"]').val();
-    	var p = $(this).find('select[name="player"]').val();
+  	var category = $(this).find("input[name='category']:checked").val()
+  	console.log(category);
+  	var t = $(this).find('select[name="team"]').val();
+  	var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
-	    switch(league) {
+	  createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
+	  nextBoxID = "box" + nextBoxNumber;
+   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+
+    
+
+	  $.ajax({
+			type: "POST",
+			dataType: "json",
+		  	url: "/create_tile",
+		  	data: {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam}
+			}).done(function(data) {
+			  console.log("created tile");
+			  console.log(data);
+			  
+			}).fail(function(xhr, status, error){
+				console.log("NOOOOOO");
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+		});
+	});
+
+	$('.teamList').on('change', function () {
+		if ($("input[name='category']:checked").val() == "player") {
+		    //player is checked so populate team list
+		    var e = document.getElementById("teams");
+				var strUser = e.options[e.selectedIndex].value;
+				populatePlayerList(strUser);
+		}
+		return true
+	});
+
+	$( ".filterOption" ).on( "click", function() {
+		$( ".filterOption" ).css("background-color", "#DDD");
+		$( ".filterOption" ).css("border-bottom", "2px solid #334");
+		$(this).css("background-color", "#17C7CA");
+		$(this).css("border-bottom", "none");
+
+		var filter = $(this).prop('id');
+		console.log(filter);
+		set_filter(filter);
+	});
+
+});
+
+function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
+	switch(league) {
 	    	case "nfl":
 	    		switch (category) {
 			    	case "team":
 			    		console.log("IN CASE STATEMENT TEAM");
 			    		data = {team: t}
-			    		getData(boxNumber, "/getTeamInfo", league, category, data, t);
+			    		getData(nextBoxNumber, "/getTeamInfo", league, category, data, t);
 			    		break;
 			    	case "player":
 				    	console.log("IN CASE STATEMENT PLAYER");
 				    	data = { player: p, team: t};
-				    	getData(boxNumber, "/getPlayerInfo", league, category, data, t);
+				    	getData(nextBoxNumber, "/getPlayerInfo", league, category, data, t);
 			    		break;
 					case "standings":
 						console.log("IN CASE STATEMENT standings");
 						data = { conference: c, division: d };
 						console.log(data);
-						getData(boxNumber, "/getNFLStandings", league, category, data);
+						getData(nextBoxNumber, "/getNFLStandings", league, category, data);
 						break;
 				}
 				break;
@@ -383,7 +439,7 @@ $(function() {
 						console.log(category);
 						console.log(league);
 						data = { team: nhlTeam };
-						getData(boxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam);
+						getData(nextBoxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam);
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NHL PLAYER");
@@ -392,7 +448,7 @@ $(function() {
 					case "standings":
 						console.log("IN CASE STATEMENT NHL STANDINGS");
 						data = { conference: nhlConference };
-						getData(boxNumber, "/getNHLStandings", league, category, data);
+						getData(nextBoxNumber, "/getNHLStandings", league, category, data);
 						break;
 				}
 				break;
@@ -426,192 +482,11 @@ $(function() {
 		    	console.log("IN CASE STATEMENT DEFAULT");
 	    		break;
 	    }
-
-	    nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
-	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
-
 	    nextBoxNumber += 1;
-		setModals();
-	
-	    // deferred = $.post("http://somewhere.com", { val: val });
-
-	    // deferred.success(function () {
-	    //     Do your stuff.
-	    // });
-
-	    // deferred.error(function () {
-     //    Handle any errors here.});
-	});
-
-	$('.teamList').on('change', function () {
-		if ($("input[name='category']:checked").val() == "player") {
-		    //player is checked so populate team list
-		    var league = $("input[name='league']:checked").val();
-		    var team = "";
-		    switch (league){
-		    	case "nfl":
-		    		var e = document.getElementById("teams");
-					team = e.options[e.selectedIndex].value;
-					break;
-				case "nhl":
-					var e = document.getElementById("nhlTeamDropdown");
-					team = e.options[e.selectedIndex].value;
-		    }    
-			populatePlayerList(team, league);
-		}
-		return true
-	});
 
 
-	$( ".filterOption" ).on( "click", function() {
-		$( ".filterOption" ).css("background-color", "#DDD");
-		$( ".filterOption" ).css("border-bottom", "2px solid #334");
-		$(this).css("background-color", "#17C7CA");
-		$(this).css("border-bottom", "none");
-
-		var filter = $(this).prop('id');
-		console.log(filter);
-		set_filter(filter);
-	});
-
-	// var boxOne = "#box1";
-	// $.ajax({
-	// 	type: "GET",
-	// 	dataType: "json",
-	//   url: "/getNFLStandings"
-	// }).done(function(data) {
-	//   console.log("standings done yo");
-	//   console.log(data);
-	//   team0 = data.teams[0]['name']
-	//   team1 = data.teams[1]['name']
-	//   team2 = data.teams[2]['name']
-	//   team3 = data.teams[3]['name']
-	//   console.log(team0)
-	//   $(boxOne + ' .sportsContent').html("<b><u> Standings </u></b><br />" + team0 + "<br />" + team1 + "<br />" + team2 + "<br />" + team3);
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-
-	// var p = "Antonio Brown"
-	// var t = "PIT"
-	// var box = '#box3'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p, team: t}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-
-	// var p2 = "Sammy Watkins"
-	// var t2 = "BUF"
-	// var box2 = '#box2'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p2, team: t2}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box2 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p4 = "Cody Parkey"
-	// var t4 = "PHI"
-	// var box4 = '#box4'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p4, team: t4}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box4 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Attempts: &nbsp;" + data.field_goal.att+"</b><br /><hr>Made: &nbsp;" + data.field_goal.made+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p5 = "DeMarco Murray"
-	// var t5 = "DAL"
-	// var box5 = '#box5'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p5, team: t5}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box5 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Rushing Yards: &nbsp;" + data.rushing.yds+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p6 = "Andrew Luck"
-	// var t6 = "IND"
-	// var box6 = '#box6'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p6, team: t6}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box6 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Touchdowns: &nbsp;" + data.touchdowns.total+"</b><br /><hr>Passing Touchdowns: &nbsp;" + data.passing.td+"</b><br /><hr>Passing Yards: &nbsp;" + data.passing.yds+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-	// var p7 = "Donnie Jones"
-	// var t7 = "PHI"
-	// var box7 = '#box7'
-
-	// $.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	//   url: "/getPlayerInfo",
-	//   data: { player: p7, team: t7}
-	// }).done(function(data) {
-	//   console.log("done");
-	//   console.log(data);
-	//   $(box7 + ' .sportsContent').html("<b>"+data.position+" &nbsp;" + data.name_full+"</b><br /><hr>Punts: &nbsp;" + data.punting.punts+"</b><br />College: &nbsp;" + data.college +"</b><br />Draft Pick: &nbsp;" + data.draft_pick + "</b><br />Height: &nbsp;" + data.height + "in");
-	// }).fail(function(xhr, status, error){
-	// 	console.log(xhr);
-	// 	console.log(status);
-	// 	console.log(error);
-	// });
-
-});
+			setModals();
+}
 
 
 function roundToTwo(num) {
