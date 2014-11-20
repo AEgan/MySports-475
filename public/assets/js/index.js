@@ -14,22 +14,13 @@ function getData (box, urlText, league, category, d, t) {
 		arrayNew.push("#box" + String(box));
 		arrayNew.push(league);
 		box_team.push(arrayNew);
-		console.log(box_team);
-		console.log(d);
-		console.log(urlText);
 
 		$.ajax({
-
-		type: "POST",
-		dataType: "json",
+			type: "POST",
+			dataType: "json",
 	  	url: urlText,
 	  	data: d
 		}).done(function(data) {
-
-		  console.log("done");
-		  console.log(data);
-		  console.log("bro cmon");
-		  console.log(box);
 		  displayData(box, data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
@@ -366,7 +357,6 @@ $(function() {
 	  nextBoxID = "box" + nextBoxNumber;
    	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
    	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
-
     
 
 	  $.ajax({
@@ -486,21 +476,4 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 
 
 			setModals();
-}
-
-
-function roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2");
-}
-
-function getElementTopLeft(id) {
-    var ele = document.getElementById(id);
-    var top = 0;
-    var left = 0;
-    while(ele.tagName != "BODY") {
-        top += ele.offsetTop;
-        left += ele.offsetLeft;
-        ele = ele.offsetParent;
-    }
-    return { top: top, left: left };
 }
