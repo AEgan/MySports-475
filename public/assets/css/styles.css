@@ -251,3 +251,10 @@ label.ui-button {
 	margin-right: 0px;
 	padding-bottom: 5px;
 }
+
+#welcome {
+	margin-right: 70px;
+	font-size: 14px;
+	float: right;
+	color: #FFF;
+}
