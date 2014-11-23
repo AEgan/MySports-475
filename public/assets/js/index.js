@@ -31,13 +31,9 @@ function getData (box, urlText, league, category, d, t) {
 }
 
 function displayData(box, data, league, category, t) {
-	box = "#box" + String(box);
 	console.log("DISPLAY DATA");
-	console.log(box);
 	console.log(data);
-	console.log(league);
-	console.log(category);
-	console.log(t);
+	box = "#box" + String(box);
 	switch (league) {
 		case "nfl":
 			switch (category) {
