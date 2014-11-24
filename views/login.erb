@@ -1,0 +1,10 @@
+<% if(logged_in?) %>
+  Welcome: <%= current_user.name %>
+  <a href="/logout">Logout</a>
+<% else %>
+  <form action="/login" method="POST" id="login-form">
+    <input type="text" name="name" placeholder="name" />
+    <input type="password" name="password" placeholder="password" />
+    <input id="login-submit-button" type="submit" value="Log In" />
+  </form>
+<% end %>

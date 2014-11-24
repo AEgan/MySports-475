@@ -194,7 +194,7 @@ table.standings-table tr:nth-child(even) {
 }
 p {
 	margin: 0px;
-	padding: 0px 5px 5px 
+	padding: 0px 5px 5px
 	5px;
 }
 
@@ -212,7 +212,7 @@ p {
 
 .filterOption {
 	display: inline-block;
-	margin: 0px; 
+	margin: 0px;
 	padding: 10px 0px 0px 0px;
 	width: 150px;
 	height: 25px;
@@ -257,4 +257,8 @@ label.ui-button {
 	font-size: 14px;
 	float: right;
 	color: #FFF;
+}
+
+#login-form > input {
+	color: #000000;
 }
