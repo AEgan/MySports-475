@@ -1,9 +1,14 @@
 # ---------------- NFL ----------------------
 # Get information for a player
 post '/getPlayerInfo' do
-	puts request["player"]
-	puts request["team"]
 	content_type :json
-	getPlayerInfo(request["player"], request["team"]).to_json
+	check_tile = get_tile_if_exists(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"])
+	if check_tile == []
+		newInfo = getPlayerInfo(request["p"], request["t"])
+		create_tile(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"], request["boxNum"], newInfo)
+		return newInfo.to_json
+	else
+		return check_tile[0].data.to_json
+	end
 end
 
