@@ -14,6 +14,7 @@ gem 'mongo'
 gem 'bson_ext'
 gem "mongoid", "~> 3.0.0"
 gem 'moped'
+gem 'bcrypt'
 
 group :development do
  gem 'sqlite3'

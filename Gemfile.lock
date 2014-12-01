@@ -16,6 +16,7 @@ GEM
     activesupport (3.2.20)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    bcrypt (3.1.7)
     bond (0.5.1)
     bson (1.11.1)
     bson_ext (1.11.1)
@@ -75,6 +76,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   bson_ext
   json
   mongo

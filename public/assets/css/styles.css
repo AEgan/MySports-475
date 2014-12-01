@@ -259,10 +259,10 @@ label.ui-button {
 	color: #FFF;
 }
 
-#login-form > input {
+#login-form > input, #signup-form > input {
 	color: #000000;
 }
 
-h2.dark {
+h2.dark, h3.dark {
 	color: #000000;
 }
