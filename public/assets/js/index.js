@@ -25,21 +25,6 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 			console.log("infoArray");
 			console.log(infoArray);
 			displayData(box, data, league, category, t);
-			// $.ajax({
-			// 	type: "POST",
-			// 	dataType: "json",
-			//   	url: "/create_tile",
-			//   	data: infoArray
-			// }).done(function(data) {
-			//   console.log("created tile");
-			//   console.log(data);
-			// }).fail(function(xhr, status, error){
-			// 	console.log("NOOOOOO");
-			// 	console.log(xhr);
-			// 	console.log(status);
-			// 	console.log(error);
-			// });
-			
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -401,9 +386,6 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NHL TEAM");
-						console.log(nhlTeam);
-						console.log(category);
-						console.log(league);
 						data = { team: nhlTeam };
 						getData(nextBoxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam, infoArray);
 						break;
@@ -458,7 +440,7 @@ function populateUserTiles(username, password) {
 	$.ajax({
 		type: "GET",
 		dataType: "json",
-  	url: "/users",
+  	url: "/get_tiles",
 	}).done(function(data) {
 	  console.log("USERS MAN");
 	  console.log(data);
