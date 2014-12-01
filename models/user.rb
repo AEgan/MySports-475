@@ -24,3 +24,11 @@ get '/users' do
 	return @tiles.to_json
 
 end
+
+get '/get_tiles' do
+	@user = current_user
+	@customs = @user.customs
+	@tiles = @customs.map {|c| Tile.find(c.tile_id)}
+	return @tiles.to_json
+
+end
