@@ -259,10 +259,18 @@ label.ui-button {
 	color: #FFF;
 }
 
-#login-form > input, #signup-form > input {
+.dark-input {
 	color: #000000;
 }
 
 h2.dark, h3.dark {
 	color: #000000;
+}
+
+.light-wrap {
+	background-color: #ffffff;
+	color: #000000;
+	margin-left: 5%;
+	margin-right: 5%;
+	padding: 1% 1% 1% 1%;
 }

@@ -4,18 +4,6 @@
 <% else %>
   <a href="#loginModal" class="modal-trigger">Log In</a>
   <div id="loginModal" class="modal">
-    <h2 class="dark">Log In</h2>
-    <form action="/login" method="POST" id="login-form">
-      <input type="text" name="name" placeholder="name" /><br />
-      <input type="password" name="password" placeholder="password" /><br />
-      <input id="login-submit-button" type="submit" value="Log In" />
-    </form>
-    <h3 class="dark">Sign Up</h3>
-    <form action="/signup" method="POST" id="signup-form">
-      <input type="text" name="name" placeholder="name" /><br />
-      <input type="password" name="password" placeholder="password" /><br />
-      <input type="password" name="password_confirmation" placeholder="password confirmation" /><br />
-      <input id="login-submit-button" type="submit" value="Sign Up" />
-    </form>
+    <%= erb :login_signup_forms %>
   </div>
 <% end %>
