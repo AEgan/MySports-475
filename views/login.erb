@@ -2,9 +2,13 @@
   Welcome: <%= current_user.name %>
   <a href="/logout">Logout</a>
 <% else %>
-  <form action="/login" method="POST" id="login-form">
-    <input type="text" name="name" placeholder="name" />
-    <input type="password" name="password" placeholder="password" />
-    <input id="login-submit-button" type="submit" value="Log In" />
-  </form>
+  <a href="#loginModal" class="modal-trigger">Log In</a>
+  <div id="loginModal" class="modal">
+    <h2 class="dark">Log In</h2>
+    <form action="/login" method="POST" id="login-form">
+      <input type="text" name="name" placeholder="name" /><br />
+      <input type="password" name="password" placeholder="password" /><br />
+      <input id="login-submit-button" type="submit" value="Log In" />
+    </form>
+  </div>
 <% end %>

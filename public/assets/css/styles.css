@@ -262,3 +262,7 @@ label.ui-button {
 #login-form > input {
 	color: #000000;
 }
+
+h2.dark {
+	color: #000000;
+}
