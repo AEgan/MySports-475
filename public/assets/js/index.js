@@ -67,7 +67,7 @@ function displayData(box, data, league, category, t) {
 		case "nhl":
 			switch (category) {
 				case "team":
-					$(box + ' .sportsContent').html("we out here");
+					$(box + ' .sportsContent').html(render('summary_nhl_team', data));
 					break;
 				case "player":
 					//implement nhl player stats here
@@ -304,7 +304,7 @@ $(function() {
 			}).done(function(data) {
 			  console.log("done");
 			  console.log(data);
-			  
+
 			}).fail(function(xhr, status, error){
 				console.log("NOOOOOO");
 				console.log(xhr);
@@ -382,7 +382,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 				}
 				break;
-			case "nhl": 
+			case "nhl":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NHL TEAM");
@@ -400,7 +400,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 				}
 				break;
-			case "nba": 
+			case "nba":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NBA TEAM");
@@ -410,10 +410,10 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NBA STANDINGS");
-						break;	
+						break;
 				}
 				break;
-			case "mlb": 
+			case "mlb":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT MLB TEAM");
@@ -423,7 +423,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT MLB STANDINGS");
-						break;	
+						break;
 				}
 				break;
 	    	default:
