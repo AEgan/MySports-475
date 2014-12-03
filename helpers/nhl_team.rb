@@ -11,5 +11,11 @@ def getNHLTeamInfo(teamID)
 	return_hash[:conference] = team.conference.capitalize
 	return_hash[:division] = team.division.capitalize
 	return_hash[:id] = team.id
+	venue_hash = Hash.new
+	venue_hash[:name] = team.venue.name
+	venue_hash[:capacity] = team.venue.capacity
+	venue_hash[:city] = team.venue.city
+	venue_hash[:state] = team.venue.state
+	return_hash[:venue] = venue_hash
 	return_hash
 end

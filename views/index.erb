@@ -215,11 +215,15 @@
 </script>
 
 <script id="summary_nhl_team" type="text/x-handlebars-template">
-<table class="player-stats-table">
-  <tr><td>Name:</td><td>{{name}}</td></tr>
-  <tr><td>Alias:</td><td>{{alias}}</td></tr>
-  <tr><td>Market:</td><td>{{market}}</td></tr>
-  <tr><td>Conference:</td><td>{{conference}}</td></tr>
-  <tr><td>Division:</td><td>{{division}}</td></tr>
-</table>
+  <h3>Team</h3>
+  <b>Name:</b>{{name}}<br />
+  <b>Alias:</b>{{alias}}<br />
+  <b>Market:</b>{{market}}<br />
+  <b>Conference:</b>{{conference}}<br />
+  <b>Division:</b>{{division}}<br />
+  <h3>Venue</h3>
+  <b>Name</b>{{venue.name}}<br />
+  <b>Capacity</b>{{venue.capacity}}<br />
+  <b>City</b>{{venue.city}}<br />
+  <b>State</b>{{venue.state}}<br />
 </script>
