@@ -4,6 +4,7 @@ var mainUser = "Varun";
 var mainPassword = "test";
 var nextBoxNumber = 1;
 var box_team = new Array();
+var current_tiles = [];
 
 function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
@@ -20,11 +21,15 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 			dataType: "json",
 		  	url: urlText,
 		  	data: infoArray
-		}).done(function(data) {
-			infoArray.data = data;
+		}).done(function(tile) {
+			infoArray.data = tile.data;
+			current_tiles.push(tile);
+			console.log("GET DATA");
+			console.log(current_tiles);
+			console.log(tile);
 			console.log("infoArray");
 			console.log(infoArray);
-			displayData(box, data, league, category, t);
+			displayData(box, tile.data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -360,7 +365,7 @@ $(function() {
 });
 
 function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
-	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam};
+	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber};
 	switch(league) {
 	    	case "nfl":
 	    		switch (category) {
@@ -447,13 +452,15 @@ function populateUserTiles(username, password) {
 	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
-	  	console.log("IM HERE BITCHESSS");
+	  	current_tiles.push(newtile);
 	  	console.log(newtile);
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
 	  	nextBoxID = "box" + nextBoxNumber;
 	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
 	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
 	  }
+	  console.log("ADDITION");
+	  console.log(current_tiles);
 	}).fail(function(xhr, status, error){
 		console.log("NOOOOOO");
 		console.log(xhr);

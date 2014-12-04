@@ -33,6 +33,7 @@ def create_custom(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, 
 		@new_custom.user = current_user
 		@new_custom.tile = tile
 		@new_custom.save
+		return @new_custom
 	else
 		return custom[0]
 	end
@@ -52,7 +53,8 @@ def create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, da
 		@new_tile.nhlConference = nhlConference
 		@new_tile.nhlTeam = nhlTeam
 		@new_tile.data = data
-
+		@new_tile.boxNum = boxNum
+		
 		@new_tile.save
 		return @new_tile
 	else 

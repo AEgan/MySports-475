@@ -20,14 +20,14 @@ post '/getNHLTeamInfo' do
 
 		if check_tile == []
 			newInfo = getNHLTeamInfo(request["nhlTeam"])
-			create_custom(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"], request["boxNum"], newInfo)
-			return newInfo.to_json
+			custom = create_custom(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"], request["boxNum"], newInfo)
+			return custom.tile.to_json
 		else
-			create_custom(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"], request["boxNum"], check_tile[0].data)
-			return check_tile[0].data.to_json
+			custom = create_custom(request["league"], request["category"], request["t"], request["p"], request["c"], request["d"], request["nhlConference"], request["nhlTeam"], request["boxNum"], check_tile[0].data)
+			return check_tile[0].to_json
 		end
 	else 
-		return check_custom[0].tile.data.to_json
+		return check_custom[0].tile.to_json
 	end
 end
 
