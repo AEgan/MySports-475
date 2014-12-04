@@ -10,6 +10,8 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
 		}
+		console.log("infoArray IS HERE");
+		console.log(infoArray);
 
 		var arrayNew = new Array();
 		arrayNew.push("#box" + String(box));
@@ -96,6 +98,9 @@ function displayData(box, data, league, category, t) {
 			switch (category) {
 				case "team":
 					//implement nba team stats here
+					console.log("NBA TEAM INFO HERE");
+					console.log(data);
+					$(box + ' .sportsContent').html("<b>Check console</b>");
 					break;
 				case "player":
 					//implement nba player stats here
@@ -220,6 +225,7 @@ function popup(box) {
 	document.getElementById("dialog-form").style.display = "block";
 	document.getElementById("submit").style.display = "block";
 	document.getElementById("nhlTeamDropdown").style.display = "none";
+	document.getElementById("nbaTeamDropdown").style.display = "none";
 	boxNumber = box;
 }
 
@@ -361,7 +367,8 @@ $(function() {
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
-		createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
+		var nbaTeam = $(this).find('select[name="nbaTeam"]').val();
+		createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam);
 		nextBoxID = "box" + nextBoxNumber;
 	   	newBox = render("outline", {num: nextBoxNumber});
 	  	$('#sortable').append(newBox);
@@ -388,8 +395,8 @@ $(function() {
 
 });
 
-function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
-	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber};
+function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam) {
+	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber, nbaTeam: nbaTeam};
 	switch(league) {
 	    	case "nfl":
 	    		switch (category) {
@@ -433,6 +440,8 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NBA TEAM");
+						data = { team: nbaTeam };
+						getData(nextBoxNumber, "/getNBATeamInfo", league, category, data, t, infoArray);
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NBA PLAYER");

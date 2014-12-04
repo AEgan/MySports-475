@@ -2,7 +2,7 @@
     <p>Choose which information to display</p>
     <form class="form">
       <fieldset>
-        
+
         <div class="center">
           <div class="radioButtons" id="league">
             <div class="radio2"><input id = "leagueNFL" type="radio" name="league" value="nfl" checked><label for="leagueNFL">NFL</label><br/></div>
@@ -20,7 +20,7 @@
             <div class="radio"><input type="radio" id="standingsRadio" name="category" value="standings">Standings</div>
           </div>
 
-        
+
 
 
         <div class="field">
@@ -104,6 +104,9 @@
               <option value="441781b9-0f24-11e2-8525-18a905767e44">Rangers</option>
             </optgroup>
           <select>
+        </div>
+        <div id="nbaTeamDropdown">
+          <%= erb :nba_team_dropdown %>
         </div>
 
         <div class="field" id="players">

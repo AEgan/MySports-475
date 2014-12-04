@@ -12,6 +12,7 @@ $(function() {
 							document.getElementById("standingsDropdowns").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nhlTeamDropdown").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 				 			var e = document.getElementById("teams");
 							var strUser = e.options[e.selectedIndex].value;
 							populatePlayerList(strUser, "nfl");
@@ -23,6 +24,7 @@ $(function() {
 							document.getElementById("standingsDropdowns").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nhlTeamDropdown").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 							break;
 						case "standings":
 							console.log("nflStandings");
@@ -31,6 +33,7 @@ $(function() {
 							document.getElementById("team-select-fields").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nhlTeamDropdown").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 							break;
 					}
 					break;
@@ -43,6 +46,7 @@ $(function() {
 				 			document.getElementById("players").style.display = "block";
 							document.getElementById("standingsDropdowns").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 				 			var e = document.getElementById("teams");
 							var strUser = e.options[e.selectedIndex].value;
 							populatePlayerList(strUser, "nhl");
@@ -53,6 +57,7 @@ $(function() {
 							document.getElementById("team-select-fields").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nhlTeamDropdown").style.display = "block";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 							break;
 						case "standings":
 							document.getElementById("standingsDropdowns").style.display = "none";
@@ -60,19 +65,30 @@ $(function() {
 							document.getElementById("team-select-fields").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "block";
 							document.getElementById("nhlTeamDropdown").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "none";
 							break;
 					}
 					break;
 			case "nba":
 					switch ($("input[name='category']:checked").val()) {
 						case "player":
-
+							document.getElementById("standingsDropdowns").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "block";
+							document.getElementById("team-select-fields").style.display = "none";
+							document.getElementById("nhlStandingsDropdowns").style.display = "none";
+							document.getElementById("nhlTeamDropdown").style.display = "none";
 							break;
 						case "team":
-
+							document.getElementById("players").style.display = "none";
+							document.getElementById("standingsDropdowns").style.display = "none";
+							document.getElementById("nbaTeamDropdown").style.display = "block";
+							document.getElementById("team-select-fields").style.display = "none";
+							document.getElementById("nhlStandingsDropdowns").style.display = "none";
+							document.getElementById("nhlTeamDropdown").style.display = "none";
 							break;
 						case "standings":
-
+							document.getElementById("nbaTeamDropdown").style.display = "none";
+							document.getElementById("team-select-fields").style.display = "none";
 							break;
 					}
 					break;

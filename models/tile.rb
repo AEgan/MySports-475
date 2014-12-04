@@ -11,23 +11,32 @@ class Tile
 	field :d
 	field :nhlConference
 	field :nhlTeam
+	field :nbaTeam
 end
 
-def get_custom_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam)
-	tile = Tile.where({league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam})[0]
+def get_custom_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam=nil)
+	if(league.downcase.eql?('nba'))
+		tile = Tile.where({league: league, category: category, nbaTeam: nbaTeam})[0]
+	else
+		tile = Tile.where({league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam})[0]
+	end
 	user = current_user
 	custom = Custom.where({tile: tile, user: user}).entries
 	return custom
 end
 
-def get_tile_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam)
-	return Tile.where({league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam}).entries
+def get_tile_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam=nil)
+	if(league.downcase.eql?('nba'))
+		return Tile.where({league: league, category: category, nbaTeam: nbaTeam}).entries
+	else
+		return Tile.where({league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam}).entries
+	end
 end
 
-def create_custom(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data)
-	custom = get_custom_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam)
+def create_custom(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data, nbaTeam=nil)
+	custom = get_custom_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam)
 	if custom == []
-		tile = create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data)
+		tile = create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data, nbaTeam)
 		@new_custom = Custom.new
 		@new_custom.user = current_user
 		@new_custom.tile = tile
@@ -39,11 +48,11 @@ def create_custom(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, 
 	end
 end
 
-def create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data)
-	check_tile = get_tile_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam)
+def create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, data, nbaTeam=nil)
+	check_tile = get_tile_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam)
 	if check_tile == []
 		@new_tile = Tile.new
-		
+
 		@new_tile.league = league
 		@new_tile.category = category
 		@new_tile.t = t
@@ -53,11 +62,12 @@ def create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, da
 		@new_tile.nhlConference = nhlConference
 		@new_tile.nhlTeam = nhlTeam
 		@new_tile.data = data
-		
+		@new_tile.nbaTeam = nbaTeam
+
 		@new_tile.save
 		return @new_tile
-	else 
+	else
 		return check_tile[0]
 	end
-	
+
 end
