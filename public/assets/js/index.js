@@ -378,9 +378,7 @@ $(function() {
 
 	$( ".filterOption" ).on( "click", function() {
 		$( ".filterOption" ).css("background-color", "#DDD");
-		$( ".filterOption" ).css("border-bottom", "2px solid #334");
-		$(this).css("background-color", "#17C7CA");
-		$(this).css("border-bottom", "none");
+		$(this).css("background-color", "#ffc435");
 
 		var filter = $(this).prop('id');
 		console.log(filter);
@@ -486,6 +484,8 @@ function populateUserTiles(username, password) {
 	  }
 	  console.log("ADDITION");
 	  console.log(current_tiles);
+	  var idsInOrder = $("#sortable").sortable("toArray");
+	  console.log(idsInOrder);
 	}).fail(function(xhr, status, error){
 		console.log("NOOOOOO");
 		console.log(xhr);

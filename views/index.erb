@@ -45,15 +45,20 @@
         <li class="filterOption" id="mlb">MLB</li>
     </ul>
   </div>
+  <div id="wrapper">
   <% if logged_in? %>
-    <div id="wrapper">
+    <script type="text/javascript">
+      $('#filterNav').css("display", "block");
+      $('#welcome').css("display", "block");
+    </script>
+    
 
       <ul id="sortable">
         <li class="ui-state-default" id="box1">
             <div class="sportsWrapper">
                <div id="logo"></div>
                <div class="sportsContent">
-                  <a id = "box1" onclick="popup('#box1')" class="button addNew">Add Sports Data</a><br />
+                  <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
               </div>
               <div class="modal-trigger-area">
                 <a href="#modal1" class="modal-trigger">More Details</a>
@@ -63,15 +68,16 @@
             </div>
         </li>
       </ul>
-    </div>
+    
 
     <!-- ADD SPORTS DATA FORM -->
     <%= erb :form %>
-  <% else %>
-  <div class="light-wrap center">
-    <%= erb :login_signup_forms %>
+    <% else %>
+      <div class="light-wrap center">
+        <%= erb :login_signup_forms %>
+      </div>
+    <% end %>
   </div>
-  <% end %>
 </body>
 </html>
 

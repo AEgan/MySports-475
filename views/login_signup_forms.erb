@@ -1,17 +1,23 @@
-<h2 class="dark">Log In</h2>
-<form action="/login" method="POST" id="login-form">
-  <div class="dark-input">
+
+<h3 class="light">Log In</h3>
+<script type="text/javascript">
+  $('#filterNav').css("display", "none");
+  $('#welcome').css("display", "none");
+</script>
+<form class ="loginForm" action="/login" method="POST" id="login-form">
+  <div class="light-input">
     <input type="text" name="name" placeholder="name" /><br />
     <input type="password" name="password" placeholder="password" /><br />
   </div>
-  <input id="login-submit-button" type="submit" value="Log In" class="waves-effect waves-light btn"/>
+  <input id="login-submit-button" type="submit" value="Log In" class="btn"/>
 </form>
-<h3 class="dark">Sign Up</h3>
-<form action="/signup" method="POST" id="signup-form">
-  <div class="dark-input">
+<br/>
+<h4 class="light">Sign Up</h4>
+<form class ="loginForm" action="/signup" method="POST" id="signup-form">
+  <div class="light-input">
     <input type="text" name="name" placeholder="name" /><br />
     <input type="password" name="password" placeholder="password" /><br />
     <input type="password" name="password_confirmation" placeholder="password confirmation" /><br />
   </div>
-  <input id="signup-submit-button" type="submit" value="Sign Up" class="waves-effect waves-light btn"/>
+  <input id="signup-submit-button" type="submit" value="Sign Up" class="btn"/>
 </form>
