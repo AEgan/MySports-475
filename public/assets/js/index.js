@@ -42,6 +42,9 @@ function displayData(box, data, league, category, t) {
 	console.log("DISPLAY DATA");
 	console.log(data);
 	box = "#box" + String(box);
+	console.log(box);
+	$(box + ' .details').css("display", "block");
+	console.log("UGH");
 	switch (league) {
 		case "nfl":
 			switch (category) {
@@ -56,7 +59,6 @@ function displayData(box, data, league, category, t) {
 				case "team":
 					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 					$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
-					$('.modal-trigger-area').css("display", "block");
 					$(box + ' > .modal').html("here it is");
 					setModals();
 					break;
@@ -367,8 +369,8 @@ $(function() {
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
 		createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
 		nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
-	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><img src="assets/images/cancel.png" class = "cancelButton" onclick="alert(\'cancel\');"><div id="logo"></div><div class="sportsContent"><img id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="plusImg" src="assets/images/plus.png" /><br /></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger details">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+	   	$("#" + nextBoxID + ' .details').css("display", "block");
 	});
 
 	$('.teamList').on('change', function () {
@@ -484,8 +486,8 @@ function populateUserTiles(username, password) {
 	  	console.log(newtile);
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
 	  	nextBoxID = "box" + nextBoxNumber;
-	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
-	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><img src="assets/images/cancel.png" class = "cancelButton" onclick="alert(\'cancel\');"><div id="logo"></div><div class="sportsContent"><img id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="plusImg" src="assets/images/plus.png" /><br /></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger details">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+	   	$("#" + nextBoxID + ' .details').css("display", "block");
 	  }
 	  console.log("ADDITION");
 	  console.log(current_tiles);

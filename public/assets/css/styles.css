@@ -120,6 +120,16 @@ html {
 	height: auto;
 	cursor: pointer;
 }
+
+.cancelButton {
+	width: 20px;
+	opacity: .8;
+	height: auto;
+	position: relative;
+	float: right;
+	cursor: pointer;
+}
+
 .sportsWrapper {
 	margin: 10px;
 	background-repeat: no-repeat;
@@ -214,7 +224,7 @@ table.standings-table tr:nth-child(even) {
 }
 
 .modal-trigger-area {
-	display: none;
+
 }
 p {
 	margin: 0px;
