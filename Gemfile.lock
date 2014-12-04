@@ -8,7 +8,6 @@ GIT
       rest-client (~> 1.6.7)
 
 GEM
-  remote: https://rubygems.org/
   specs:
     activemodel (3.2.20)
       activesupport (= 3.2.20)
