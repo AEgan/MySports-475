@@ -24,8 +24,6 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 		}).done(function(tile) {
 			infoArray.data = tile.data;
 			current_tiles["box" + String(box)] = tile;
-			console.log("CURRENT TILES");
-			console.log(current_tiles);
 			displayData(box, tile.data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
@@ -303,7 +301,6 @@ $(function() {
 			}).done(function(data) {
 
 			}).fail(function(xhr, status, error){
-				console.log("NOOOOOO");
 				console.log(xhr);
 				console.log(status);
 				console.log(error);
@@ -313,15 +310,23 @@ $(function() {
 
 	$( "#sortable" ).sortable({
 		stop: function (e) {
-			var sorted = $('#sortable').sortable("toArray").pop();
-			var test = sorted.map(function(t) {
+			var sorted = $('#sortable').sortable("toArray");
+			var new_sorted = sorted.map(function(t) {
 				return current_tiles[t];
 			});
+			console.log(sorted);
+			$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "/save_order",
+				data: {new_order: new_sorted}
+			}).done(function(data) {
 
-			console.log(test);
-		},
-		change: function (e) {
-			console.log($('#sortable').sortable("toArray"));
+			}).fail(function(xhr, status, error){
+				console.log(xhr);
+				console.log(status);
+				console.log(error);
+			});
 		}
 
 	});
@@ -461,7 +466,6 @@ function populateUserTiles(username, password) {
 	  var idsInOrder = $("#sortable").sortable("toArray");
 	  console.log(idsInOrder);
 	}).fail(function(xhr, status, error){
-		console.log("NOOOOOO");
 		console.log(xhr);
 		console.log(status);
 		console.log(error);
