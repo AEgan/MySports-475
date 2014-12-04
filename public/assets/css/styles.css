@@ -367,3 +367,7 @@ td, th {
 .addData {
 	display: none;
 }
+
+.filterSelected {
+	background-color: #ffc435;
+}

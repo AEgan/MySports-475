@@ -38,7 +38,7 @@
 
   <div id="filterNav">
     <ul>
-        <li class="filterOption" id="noFilter">No Filter</li>
+        <li class="filterOption" id="noFilter" class="filterSelected">No Filter</li>
         <li class="filterOption" id="nfl">NFL</li>
         <li class="filterOption" id="nhl">NHL</li>
         <li class="filterOption" id="nba">NBA</li>
@@ -53,7 +53,7 @@
     </script>
 
       <ul id="sortable">
-        <li class="ui-state-default" id="box1">
+        <li class="ui-state-default unsortable" id="box1">
             <div class="sportsWrapper">
                <img src="assets/images/cancel.png" class="cancelButton addData" onclick="deleteTile(this)">
                <div id="logo"></div>
@@ -459,7 +459,7 @@
 
 <!-- BOX OUTLINE -->
 <script id="outline" type="text/x-handlebars-template">
-<li class="ui-state-default" id="box{{num}}">
+<li class="ui-state-default unsortable" id="box{{num}}">
     <div class="sportsWrapper">
        <img src="assets/images/cancel.png" class="cancelButton addData" onclick="deleteTile(this)">
        <div id="logo"></div>
