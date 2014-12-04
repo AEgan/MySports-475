@@ -476,5 +476,24 @@ function saveOrder() {
 }
 
 function deleteTile(element) {
-	alert(element);
+	console.log(element);
+	var $liElement = $(element).closest('li');
+	var liid = $liElement.attr('id')
+	console.log($liElement.attr('id'));
+	var tile = current_tiles[liid];
+	delete current_tiles[liid];
+	$liElement.remove();
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/delete_custom",
+		data: {tile: tile}
+	}).done(function(data) {
+		saveOrder();
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
+
 }
