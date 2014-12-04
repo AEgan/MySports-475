@@ -25,7 +25,7 @@ get '/get_tiles' do
 	if logged_in?
 		@user = current_user
 		@customs = @user.customs
-		@tiles = @customs.map {|c| Tile.find(c.tile_id)}
+		@tiles = @customs.map {|c| c.tile}
 		return @tiles.to_json
 	end
 
