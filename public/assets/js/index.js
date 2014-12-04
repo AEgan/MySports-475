@@ -175,7 +175,7 @@ function setModalHTML(data) {
 	} else if(position === "WR") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
-		if(parseInt(data.penalty.num) != 0) {
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
 			console.log("IM HERE");
 			modalString += render("penalties", data);
 		}
@@ -190,13 +190,13 @@ function setModalHTML(data) {
 	} else if(position === "RB") { // RUNNING BACK
 		var modalString = render("basicInfo", data) + render("rushing", data) + render("receiving", data);
 
-		if(parseInt(data.penalty.num) != 0) {
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
 			modalString += render("penalties", data);
 		}
-		if(parseInt(data.kick_return.returns) != 0) {
+		if(data.kick_return && parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
-		if(parseInt(data.punt_return.returns) != 0) {
+		if(data.punt_return && parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
 		return modalString;
@@ -251,10 +251,10 @@ function populatePlayerList(t, league){
 	  console.log("done");
 	  console.log(data);
 	   for (var i = 0; i < data.length; i++) {
-        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
+        var opt = data[i].name_last + ", " + data[i].name_first;
         var el = document.createElement("option");
         el.textContent = opt;
-        el.value = data[i].player.name_full;
+        el.value = data[i].name_full;
         select.appendChild(el);
       }
 			setChosen();

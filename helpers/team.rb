@@ -3,15 +3,13 @@
 def getTeamRoster(teamName)
 	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
 	SportsDataApi.set_access_level(:nfl, 't')
-	all_players = SportsDataApi::Nfl.team_roster(teamName).players.select{|play| !play.player.nil?}.sort_by!{|play| play.player[:name_last]}
-	return all_players
+	Roster.get_roster('nfl', teamName)
 end
 
 def getNHLTeamRoster(teamName)
 	SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
 	SportsDataApi.set_access_level(:nhl, 't')
-	all_players = SportsDataApi::Nhl.team_roster(teamName).players.select{|play| !play.player.nil?}.sort_by!{|play| play.player[:name_last]}
-	return all_players
+	Roster.get_roster('nhl', teamName)
 end
 
 # Get Team Stats
@@ -48,4 +46,3 @@ def getTeamInfo(teamName)
 	stats = stats.reduce(&:merge)
 	return stats
 end
-
