@@ -80,8 +80,10 @@ function displayData(box, data, league, category, t) {
 					//implement nhl player stats here
 					if(data.position === "g" || data.position === "G") {
 						$(box + ' .sportsContent').html(render('summary_nhl_goalie', data));
+						$(box + ' > .modal').html(render('summary_nhl_goalie_modal', data));
 					} else {
 						$(box + ' .sportsContent').html(render('summary_nhl_skater', data));
+						$(box + ' > .modal').html(render('summary_nhl_skater_modal', data));
 					}
 					break;
 				case "standings":

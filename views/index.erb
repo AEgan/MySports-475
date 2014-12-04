@@ -247,15 +247,107 @@
     <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
   </table>
 </script>
+
 <script id="summary_nhl_goalie" type="text/x-handlebars-template">
-<b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+  <b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Team:</td><td>{{team.alias}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+  </table>
+</script>
+
+<script id="summary_nhl_skater_modal" type="text/x-handlebars-template">
+<h2>Basic Information</h2>
+<h3>{{full_name}}: &nbsp; {{position}} for {{team.market}} {{team.name}}</h3><br /><hr />
 <table class='player-stats-table'>
-<tr><td>Number:</td><td>{{jersey_number}}</td></tr>
-<tr><td>Position:</td><td>{{position}}</td></tr>
-<tr><td>Height:</td><td>{{height}}</td></tr>
-<tr><td>Weight:</td><td>{{weight}}</td></tr>
-<tr><td>Team:</td><td>{{team.alias}}</td></tr>
-<tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
-<tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+  <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+  <tr><td>Position:</td><td>{{position}}</td></tr>
+  <tr><td>Height:</td><td>{{height}}</td></tr>
+  <tr><td>Weight:</td><td>{{weight}}</td></tr>
 </table>
+<h3>Scoring</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
+  <tr><td>Points:</td><td>{{team.statistics.total.points}}</td></tr>
+  <tr><td>+/-:</td><td>{{team.statistics.total.plus_minus}}</td></tr>
+  <tr><td>GWG:</td><td>{{team.statistics.total.winning_goals}}</td></tr>
+</table>
+<h3>Time On Ice</h3>
+<table class='player-stats-table'>
+  <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
+  <tr><td>Shifts per game:</td><td>{{team.time_on_ice.shifts_pg}}</td></tr>
+  <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
+  <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
+</table>
+<h3>Even Strength</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.even_strength.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.even_strength.assists}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.even_strength.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.even_strength.missed_shots}}</td></tr>
+</table>
+<h3>Powerplay</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.powerplay.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.powerplay.assists}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.powerplay.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.powerplay.missed_shots}}</td></tr>
+</table>
+<h3>Shootout</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.shootout.goals}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.shootout.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.shootout.missed_shots}}</td></tr>
+</table>
+</script>
+
+<script id="summary_nhl_goalie_modal" type="text/x-handlebars-template">
+  <h2>Basic Information</h2>
+  <h3>{{full_name}}: &nbsp; {{position}} for {{team.market}} {{team.name}}</h3><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+  </table>
+  <h3>Averages</h3>
+  <table class='player-stats-table'>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+    <tr><td>Shots PG:</td><td>{{goaltending.average.shots_against}}</td></tr>
+  </table>
+  <h3>Even Strength</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.even_strength.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.even_strength.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.even_strength.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.even_strength.saves_pct}}</td></tr>
+  </table>
+  <h3>Shorthanded</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.shorthanded.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.shorthanded.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.shorthanded.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.shorthanded.saves_pct}}</td></tr>
+  </table>
+  <h3>Powerplay</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.powerplay.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.powerplay.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.powerplay.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.powerplay.saves_pct}}</td></tr>
+  </table>
+  <h3>Shootouts</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.shootout.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.shootout.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.shootout.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.shootout.saves_pct}}</td></tr>
+  </table>
 </script>
