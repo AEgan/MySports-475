@@ -4,7 +4,7 @@ var mainUser = "Varun";
 var mainPassword = "test";
 var nextBoxNumber = 1;
 var box_team = new Array();
-var current_tiles = [];
+var current_tiles = {};
 
 function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
@@ -23,12 +23,9 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 		  	data: infoArray
 		}).done(function(tile) {
 			infoArray.data = tile.data;
-			current_tiles.push(tile);
-			console.log("GET DATA");
+			current_tiles["box" + String(box)] = tile;
+			console.log("CURRENT TILES");
 			console.log(current_tiles);
-			console.log(tile);
-			console.log("infoArray");
-			console.log(infoArray);
 			displayData(box, tile.data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
@@ -39,14 +36,11 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 }
 
 function displayData(box, data, league, category, t) {
-	console.log("DISPLAY DATA");
-	console.log(data);
 	box = "#box" + String(box);
 	switch (league) {
 		case "nfl":
 			switch (category) {
 				case "player":
-					console.log("ASDASDASD");
 					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
 					var statsHTML = setBoxHTML(data);
 					var modalHTML = setModalHTML(data);
@@ -307,8 +301,6 @@ $(function() {
 		  	url: "/login",
 		  	data: {username: username, password: password}
 			}).done(function(data) {
-			  console.log("done");
-			  console.log(data);
 
 			}).fail(function(xhr, status, error){
 				console.log("NOOOOOO");
@@ -319,7 +311,20 @@ $(function() {
 	});
 
 
-	$( "#sortable" ).sortable();
+	$( "#sortable" ).sortable({
+		stop: function (e) {
+			var sorted = $('#sortable').sortable("toArray").pop();
+			var test = sorted.map(function(t) {
+				return current_tiles[t];
+			});
+
+			console.log(test);
+		},
+		change: function (e) {
+			console.log($('#sortable').sortable("toArray"));
+		}
+
+	});
 	$( "#sortable" ).disableSelection();
 
 
@@ -328,7 +333,6 @@ $(function() {
 		document.getElementById("dialog-form").style.display = "none";
 		var league = $(this).find("input[name='league']:checked").val()
 	  	var category = $(this).find("input[name='category']:checked").val()
-	  	console.log(category);
 	  	var t = $(this).find('select[name="team"]').val();
 	  	var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
@@ -358,7 +362,6 @@ $(function() {
 		$(this).css("border-bottom", "none");
 
 		var filter = $(this).prop('id');
-		console.log(filter);
 		set_filter(filter);
 	});
 
@@ -447,20 +450,14 @@ function populateUserTiles(username, password) {
 		dataType: "json",
   	url: "/get_tiles",
 	}).done(function(data) {
-	  console.log("USERS MAN");
-	  console.log(data);
 	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
-	  	current_tiles.push(newtile);
-	  	console.log(newtile);
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
 	  	nextBoxID = "box" + nextBoxNumber;
 	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
 	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
 	  }
-	  console.log("ADDITION");
-	  console.log(current_tiles);
 	  var idsInOrder = $("#sortable").sortable("toArray");
 	  console.log(idsInOrder);
 	}).fail(function(xhr, status, error){

@@ -24,7 +24,7 @@ end
 get '/get_tiles' do
 	if logged_in?
 		@user = current_user
-		@customs = @user.customs
+		@customs = @user.customs.sort_by{|c| c.boxNum}
 		@tiles = @customs.map {|c| c.tile}
 		return @tiles.to_json
 	end
