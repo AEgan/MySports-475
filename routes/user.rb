@@ -16,7 +16,9 @@ end
 get '/get_tiles' do
 	if logged_in?
 		@user = current_user
-		@customs = @user.customs.sort_by{|c| c.boxNum}
+		puts "WOOOOOOOOO"
+		puts @user.customs
+		@customs = @user.customs.sort_by{|c| c.boxNum.to_i}
 		@tiles = @customs.map {|c| c.tile}
 		return @tiles.to_json
 	end
@@ -35,13 +37,13 @@ post '/save_order' do
 	return "save_order".to_json
 end
 
-post 'delete_custom' do
-	@v = request["tile"]
-	puts @v
+post '/delete_custom' do
+	puts "DELETE CUSTOM"
+	v = request["tile"]
+	puts v
 	@custom_to_delete = get_custom_if_exists(v["league"], v["category"], v["t"], v["p"], v["c"], v["d"], v["nhlConference"], v["nhlTeam"])
 	@custom_to_delete = @custom_to_delete[0]
 	@custom_to_delete.delete
-
-
+	return "delete_custom".to_json
 end
 
