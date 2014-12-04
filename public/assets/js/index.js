@@ -235,38 +235,63 @@ function getQueryVariable(variable)
 }
 
 function populatePlayerList(t, league){
+
+	var select = document.getElementById("playerList");
+	select.className += select.className ? ' chosen-select' : 'chosen-select';
+
+	select.options.length = 0;
 	console.log('populatePlayerList');
-    var select = document.getElementById("playerList");
-		select.className += select.className ? ' chosen-select' : 'chosen-select';
-
-    select.options.length = 0;
-
-    $.ajax({
-		type: "POST",
-		dataType: "json",
-	  url: "/getTeamRoster",
-	  data: {teamName: t}
-	}).done(function(data) {
-	  //alert("done");
-	  console.log("done");
-	  console.log(data);
-	   for (var i = 0; i < data.length; i++) {
-        var opt = data[i].name_last + ", " + data[i].name_first;
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = data[i].name_full;
-        select.appendChild(el);
-      }
+	if(league === 'nfl' || league === 'NFL') {
+	    $.ajax({
+			type: "POST",
+			dataType: "json",
+		  url: "/getTeamRoster",
+		  data: {teamName: t}
+		}).done(function(data) {
+		  //alert("done");
+		  console.log("done");
+		  console.log(data);
+		   for (var i = 0; i < data.length; i++) {
+	        var opt = data[i].name_last + ", " + data[i].name_first;
+	        var el = document.createElement("option");
+	        el.textContent = opt;
+	        el.value = data[i].name_full;
+	        select.appendChild(el);
+	      }
+				setChosen();
+				console.log("here");
+				$(".chosen-select").trigger("chosen:updated");
+		}).fail(function(xhr, status, error){
+			//alert("fail");
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	} else if (league === 'nhl' || league === 'NHL') {
+		t = $("#nhlTeams").val();
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/getNHLTeamRoster",
+			data: {teamName: t}
+		}).done(function(data) {
+			console.log('data is here');
+			console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				var opt = data[i].last_name + ", " + data[i].first_name;
+				var el = document.createElement("option");
+				el.textContent = opt;
+				el.value = data[i].id;
+				select.appendChild(el);
+			}
 			setChosen();
-			console.log("here");
 			$(".chosen-select").trigger("chosen:updated");
-	}).fail(function(xhr, status, error){
-		//alert("fail");
-		console.log(xhr);
-		console.log(status);
-		console.log(error);
-	});
-
+		}).fail(function(xhr, status, error) {
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	}
 }
 
 //function to set styling on filtering by league
@@ -396,7 +421,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NHL PLAYER");
-						//add nhl player info here
+						getData(nextBoxNumber, "/getNHLPlayerInfo", league, category, data, nhlTeam, infoArray);
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NHL STANDINGS");

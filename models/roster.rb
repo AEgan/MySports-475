@@ -31,7 +31,6 @@ class Roster
         roster.team_id = team_id
         roster.players = players
         roster.save
-        puts "saving roster as #{team_id} in #{league}"
         return roster.players
 
       else
