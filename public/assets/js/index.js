@@ -36,7 +36,7 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 function displayData(box, data, league, category, t) {
 	console.log("DISPLAY DATA");
 	box = "#box" + String(box);
-	console.log($(box + ' .addData'));
+	$(box).removeClass('unsortable');
 	$(box + ' .addData').removeClass('addData');
 	switch (league) {
 		case "nfl":
@@ -301,10 +301,6 @@ function populatePlayerList(t, league){
 function set_filter(league) {
 	console.log("FILTERING")
 	for (var i = 0; i < box_team.length; i++) {
-		console.log("BOX TEAM");
-		console.log(box_team[i]);
-		console.log(box_team[i][1]);
-		console.log(box_team[i][0]);
 		if (box_team[i][1] == league) {
 			$(box_team[i][0]).css("display", "block");
 		}
@@ -319,10 +315,6 @@ function set_filter(league) {
 
 // Main Function
 $(function() {
-
-
-
-
 	populateUserTiles();
 	// Login button
 	$('#login').on('click', function (e) {
@@ -347,7 +339,8 @@ $(function() {
 	$( "#sortable" ).sortable({
 		stop: function (e) {
 			saveOrder();
-		}
+		},
+		items: "li:not(.unsortable)"
 
 	});
 	$( "#sortable" ).disableSelection();
@@ -381,8 +374,9 @@ $(function() {
 	});
 
 	$( ".filterOption" ).on( "click", function() {
-		$( ".filterOption" ).css("background-color", "#DDD");
-		$(this).css("background-color", "#ffc435");
+		console.log("BITCHES");
+		$('.filterOption').removeClass('filterSelected');
+		$(this).addClass('filterSelected');
 
 		var filter = $(this).prop('id');
 		set_filter(filter);
