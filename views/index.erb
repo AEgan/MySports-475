@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -38,7 +36,7 @@
 
   <div id="filterNav">
     <ul>
-        <li class="filterOption" id="noFilter">No Filter</li>
+        <li class="filterOption filterSelected" id="noFilter">No Filter</li>
         <li class="filterOption" id="nfl">NFL</li>
         <li class="filterOption" id="nhl">NHL</li>
         <li class="filterOption" id="nba">NBA</li>
@@ -53,22 +51,21 @@
     </script>
 
       <ul id="sortable">
-        <li class="ui-state-default" id="box1">
+        <li class="ui-state-default unsortable" id="box1">
             <div class="sportsWrapper">
-               <img src="assets/images/cancel.png" class="cancelButton" onclick="deleteTile(this)">
+               <img src="assets/images/cancel.png" class="cancelButton addData" onclick="deleteTile(this)">
                <div id="logo"></div>
                <div class="sportsContent">
                   <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
               </div>
               <div class="modal-trigger-area">
-                <a href="#modal1" class="modal-trigger details">More Details</a>
+                <a href="#modal1" class="modal-trigger details addData">More Details</a>
               </div>
             </div>
             <div id="modal1" class="modal">
             </div>
         </li>
       </ul>
-
 
     <!-- ADD SPORTS DATA FORM -->
     <%= erb :form %>
@@ -78,6 +75,7 @@
       </div>
     <% end %>
   </div>
+
 </body>
 </html>
 
@@ -458,21 +456,20 @@
 </script>
 <!-- BOX OUTLINE -->
 <script id="outline" type="text/x-handlebars-template">
-<li class="ui-state-default" id="box{{num}}">
+<li class="ui-state-default unsortable" id="box{{num}}">
     <div class="sportsWrapper">
-       <img src="assets/images/cancel.png" class="cancelButton" onclick="deleteTile(this)">
+       <img src="assets/images/cancel.png" class="cancelButton addData" onclick="deleteTile(this)">
        <div id="logo"></div>
        <div class="sportsContent">
           <img id = "box{{num}}" onclick="popup('#box{{num}}')" class="plusImg" src="assets/images/plus.png" /><br />
       </div>
       <div class="modal-trigger-area">
-        <a href="#modal{{num}}" class="modal-trigger details">More Details</a>
+        <a href="#modal{{num}}" class="modal-trigger details addData">More Details</a>
       </div>
     </div>
     <div id="modal{{num}}" class="modal">
     </div>
 </li>
-</script>
 
 <script id="summary_nba_team" type="text/x-handlebars-template">
   <h3>Team</h3>

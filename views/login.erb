@@ -1,6 +1,10 @@
 <% if(logged_in?) %>
-  Welcome: <%= current_user.name %>
-  <a href="/logout">Logout</a>
+  <div class="button welcome_button" onclick="popupNextBox()"><img class="plusImgSmall" src="assets/images/plus.png" /> Add Data</div>
+  <div id="welcomeInfo">
+  	 Welcome: <%= current_user.name %>
+ 	 <a href="/logout">Logout</a>
+  </div>
+ 
 <% else %>
   <a href="#loginModal" class="modal-trigger">Log In</a>
   <div id="loginModal" class="modal">

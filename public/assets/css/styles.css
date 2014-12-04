@@ -121,13 +121,28 @@ html {
 	cursor: pointer;
 }
 
+.plusImgSmall {
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	width: 20px;
+	height: auto;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	top: 4px;
+	right: 2px;
+}
+
 .cancelButton {
 	width: 20px;
 	opacity: .8;
 	height: auto;
 	position: relative;
 	float: right;
+	margin-right: 10px;
 	cursor: pointer;
+	z-index: 3;
 }
 
 .sportsWrapper {
@@ -137,12 +152,14 @@ html {
 	background-position: 100% 40%;
 	height: 200px;
 	overflow: scroll;
+	z-index: 2;
 
 }
 .sportsContent {
 	text-align: left;
 	opacity: 1 !important;
 	color: #ddd;
+	z-index: 1;
 }
 
 
@@ -261,6 +278,13 @@ p {
 	cursor: pointer;
 	transition: all linear 0.15s;
 }
+
+.filterOption#new {
+	margin-left: 20px;
+	width: 100px;
+	background-color: #393;
+
+}
 .filterOption:hover {
 	background: #ffc435;
 }
@@ -293,6 +317,20 @@ label.ui-button {
 	font-size: 14px;
 	float: right;
 	color: #FFF;
+	display: inline-block;
+	width: 300px;
+}
+#welcomeInfo {
+	display: inline-block;
+}
+
+.welcome_button {
+	width: 100px;
+	margin-right: 20px;
+	display: inline-block;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background: #093;
 }
 
 .dark-input {
@@ -362,4 +400,12 @@ td, th {
   padding: inherit;
   border-radius: inherit;
   padding-left: 5px;
+}
+
+.addData {
+	display: none;
+}
+
+.filterSelected {
+	background-color: #ffc435;
 }
