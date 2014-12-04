@@ -351,3 +351,109 @@
     <tr><td>Save %:</td><td>{{goaltending.shootout.saves_pct}}</td></tr>
   </table>
 </script>
+
+<script id="summary_nhl_standings_modal" type="text/x-handlebars-template">
+  <h2>Standings for the {{name}} Conference</h2>
+  <h3>Standings</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Name</th>
+      <th>Games Played</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>OTL</th>
+      <th>Points</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.games_played}}</td>
+        <td>{{this.wins}}</td>
+        <td>{{this.losses}}</td>
+        <td>{{this.overtime_losses}}</td>
+        <td>{{this.points}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Goals</h3>
+    <table class='player-stats-table'>
+      <thead>
+        <th>Goals For</th>
+        <th>Goals Against</th>
+        <th>Goal Diff</th>
+      </thead>
+      <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{this.goals_for}}</td>
+        <td>{{this.goals_against}}</td>
+        <td>{{this.goal_diff}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Regulation / Overtime / Shootout</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Regulation Wins</th>
+      <th>Regulation Losses</th>
+      <th>Overtime Wins</th>
+      <th>Overtime Losses</th>
+      <th>Shootout Wins</th>
+      <th>Shootout Losses</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.regulation_wins}}</td>
+      <td>{{this.losses}}</td>
+      <td>{{this.overtime_wins}}</td>
+      <td>{{this.overtime_losses}}</td>
+      <td>{{this.shootout_wins}}</td>
+      <td>{{this.shootout_losses}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <h3>Special Teams</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Powerplays</th>
+      <th>PP Goals</th>
+      <th>PP%</th>
+      <th>Powerplays Against</th>
+      <th>PPG Against</th>
+      <th>PK%</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.powerplays}}</td>
+      <td>{{this.powerplay_goals}}</td>
+      <td>{{this.powerplay_pct}}</td>
+      <td>{{this.powerplays_against}}</td>
+      <td>{{this.powerplay_goals_against}}</td>
+      <td>{{this.penalty_killing_pct}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  </table>
+  <h3>Records</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Streak Type</th>
+      <th>Streak Length</th>
+      <th>Last 10</th>
+      <th>Home</th>
+      <th>Road</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.streak.type}}</td>
+      <td>{{this.streak.length}}</td>
+      <td>{{this.records.last_10.wins}}-{{this.records.last_10.losses}}-{{this.records.last_10.overtime_losses}}</td>
+      <td>{{this.records.home.wins}}-{{this.records.home.losses}}-{{this.records.home.overtime_losses}}</td>
+      <td>{{this.records.road.wins}}-{{this.records.road.losses}}-{{this.records.road.overtime_losses}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</script>

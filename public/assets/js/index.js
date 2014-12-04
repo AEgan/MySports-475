@@ -97,7 +97,7 @@ function displayData(box, data, league, category, t) {
 					}
 					str += "</tbody></table>";
 					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
-					$(box + ' > .modal').html("here it is");
+					$(box + ' > .modal').html(render('summary_nhl_standings_modal', data));
 					break;
 			}
 			break;
