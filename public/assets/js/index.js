@@ -98,12 +98,13 @@ function displayData(box, data, league, category, t) {
 			switch (category) {
 				case "team":
 					//implement nba team stats here
-					console.log("NBA TEAM INFO HERE");
-					console.log(data);
 					$(box + ' .sportsContent').html(render('summary_nba_team', data));
 					break;
 				case "player":
 					//implement nba player stats here
+					globalPlayer = data;
+					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
+					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
 					break;
 				case "standings":
 					//implement nba standings stats here
@@ -467,6 +468,8 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTea
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NBA PLAYER");
+						data = { player: p, team: nbaTeam}
+						getData(nextBoxNumber, "/getNBAPlayerInfo", league, category, data, t, infoArray);
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NBA STANDINGS");
