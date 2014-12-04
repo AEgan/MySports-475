@@ -13,20 +13,35 @@ post '/signup' do
 	redirect '/'
 end
 
-get '/users' do
-	@user = User.first
-	@customs = @user.customs
-	@tiles = @customs.map {|c| Tile.find(c.tile_id)}
-	return @tiles.to_json
-
-end
-
 get '/get_tiles' do
 	if logged_in?
 		@user = current_user
-		@customs = @user.customs
+		@customs = @user.customs.sort_by{|c| c.boxNum}
 		@tiles = @customs.map {|c| c.tile}
 		return @tiles.to_json
 	end
+end
+
+post '/save_order' do
+	@new_order = request["new_order"]
+	count = 1
+	@new_order.each do |k,v|
+		custom = get_custom_if_exists(v["league"], v["category"], v["t"], v["p"], v["c"], v["d"], v["nhlConference"], v["nhlTeam"])
+		the_custom = custom[0]
+		the_custom.boxNum = count
+		the_custom.save
+		count += 1
+	end
+	return "save_order".to_json
+end
+
+post 'delete_custom' do
+	@v = request["tile"]
+	puts @v
+	@custom_to_delete = get_custom_if_exists(v["league"], v["category"], v["t"], v["p"], v["c"], v["d"], v["nhlConference"], v["nhlTeam"])
+	@custom_to_delete = @custom_to_delete[0]
+	@custom_to_delete.delete
+
 
 end
+
