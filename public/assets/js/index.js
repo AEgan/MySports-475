@@ -69,6 +69,13 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nhl player stats here
+					if(data.position === "g" || data.position === "G") {
+						$(box + ' .sportsContent').html(render('summary_nhl_goalie', data));
+						$(box + ' > .modal').html(render('summary_nhl_goalie_modal', data));
+					} else {
+						$(box + ' .sportsContent').html(render('summary_nhl_skater', data));
+						$(box + ' > .modal').html(render('summary_nhl_skater_modal', data));
+					}
 					break;
 				case "standings":
 					var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";
@@ -81,7 +88,7 @@ function displayData(box, data, league, category, t) {
 					}
 					str += "</tbody></table>";
 					$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + " conference</u></b><br />" + str);
-					$(box + ' > .modal').html("here it is");
+					$(box + ' > .modal').html(render('summary_nhl_standings_modal', data));
 					break;
 			}
 			break;
@@ -168,7 +175,7 @@ function setModalHTML(data) {
 	} else if(position === "WR") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
-		if(parseInt(data.penalty.num) != 0) {
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
 			console.log("IM HERE");
 			modalString += render("penalties", data);
 		}
@@ -183,13 +190,13 @@ function setModalHTML(data) {
 	} else if(position === "RB") { // RUNNING BACK
 		var modalString = render("basicInfo", data) + render("rushing", data) + render("receiving", data);
 
-		if(parseInt(data.penalty.num) != 0) {
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
 			modalString += render("penalties", data);
 		}
-		if(parseInt(data.kick_return.returns) != 0) {
+		if(data.kick_return && parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
-		if(parseInt(data.punt_return.returns) != 0) {
+		if(data.punt_return && parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
 		return modalString;
@@ -228,36 +235,63 @@ function getQueryVariable(variable)
 }
 
 function populatePlayerList(t, league){
+
+	var select = document.getElementById("playerList");
+	select.className += select.className ? ' chosen-select' : 'chosen-select';
+
+	select.options.length = 0;
 	console.log('populatePlayerList');
-    var select = document.getElementById("playerList");
-		select.className += select.className ? ' chosen-select' : 'chosen-select';
-
-    select.options.length = 0;
-
-    $.ajax({
-		type: "POST",
-		dataType: "json",
-	  url: "/getTeamRoster",
-	  data: {teamName: t}
-	}).done(function(data) {
-	  console.log("done");
-	  console.log(data);
-	   for (var i = 0; i < data.length; i++) {
-        var opt = data[i].player.name_last + ", " + data[i].player.name_first;
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = data[i].player.name_full;
-        select.appendChild(el);
-      }
+	if(league === 'nfl' || league === 'NFL') {
+	    $.ajax({
+			type: "POST",
+			dataType: "json",
+		  url: "/getTeamRoster",
+		  data: {teamName: t}
+		}).done(function(data) {
+		  //alert("done");
+		  console.log("done");
+		  console.log(data);
+		   for (var i = 0; i < data.length; i++) {
+	        var opt = data[i].name_last + ", " + data[i].name_first;
+	        var el = document.createElement("option");
+	        el.textContent = opt;
+	        el.value = data[i].name_full;
+	        select.appendChild(el);
+	      }
+				setChosen();
+				console.log("here");
+				$(".chosen-select").trigger("chosen:updated");
+		}).fail(function(xhr, status, error){
+			//alert("fail");
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	} else if (league === 'nhl' || league === 'NHL') {
+		t = $("#nhlTeams").val();
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/getNHLTeamRoster",
+			data: {teamName: t}
+		}).done(function(data) {
+			console.log('data is here');
+			console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				var opt = data[i].last_name + ", " + data[i].first_name;
+				var el = document.createElement("option");
+				el.textContent = opt;
+				el.value = data[i].id;
+				select.appendChild(el);
+			}
 			setChosen();
-			console.log("here");
 			$(".chosen-select").trigger("chosen:updated");
-	}).fail(function(xhr, status, error){
-		console.log(xhr);
-		console.log(status);
-		console.log(error);
-	});
-
+		}).fail(function(xhr, status, error) {
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	}
 }
 
 //function to set styling on filtering by league
@@ -386,7 +420,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NHL PLAYER");
-						//add nhl player info here
+						getData(nextBoxNumber, "/getNHLPlayerInfo", league, category, data, nhlTeam, infoArray);
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NHL STANDINGS");
