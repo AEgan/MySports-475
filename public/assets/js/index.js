@@ -461,6 +461,8 @@ function populateUserTiles(username, password) {
 	  }
 	  console.log("ADDITION");
 	  console.log(current_tiles);
+	  var idsInOrder = $("#sortable").sortable("toArray");
+	  console.log(idsInOrder);
 	}).fail(function(xhr, status, error){
 		console.log("NOOOOOO");
 		console.log(xhr);
