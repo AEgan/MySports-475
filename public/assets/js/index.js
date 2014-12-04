@@ -310,23 +310,7 @@ $(function() {
 
 	$( "#sortable" ).sortable({
 		stop: function (e) {
-			var sorted = $('#sortable').sortable("toArray");
-			var new_sorted = sorted.map(function(t) {
-				return current_tiles[t];
-			});
-			console.log(sorted);
-			$.ajax({
-				type: "POST",
-				dataType: "json",
-				url: "/save_order",
-				data: {new_order: new_sorted}
-			}).done(function(data) {
-
-			}).fail(function(xhr, status, error){
-				console.log(xhr);
-				console.log(status);
-				console.log(error);
-			});
+			saveOrder();
 		}
 
 	});
@@ -463,6 +447,26 @@ function populateUserTiles(username, password) {
 	  }
 	  var idsInOrder = $("#sortable").sortable("toArray");
 	  console.log(idsInOrder);
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
+}
+
+function saveOrder() {
+	var sorted = $('#sortable').sortable("toArray");
+	var new_sorted = sorted.map(function(t) {
+		return current_tiles[t];
+	});
+	console.log(sorted);
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/save_order",
+		data: {new_order: new_sorted}
+	}).done(function(data) {
+
 	}).fail(function(xhr, status, error){
 		console.log(xhr);
 		console.log(status);
