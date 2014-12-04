@@ -50,12 +50,11 @@
       $('#filterNav').css("display", "block");
       $('#welcome').css("display", "block");
     </script>
-    
 
       <ul id="sortable">
         <li class="ui-state-default" id="box1">
             <div class="sportsWrapper">
-               <img src="assets/images/cancel.png" class = "cancelButton" onclick="alert('cancel');">
+               <img src="assets/images/cancel.png" class="cancelButton" onclick="deleteTile(this)">
                <div id="logo"></div>
                <div class="sportsContent">
                   <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
@@ -231,4 +230,246 @@
   <b>Capacity</b>{{venue.capacity}}<br />
   <b>City</b>{{venue.city}}<br />
   <b>State</b>{{venue.state}}<br />
+</script>
+
+<<<<<<< HEAD
+<script id="summary_nhl_skater" type="text/x-handlebars-template">
+  <b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Team:</td><td>{{team.alias}}</td></tr>
+    <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
+    <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
+  </table>
+</script>
+
+<script id="summary_nhl_goalie" type="text/x-handlebars-template">
+  <b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Team:</td><td>{{team.alias}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+  </table>
+</script>
+
+<script id="summary_nhl_skater_modal" type="text/x-handlebars-template">
+<h2>Basic Information</h2>
+<h3>{{full_name}}: &nbsp; {{position}} for {{team.market}} {{team.name}}</h3><br /><hr />
+<table class='player-stats-table'>
+  <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+  <tr><td>Position:</td><td>{{position}}</td></tr>
+  <tr><td>Height:</td><td>{{height}}</td></tr>
+  <tr><td>Weight:</td><td>{{weight}}</td></tr>
+</table>
+<h3>Scoring</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
+  <tr><td>Points:</td><td>{{team.statistics.total.points}}</td></tr>
+  <tr><td>+/-:</td><td>{{team.statistics.total.plus_minus}}</td></tr>
+  <tr><td>GWG:</td><td>{{team.statistics.total.winning_goals}}</td></tr>
+</table>
+<h3>Time On Ice</h3>
+<table class='player-stats-table'>
+  <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
+  <tr><td>Shifts per game:</td><td>{{team.time_on_ice.shifts_pg}}</td></tr>
+  <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
+  <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
+</table>
+<h3>Even Strength</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.even_strength.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.even_strength.assists}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.even_strength.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.even_strength.missed_shots}}</td></tr>
+</table>
+<h3>Powerplay</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.powerplay.goals}}</td></tr>
+  <tr><td>Assists:</td><td>{{team.statistics.powerplay.assists}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.powerplay.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.powerplay.missed_shots}}</td></tr>
+</table>
+<h3>Shootout</h3>
+<table class='player-stats-table'>
+  <tr><td>Goals:</td><td>{{team.statistics.shootout.goals}}</td></tr>
+  <tr><td>Shots:</td><td>{{team.statistics.shootout.shots}}</td></tr>
+  <tr><td>Missed Shots</td><td>{{team.statistics.shootout.missed_shots}}</td></tr>
+</table>
+</script>
+
+<script id="summary_nhl_goalie_modal" type="text/x-handlebars-template">
+  <h2>Basic Information</h2>
+  <h3>{{full_name}}: &nbsp; {{position}} for {{team.market}} {{team.name}}</h3><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+  </table>
+  <h3>Averages</h3>
+  <table class='player-stats-table'>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+    <tr><td>Shots PG:</td><td>{{goaltending.average.shots_against}}</td></tr>
+  </table>
+  <h3>Even Strength</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.even_strength.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.even_strength.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.even_strength.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.even_strength.saves_pct}}</td></tr>
+  </table>
+  <h3>Shorthanded</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.shorthanded.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.shorthanded.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.shorthanded.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.shorthanded.saves_pct}}</td></tr>
+  </table>
+  <h3>Powerplay</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.powerplay.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.powerplay.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.powerplay.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.powerplay.saves_pct}}</td></tr>
+  </table>
+  <h3>Shootouts</h3>
+  <table class='player-stats-table'>
+    <tr><td>Shots Against:</td><td>{{goaltending.shootout.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{goaltending.shootout.saves}}</td></tr>
+    <tr><td>Goals Allowed:</td><td>{{goaltending.shootout.goals_against}}</td></tr>
+    <tr><td>Save %:</td><td>{{goaltending.shootout.saves_pct}}</td></tr>
+  </table>
+</script>
+
+<script id="summary_nhl_standings_modal" type="text/x-handlebars-template">
+  <h2>Standings for the {{name}} Conference</h2>
+  <h3>Standings</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Name</th>
+      <th>Games Played</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>OTL</th>
+      <th>Points</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.games_played}}</td>
+        <td>{{this.wins}}</td>
+        <td>{{this.losses}}</td>
+        <td>{{this.overtime_losses}}</td>
+        <td>{{this.points}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Goals</h3>
+    <table class='player-stats-table'>
+      <thead>
+        <th>Goals For</th>
+        <th>Goals Against</th>
+        <th>Goal Diff</th>
+      </thead>
+      <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{this.goals_for}}</td>
+        <td>{{this.goals_against}}</td>
+        <td>{{this.goal_diff}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Regulation / Overtime / Shootout</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Regulation Wins</th>
+      <th>Regulation Losses</th>
+      <th>Overtime Wins</th>
+      <th>Overtime Losses</th>
+      <th>Shootout Wins</th>
+      <th>Shootout Losses</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.regulation_wins}}</td>
+      <td>{{this.losses}}</td>
+      <td>{{this.overtime_wins}}</td>
+      <td>{{this.overtime_losses}}</td>
+      <td>{{this.shootout_wins}}</td>
+      <td>{{this.shootout_losses}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  <h3>Special Teams</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Powerplays</th>
+      <th>PP Goals</th>
+      <th>PP%</th>
+      <th>Powerplays Against</th>
+      <th>PPG Against</th>
+      <th>PK%</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.powerplays}}</td>
+      <td>{{this.powerplay_goals}}</td>
+      <td>{{this.powerplay_pct}}</td>
+      <td>{{this.powerplays_against}}</td>
+      <td>{{this.powerplay_goals_against}}</td>
+      <td>{{this.penalty_killing_pct}}</td>
+    </tr>
+    {{/each}}
+  </table>
+  </table>
+  <h3>Records</h3>
+  <table class='player-stats-table'>
+    <thead>
+      <th>Streak Type</th>
+      <th>Streak Length</th>
+      <th>Last 10</th>
+      <th>Home</th>
+      <th>Road</th>
+    </thead>
+    {{#each teams}}
+    <tr>
+      <td>{{this.streak.type}}</td>
+      <td>{{this.streak.length}}</td>
+      <td>{{this.records.last_10.wins}}-{{this.records.last_10.losses}}-{{this.records.last_10.overtime_losses}}</td>
+      <td>{{this.records.home.wins}}-{{this.records.home.losses}}-{{this.records.home.overtime_losses}}</td>
+      <td>{{this.records.road.wins}}-{{this.records.road.losses}}-{{this.records.road.overtime_losses}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</script>
+
+<!-- BOX OUTLINE -->
+<script id="outline" type="text/x-handlebars-template">
+<li class="ui-state-default" id="box{{num}}">
+    <div class="sportsWrapper">
+       <img src="assets/images/cancel.png" class="cancelButton" onclick="deleteTile(this)">
+       <div id="logo"></div>
+       <div class="sportsContent">
+          <img id = "box{{num}}" onclick="popup('#box{{num}}')" class="plusImg" src="assets/images/plus.png" /><br />
+      </div>
+      <div class="modal-trigger-area">
+        <a href="#modal{{num}}" class="modal-trigger details">More Details</a>
+      </div>
+    </div>
+    <div id="modal{{num}}" class="modal">
+    </div>
+</li>
 </script>

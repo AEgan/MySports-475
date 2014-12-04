@@ -15,15 +15,23 @@ def getPlayerInfo(playerName, teamName)
 	all_players = getTeamRoster(teamName)
 	puts all_players
 	# Get basic information of input player
-	puts all_players.find {|p| p.player[:name_full] == playerName }
-	basicPlayerInformation = all_players.find {|p| p.player[:name_full] == playerName }.player
+	if all_players.first[:name_full].nil?
+		basicPlayerInformation = all_players.find {|play| play['name_full'] == playerName }
+	else
+		basicPlayerInformation = all_players.find {|play| play[:name_full] == playerName }
+	end
 
 	# Get stats for the input player
 	player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2014", "REG")
-	playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation[:id]}[:stats]
+	if basicPlayerInformation['id'].nil?
+		playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation[:id]}[:stats]
+	else
+		playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation['id']}[:stats]
+	end
 
 	# Get position of the player
-	position = basicPlayerInformation[:position]
+	position = basicPlayerInformation['position']
+	position = basicPlayerInformation[:position] if position.nil?
 	stats = {}
 
 	case position
@@ -40,14 +48,14 @@ def getPlayerInfo(playerName, teamName)
 	when "P"
 		stats = punter(playerStats)
 	end
-		
+
 	basicPlayerInformation = stats.merge(basicPlayerInformation)
 
 	return basicPlayerInformation
 end
 
 def wideReceiver(playerStats)
-	
+
 	touchdowns = getTouchdowns(playerStats)
 	receiving = getReceiving(playerStats)
 	penalty = getPenalty(playerStats)
