@@ -127,7 +127,9 @@ html {
 	height: auto;
 	position: relative;
 	float: right;
+	margin-right: 10px;
 	cursor: pointer;
+	z-index: 3;
 }
 
 .sportsWrapper {
@@ -137,12 +139,14 @@ html {
 	background-position: 100% 40%;
 	height: 200px;
 	overflow: scroll;
+	z-index: 2;
 
 }
 .sportsContent {
 	text-align: left;
 	opacity: 1 !important;
 	color: #ddd;
+	z-index: 1;
 }
 
 
