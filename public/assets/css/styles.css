@@ -261,6 +261,13 @@ p {
 	cursor: pointer;
 	transition: all linear 0.15s;
 }
+
+.filterOption#new {
+	margin-left: 20px;
+	width: 100px;
+	background-color: #393;
+
+}
 .filterOption:hover {
 	background: #ffc435;
 }
