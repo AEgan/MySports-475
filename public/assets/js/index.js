@@ -65,11 +65,11 @@ function displayData(box, data, league, category, t) {
 		case "nhl":
 			switch (category) {
 				case "team":
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nfl/"+t.toLowerCase()+".png')");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nhl/"+data.alias.toLowerCase()+".png')");
 					$(box + ' .sportsContent').html(render('summary_nhl_team', data));
 					break;
 				case "player":
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nfl/"+t.toLowerCase()+".png')");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nhl/"+data.team.alias.toLowerCase()+".png')");
 					//implement nhl player stats here
 					if(data.position === "g" || data.position === "G") {
 						$(box + ' .sportsContent').html(render('summary_nhl_goalie', data));
