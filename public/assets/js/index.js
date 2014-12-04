@@ -224,6 +224,13 @@ function popup(box) {
 	document.getElementById("submit").style.display = "block";
 	document.getElementById("nhlTeamDropdown").style.display = "none";
 	boxNumber = box;
+	element_to_scroll_to = document.getElementById('dialog-form');
+	element_to_scroll_to.scrollIntoView();
+}
+
+function popupNextBox () {
+	console.log(nextBoxID);
+	popup("#" + nextBoxID);
 }
 
 function getQueryVariable(variable)
