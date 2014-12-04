@@ -76,6 +76,11 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nhl player stats here
+					if(data.position === "g" || data.position === "G") {
+						$(box + ' .sportsContent').html(render('summary_nhl_goalie', data));
+					} else {
+						$(box + ' .sportsContent').html(render('summary_nhl_skater', data));
+					}
 					break;
 				case "standings":
 					var str = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>OTL</th><th>Points</th></thead><tbody>";

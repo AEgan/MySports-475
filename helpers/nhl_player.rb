@@ -11,6 +11,10 @@ def getNHLPlayerInfo(player_id, team_name)
   player_info[:height] = player_season_stats.player.height
   player_info[:weight] = player_season_stats.player.weight
   player_info[:seasons] = player_season_stats.seasons
+  player_info[:team] = player_season_stats.seasons.last[:teams].last
+  if position.downcase.eql?('g')
+    player_info[:goaltending] = player_season_stats.seasons.last[:teams].last[:goaltending]
+  end
   player_info
 end
 

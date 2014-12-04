@@ -51,7 +51,7 @@
       $('#filterNav').css("display", "block");
       $('#welcome').css("display", "block");
     </script>
-    
+
 
       <ul id="sortable">
         <li class="ui-state-default" id="box1">
@@ -68,7 +68,7 @@
             </div>
         </li>
       </ul>
-    
+
 
     <!-- ADD SPORTS DATA FORM -->
     <%= erb :form %>
@@ -232,4 +232,29 @@
   <b>Capacity</b>{{venue.capacity}}<br />
   <b>City</b>{{venue.city}}<br />
   <b>State</b>{{venue.state}}<br />
+</script>
+
+<script id="summary_nhl_skater" type="text/x-handlebars-template">
+  <b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Position:</td><td>{{position}}</td></tr>
+    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Team:</td><td>{{team.alias}}</td></tr>
+    <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
+    <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
+  </table>
+</script>
+<script id="summary_nhl_goalie" type="text/x-handlebars-template">
+<b>{{position}} &nbsp; {{full_name}}</b><br /><hr />
+<table class='player-stats-table'>
+<tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+<tr><td>Position:</td><td>{{position}}</td></tr>
+<tr><td>Height:</td><td>{{height}}</td></tr>
+<tr><td>Weight:</td><td>{{weight}}</td></tr>
+<tr><td>Team:</td><td>{{team.alias}}</td></tr>
+<tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+<tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
+</table>
 </script>
