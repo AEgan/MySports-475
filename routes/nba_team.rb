@@ -17,3 +17,8 @@ post '/getNBATeamInfo' do
     return check_custom[0].tile.to_json
   end
 end
+
+post '/getNBATeamRoster' do
+  content_type :json
+  getNBATeamRoster(request["teamName"]).to_json
+end

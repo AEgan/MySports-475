@@ -77,6 +77,8 @@ $(function() {
 							document.getElementById("team-select-fields").style.display = "none";
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nhlTeamDropdown").style.display = "none";
+							document.getElementById("players").style.display = "block";
+							populatePlayerList(strUser, "nba");
 							break;
 						case "team":
 							document.getElementById("players").style.display = "none";

@@ -241,7 +241,8 @@ function getQueryVariable(variable)
 }
 
 function populatePlayerList(t, league){
-
+	console.log("populate player list");
+	console.log(league);
 	var select = document.getElementById("playerList");
 	select.className += select.className ? ' chosen-select' : 'chosen-select';
 
@@ -281,8 +282,28 @@ function populatePlayerList(t, league){
 			url: "/getNHLTeamRoster",
 			data: {teamName: t}
 		}).done(function(data) {
-			console.log('data is here');
-			console.log(data);
+			for (var i = 0; i < data.length; i++) {
+				var opt = data[i].last_name + ", " + data[i].first_name;
+				var el = document.createElement("option");
+				el.textContent = opt;
+				el.value = data[i].id;
+				select.appendChild(el);
+			}
+			setChosen();
+			$(".chosen-select").trigger("chosen:updated");
+		}).fail(function(xhr, status, error) {
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	} else {
+		t = $("#nbaTeams").val();
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/getNBATeamRoster",
+			data: {teamName: t}
+		}).done(function(data) {
 			for (var i = 0; i < data.length; i++) {
 				var opt = data[i].last_name + ", " + data[i].first_name;
 				var el = document.createElement("option");
@@ -380,6 +401,7 @@ $(function() {
 		    //player is checked so populate team list
 		    var e = document.getElementById("teams");
 				var strUser = e.options[e.selectedIndex].value;
+				console.log(strUser);
 				populatePlayerList(strUser);
 		}
 		return true

@@ -12,6 +12,12 @@ def getNHLTeamRoster(teamName)
 	Roster.get_roster('nhl', teamName)
 end
 
+def getNBATeamRoster(teamId)
+	SportsDataApi.set_key(:nba, 'tjkbcujdh4hkh2nby8bfs5nf')
+	SportsDataApi.set_access_level(:nba, 't')
+	Roster.get_roster('nba', teamId)
+end
+
 # Get Team Stats
 def getTeamInfo(teamName)
 	# Set API Keys
