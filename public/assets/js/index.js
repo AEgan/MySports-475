@@ -100,7 +100,7 @@ function displayData(box, data, league, category, t) {
 					//implement nba team stats here
 					console.log("NBA TEAM INFO HERE");
 					console.log(data);
-					$(box + ' .sportsContent').html("<b>Check console</b>");
+					$(box + ' .sportsContent').html(render('summary_nba_team', data));
 					break;
 				case "player":
 					//implement nba player stats here
@@ -483,7 +483,7 @@ function populateUserTiles() {
 	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
-	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
+	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam, newtile.nbaTeam);
 	  	nextBoxID = "box" + nextBoxNumber;
 	  	newBox = render("outline", {num: nextBoxNumber});
 	  	$('#sortable').append(newBox);
