@@ -36,7 +36,8 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 function displayData(box, data, league, category, t) {
 	console.log("DISPLAY DATA");
 	box = "#box" + String(box);
-	$(box + ' .details').css("display", "block");
+	console.log($(box + ' .addData'));
+	$(box + ' .addData').removeClass('addData');
 	switch (league) {
 		case "nfl":
 			switch (category) {
@@ -367,7 +368,6 @@ $(function() {
 		nextBoxID = "box" + nextBoxNumber;
 	   	newBox = render("outline", {num: nextBoxNumber});
 	  	$('#sortable').append(newBox);
-	   	$("#" + nextBoxID + ' .details').css("display", "block");
 	});
 
 	$('.teamList').on('change', function () {
@@ -480,7 +480,6 @@ function populateUserTiles() {
 	  	nextBoxID = "box" + nextBoxNumber;
 	  	newBox = render("outline", {num: nextBoxNumber});
 	  	$('#sortable').append(newBox);
-	   	$("#" + nextBoxID + ' .details').css("display", "block");
 	  }
 	  var idsInOrder = $("#sortable").sortable("toArray");
 	  console.log(idsInOrder);

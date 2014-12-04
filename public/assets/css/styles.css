@@ -374,3 +374,7 @@ td, th {
   border-radius: inherit;
   padding-left: 5px;
 }
+
+.addData {
+	display: none;
+}
