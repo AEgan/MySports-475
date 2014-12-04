@@ -4,8 +4,9 @@ var mainUser = "Varun";
 var mainPassword = "test";
 var nextBoxNumber = 1;
 var box_team = new Array();
+var current_tiles = [];
 
-function getData (box, urlText, league, category, d, t) {
+function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
 		}
@@ -14,23 +15,21 @@ function getData (box, urlText, league, category, d, t) {
 		arrayNew.push("#box" + String(box));
 		arrayNew.push(league);
 		box_team.push(arrayNew);
-		console.log(box_team);
-		console.log(d);
-		console.log(urlText);
 
 		$.ajax({
-
-		type: "POST",
-		dataType: "json",
-	  	url: urlText,
-	  	data: d
-		}).done(function(data) {
-
-		  console.log("done");
-		  console.log(data);
-		  console.log("bro cmon");
-		  console.log(box);
-		  displayData(box, data, league, category, t);
+			type: "POST",
+			dataType: "json",
+		  	url: urlText,
+		  	data: infoArray
+		}).done(function(tile) {
+			infoArray.data = tile.data;
+			current_tiles.push(tile);
+			console.log("GET DATA");
+			console.log(current_tiles);
+			console.log(tile);
+			console.log("infoArray");
+			console.log(infoArray);
+			displayData(box, tile.data, league, category, t);
 		}).fail(function(xhr, status, error){
 			console.log(xhr);
 			console.log(status);
@@ -40,13 +39,9 @@ function getData (box, urlText, league, category, d, t) {
 }
 
 function displayData(box, data, league, category, t) {
-	box = "#box" + String(box);
 	console.log("DISPLAY DATA");
-	console.log(box);
 	console.log(data);
-	console.log(league);
-	console.log(category);
-	console.log(t);
+	box = "#box" + String(box);
 	switch (league) {
 		case "nfl":
 			switch (category) {
@@ -77,7 +72,7 @@ function displayData(box, data, league, category, t) {
 		case "nhl":
 			switch (category) {
 				case "team":
-					$(box + ' .sportsContent').html("we out here");
+					$(box + ' .sportsContent').html(render('summary_nhl_team', data));
 					break;
 				case "player":
 					//implement nhl player stats here
@@ -296,33 +291,11 @@ function set_filter(league) {
 
 // Main Function
 $(function() {
-	$.ajax({
-			type: "GET",
-			dataType: "json",
-		  	url: "/users",
-			}).done(function(data) {
-			  console.log("USERS MAN");
-			  console.log(data);
-			  // data.forEach(function (newtile, index, array) {
-		  	for (var i = 0; i < data.length; i++) {
-			  	var newtile = data[i];
-			  	console.log("IM HERE BITCHESSS");
-			  	console.log(newtile);
-			  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
-			  	nextBoxID = "box" + nextBoxNumber;
-		   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
-		   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
-			  }//);
-			  console.log("DAMN");
-			  // nextBoxNumber += 1;
-			  
-			  
-			}).fail(function(xhr, status, error){
-				console.log("NOOOOOO");
-				console.log(xhr);
-				console.log(status);
-				console.log(error);
-		});
+
+
+
+
+	populateUserTiles("varun", "test");
 	// Login button
 	$('#login').on('click', function (e) {
 		e.preventDefault();
@@ -336,7 +309,7 @@ $(function() {
 			}).done(function(data) {
 			  console.log("done");
 			  console.log(data);
-			  
+
 			}).fail(function(xhr, status, error){
 				console.log("NOOOOOO");
 				console.log(xhr);
@@ -354,36 +327,18 @@ $(function() {
 		e.preventDefault();
 		document.getElementById("dialog-form").style.display = "none";
 		var league = $(this).find("input[name='league']:checked").val()
-  	var category = $(this).find("input[name='category']:checked").val()
-  	console.log(category);
-  	var t = $(this).find('select[name="team"]').val();
-  	var p = $(this).find('select[name="player"]').val();
+	  	var category = $(this).find("input[name='category']:checked").val()
+	  	console.log(category);
+	  	var t = $(this).find('select[name="team"]').val();
+	  	var p = $(this).find('select[name="player"]').val();
 		var c = $(this).find('select[name="conference"]').val();
 		var d = c + "_" + $(this).find('select[name="division"]').val();
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
-	  createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
-	  nextBoxID = "box" + nextBoxNumber;
-   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
-   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
-
-    
-
-	  $.ajax({
-			type: "POST",
-			dataType: "json",
-		  	url: "/create_tile",
-		  	data: {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam}
-			}).done(function(data) {
-			  console.log("created tile");
-			  console.log(data);
-			  
-			}).fail(function(xhr, status, error){
-				console.log("NOOOOOO");
-				console.log(xhr);
-				console.log(status);
-				console.log(error);
-		});
+		createTile(league, category, t, p, c, d, nhlConference, nhlTeam)
+		nextBoxID = "box" + nextBoxNumber;
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
 	});
 
 	$('.teamList').on('change', function () {
@@ -398,9 +353,7 @@ $(function() {
 
 	$( ".filterOption" ).on( "click", function() {
 		$( ".filterOption" ).css("background-color", "#DDD");
-		$( ".filterOption" ).css("border-bottom", "2px solid #334");
-		$(this).css("background-color", "#17C7CA");
-		$(this).css("border-bottom", "none");
+		$(this).css("background-color", "#ffc435");
 
 		var filter = $(this).prop('id');
 		console.log(filter);
@@ -410,36 +363,34 @@ $(function() {
 });
 
 function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
+	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber};
 	switch(league) {
 	    	case "nfl":
 	    		switch (category) {
 			    	case "team":
 			    		console.log("IN CASE STATEMENT TEAM");
 			    		data = {team: t}
-			    		getData(nextBoxNumber, "/getTeamInfo", league, category, data, t);
+			    		getData(nextBoxNumber, "/getTeamInfo", league, category, data, t, infoArray);
 			    		break;
 			    	case "player":
 				    	console.log("IN CASE STATEMENT PLAYER");
 				    	data = { player: p, team: t};
-				    	getData(nextBoxNumber, "/getPlayerInfo", league, category, data, t);
+				    	getData(nextBoxNumber, "/getPlayerInfo", league, category, data, t, infoArray);
 			    		break;
 					case "standings":
 						console.log("IN CASE STATEMENT standings");
 						data = { conference: c, division: d };
 						console.log(data);
-						getData(nextBoxNumber, "/getNFLStandings", league, category, data);
+						getData(nextBoxNumber, "/getNFLStandings", league, category, data, t, infoArray);
 						break;
 				}
 				break;
-			case "nhl": 
+			case "nhl":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NHL TEAM");
-						console.log(nhlTeam);
-						console.log(category);
-						console.log(league);
 						data = { team: nhlTeam };
-						getData(nextBoxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam);
+						getData(nextBoxNumber, "/getNHLTeamInfo", league, category, data, nhlTeam, infoArray);
 						break;
 					case "player":
 						console.log("IN CASE STATEMENT NHL PLAYER");
@@ -448,11 +399,11 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 					case "standings":
 						console.log("IN CASE STATEMENT NHL STANDINGS");
 						data = { conference: nhlConference };
-						getData(nextBoxNumber, "/getNHLStandings", league, category, data);
+						getData(nextBoxNumber, "/getNHLStandings", league, category, data, t, infoArray);
 						break;
 				}
 				break;
-			case "nba": 
+			case "nba":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT NBA TEAM");
@@ -462,10 +413,10 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NBA STANDINGS");
-						break;	
+						break;
 				}
 				break;
-			case "mlb": 
+			case "mlb":
 				switch (category) {
 					case "team":
 						console.log("IN CASE STATEMENT MLB TEAM");
@@ -475,7 +426,7 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT MLB STANDINGS");
-						break;	
+						break;
 				}
 				break;
 	    	default:
@@ -488,19 +439,32 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam) {
 			setModals();
 }
 
-
-function roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2");
-}
-
-function getElementTopLeft(id) {
-    var ele = document.getElementById(id);
-    var top = 0;
-    var left = 0;
-    while(ele.tagName != "BODY") {
-        top += ele.offsetTop;
-        left += ele.offsetLeft;
-        ele = ele.offsetParent;
-    }
-    return { top: top, left: left };
+function populateUserTiles(username, password) {
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+  	url: "/get_tiles",
+	}).done(function(data) {
+	  console.log("USERS MAN");
+	  console.log(data);
+	  // data.forEach(function (newtile, index, array) {
+  	for (var i = 0; i < data.length; i++) {
+	  	var newtile = data[i];
+	  	current_tiles.push(newtile);
+	  	console.log(newtile);
+	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam);
+	  	nextBoxID = "box" + nextBoxNumber;
+	   	$('#sortable').append('<li class="ui-state-default" id="' + nextBoxID + '"><div class="sportsWrapper"><div id="logo"></div><div class="sportsContent"><a id = "' + nextBoxID + '" onclick="popup(\'#' + nextBoxID + '\')" class="button addNew">Add Sports Data</a></div><div class="modal-trigger-area"><a href="#modal' + nextBoxNumber + '" class="modal-trigger">More Details</a></div></div><div id="modal' + nextBoxNumber + '" class="modal"></div></li>');
+	   	$("#" + nextBoxID + ' .modal-trigger-area').css("display", "none");
+	  }
+	  console.log("ADDITION");
+	  console.log(current_tiles);
+	  var idsInOrder = $("#sortable").sortable("toArray");
+	  console.log(idsInOrder);
+	}).fail(function(xhr, status, error){
+		console.log("NOOOOOO");
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
 }

@@ -88,7 +88,6 @@ html {
    cursor: pointer;
    height: auto;
    width: auto;
-   padding: 0px 8px 0px 8px;
 }
 
 .button:hover {
@@ -188,7 +187,8 @@ table.player-stats-table {
 }
 
 table.player-stats-table tr:nth-child(even) {
-	background-color: #17C7CA;
+	background-color: #ddd;
+	color: #000;
 }
 
 table.standings-table {
@@ -196,7 +196,8 @@ table.standings-table {
 }
 
 table.standings-table tr:nth-child(even) {
-	background-color: #17C7CA;
+	background-color: #ddd;
+	color: #000;
 }
 /*table.player-stats-table tr:nth-child(odd) {
 	background-color: #016684;
@@ -217,7 +218,7 @@ table.standings-table tr:nth-child(even) {
 }
 p {
 	margin: 0px;
-	padding: 0px 5px 5px 
+	padding: 0px 5px 5px
 	5px;
 }
 
@@ -238,7 +239,7 @@ p {
 
 .filterOption {
 	display: inline-block;
-	margin: 0px; 
+	margin: 0px;
 	padding: 10px 0px 0px 0px;
 	width: 150px;
 	height: 25px;
@@ -282,4 +283,73 @@ label.ui-button {
 	font-size: 14px;
 	float: right;
 	color: #FFF;
+}
+
+.dark-input {
+	color: #000000;
+}
+
+h2.dark, h3.dark {
+	color: #000000;
+}
+
+.light-wrap {
+	background-color: #003364;
+	margin-left: 25%;
+	margin-right: 25%;
+	padding: 1% 1% 1% 1%;
+	font-size: 15px;
+	color: #bdbdbd;
+	border-left: 1px solid #ffc435;
+	border-right: 1px solid #ffc435;
+	border-bottom: 1px solid #ffc435;
+}
+
+.loginForm {
+	width: 75%;
+	margin: 0px auto;
+}
+
+
+
+
+/*changes to materialize css*/
+.btn, .btn-large {
+  color: #000;
+  background-color: #bdbdbd;
+
+}
+.btn:hover, .btn-large:hover {
+  background-color: #ddd;
+}
+input[type=text],
+input[type=password],
+input[type=email],
+textarea {
+  height: 2rem;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+textarea:focus {
+  border-bottom: 1px solid #fff;
+  -webkit-box-shadow: 0 1px 0 0 #fff;
+  -moz-box-shadow: 0 1px 0 0 #fff;
+  box-shadow: 0 1px 0 0 #fff;
+}
+
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
+  padding-left: 0px;
+}
+[type="radio"] + label:before,
+[type="radio"] + label:after {
+  content: normal;
+}
+
+td, th {
+  padding: inherit;
+  border-radius: inherit;
+  padding-left: 5px;
 }

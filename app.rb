@@ -10,6 +10,9 @@ require 'bson'
 require 'moped'
 # include Mongoid
 
+# using sessions
+enable :sessions
+
 configure do
   Mongoid.load!("./mongoid.yml", :development)
 end

@@ -22,6 +22,7 @@
   <script src="assets/js/constants.js" type="text/javascript"></script>
   <script src="assets/js/form.js" type="text/javascript"></script>
   <script src="assets/js/handlebars_helpers.js" type="text/javascript"></script>
+  <script src="assets/js/helpers.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -31,7 +32,7 @@
       My Sports
     </div>
     <div id="welcome">
-      Welcome: Varun
+      <%= erb :login %>
     </div>
   </div>
 
@@ -44,29 +45,39 @@
         <li class="filterOption" id="mlb">MLB</li>
     </ul>
   </div>
-
   <div id="wrapper">
+  <% if logged_in? %>
+    <script type="text/javascript">
+      $('#filterNav').css("display", "block");
+      $('#welcome').css("display", "block");
+    </script>
+    
 
-    <ul id="sortable">
-      <li class="ui-state-default" id="box1">
-          <div class="sportsWrapper">
-             <div id="logo"></div>
-             <div class="sportsContent">
-                <img onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
+      <ul id="sortable">
+        <li class="ui-state-default" id="box1">
+            <div class="sportsWrapper">
+               <div id="logo"></div>
+               <div class="sportsContent">
+                  <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
+              </div>
+              <div class="modal-trigger-area">
+                <a href="#modal1" class="modal-trigger">More Details</a>
+              </div>
             </div>
-            <div class="modal-trigger-area">
-              <a href="#modal1" class="modal-trigger">More Details</a>
+            <div id="modal1" class="modal">
             </div>
-          </div>
-          <div id="modal1" class="modal">
-          </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    
+
+    <!-- ADD SPORTS DATA FORM -->
+    <%= erb :form %>
+    <% else %>
+      <div class="light-wrap center">
+        <%= erb :login_signup_forms %>
+      </div>
+    <% end %>
   </div>
-
-  <!-- ADD SPORTS DATA FORM -->
-  <%= erb :form %>
-
 </body>
 </html>
 
@@ -207,4 +218,18 @@
   <tr><td>Receiving Yards: </td><td>{{receiving.yds}}</td></tr>
   <tr><td>Receiving TDs: </td><td>{{receiving.td}}</td></tr>
 </table>
+</script>
+
+<script id="summary_nhl_team" type="text/x-handlebars-template">
+  <h3>Team</h3>
+  <b>Name:</b>{{name}}<br />
+  <b>Alias:</b>{{alias}}<br />
+  <b>Market:</b>{{market}}<br />
+  <b>Conference:</b>{{conference}}<br />
+  <b>Division:</b>{{division}}<br />
+  <h3>Venue</h3>
+  <b>Name</b>{{venue.name}}<br />
+  <b>Capacity</b>{{venue.capacity}}<br />
+  <b>City</b>{{venue.city}}<br />
+  <b>State</b>{{venue.state}}<br />
 </script>

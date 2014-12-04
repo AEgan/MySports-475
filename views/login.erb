@@ -1,0 +1,9 @@
+<% if(logged_in?) %>
+  Welcome: <%= current_user.name %>
+  <a href="/logout">Logout</a>
+<% else %>
+  <a href="#loginModal" class="modal-trigger">Log In</a>
+  <div id="loginModal" class="modal">
+    <%= erb :login_signup_forms %>
+  </div>
+<% end %>

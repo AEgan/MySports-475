@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/AEgan/sports_data_api.git
-  revision: 2ad717e65711db634fcf9bd89458a7f2bf410e40
+  revision: 7ea7d3944645c5afed7e57354d6c230c70858f8e
   branch: all_updates
   specs:
     sports_data_api (0.1.0)
@@ -8,7 +8,6 @@ GIT
       rest-client (~> 1.6.7)
 
 GEM
-  remote: https://rubygems.org/
   specs:
     activemodel (3.2.20)
       activesupport (= 3.2.20)
@@ -16,6 +15,7 @@ GEM
     activesupport (3.2.20)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    bcrypt (3.1.7)
     bond (0.5.1)
     bson (1.11.1)
     bson_ext (1.11.1)
@@ -75,6 +75,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   bson_ext
   json
   mongo
