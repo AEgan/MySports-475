@@ -516,7 +516,6 @@ function populateUserTiles() {
 		dataType: "json",
   	url: "/get_tiles",
 	}).done(function(data) {
-	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam, newtile.nbaTeam);
@@ -535,22 +534,26 @@ function populateUserTiles() {
 
 function saveOrder() {
 	var sorted = $('#sortable').sortable("toArray");
+	console.log("SAVE ORDER");
+	console.log(sorted);
 	var new_sorted = sorted.map(function(t) {
 		return current_tiles[t];
 	});
-	console.log(sorted);
-	$.ajax({
-		type: "POST",
-		dataType: "json",
-		url: "/save_order",
-		data: {new_order: new_sorted}
-	}).done(function(data) {
+	console.log(new_sorted);
+	if (new_sorted.length > 0) {
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/save_order",
+			data: {new_order: new_sorted}
+		}).done(function(data) {
 
-	}).fail(function(xhr, status, error){
-		console.log(xhr);
-		console.log(status);
-		console.log(error);
-	});
+		}).fail(function(xhr, status, error){
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+	}
 }
 
 function deleteTile(element) {
