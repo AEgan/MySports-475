@@ -228,8 +228,7 @@
 </script>
 
 <script id="summary_running_back" type="text/x-handlebars-template">​
-<div class = "modal_table">
-<table class='player-stats-table modalT'>
+<table class='player-stats-table'>
   <tr><td>Rushing Attempts: </td><td>{{rushing.att}}</td></tr>
   <tr><td>Rushing Yards: </td><td>{{rushing.yds}}</td></tr>
   <tr><td>Average: </td><td>{{round_one rushing.avg}}</td></tr>
@@ -238,7 +237,7 @@
   <tr><td>Receiving Yards: </td><td>{{receiving.yds}}</td></tr>
   <tr><td>Receiving TDs: </td><td>{{receiving.td}}</td></tr>
 </table>
-</div>
+
 </script>
 
 <script id="summary_nhl_team" type="text/x-handlebars-template">
@@ -612,9 +611,12 @@
 </script>
 
 <script id="modal_nba_standings" type="text/x-handlebars-template">
-  <h2>Standings for the {{name}} Division</h2>
-  <h3>Summary</h3>
-  <table class="player-stats-table">
+  
+  <h4>Standings for the {{name}} Division</h4>
+  <br/>
+
+  <h5>Summary</h5>
+  <table class="player-stats-table standings-table">
     <thead>
       <th>Team</th>
       <th>Wins</th>
@@ -628,15 +630,17 @@
       <td>{{name}}</td>
       <td>{{wins}}</td>
       <td>{{losses}}</td>
-      <td>{{round_one win_pct}}%</td>
+      <td>{{win_pct}}%</td>
       <td>{{point_diff}}</td>
     </tr>
     {{/each}}
     </tbody>
   </table>
-  <h3>
-  <h3>Last 10</h3>
-  <table class="player-stats-table">
+  <br/>
+
+
+  <h5>Last 10</h5>
+  <table class="player-stats-table standings-table">
     <thead>
       <th>Team</th>
       <th>Wins</th>
@@ -649,13 +653,15 @@
         <td>{{name}}</td>
         <td>{{records.last_10.wins}}</td>
         <td>{{records.last_10.losses}}</td>
-        <td>{{round_one records.last_10.win_pct}}%</td>
+        <td>{{records.last_10.win_pct}}%</td>
       </tr>
       {{/each}}
     </tbody>
   </table>
-  <h3>Home</h3>
-  <table class="player-stats-table">
+<br/>
+
+  <h5>Home</h5>
+  <table class="player-stats-table standings-table">
     <thead>
       <th>Team</th>
       <th>Wins</th>
@@ -668,13 +674,15 @@
         <td>{{name}}</td>
         <td>{{records.home.wins}}</td>
         <td>{{records.home.losses}}</td>
-        <td>{{round_one records.home.win_pct}}%</td>
+        <td>{{records.home.win_pct}}%</td>
       </tr>
       {{/each}}
     </tbody>
   </table>
-  <h3>Road</h3>
-  <table class="player-stats-table">
+  <br/>
+
+  <h5>Road</h5>
+  <table class="player-stats-table standings-table">
     <thead>
       <th>Team</th>
       <th>Wins</th>
@@ -687,7 +695,7 @@
       <td>{{name}}</td>
       <td>{{records.road.wins}}</td>
       <td>{{records.road.losses}}</td>
-      <td>{{round_one records.road.win_pct}}%</td>
+      <td>{{records.road.win_pct}}%</td>
     </tr>
     {{/each}}
     </tbody>

@@ -140,7 +140,7 @@ function setNFLStandingsHTML(data, callback) {
 		tableStr += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
 	}
 	tableStr += "</tbody></table>";
-	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Point Differential</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
+	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
 	for(var i = 0; i < data.teams.length; i++) {
 		modalString += "<tr><td>" + data.teams[i]['name'] + "</td>";
 		modalString += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
@@ -148,7 +148,6 @@ function setNFLStandingsHTML(data, callback) {
 		modalString += "<td>" + data.teams[i]['overall']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['last_5']['wins'] + '-' + data.teams[i]['last_5']['losses'] + "-" + data.teams[i]['last_5']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['streak']['type'] + " " + data.teams[i]['streak']['length'] + "</td>";
-		modalString += "<td>" + data.teams[i]['points']['net'] + "</td>";
 		modalString += "<td>" + data.teams[i]['scored_first']['wins'] + '-' + data.teams[i]['scored_first']['losses'] + "-" + data.teams[i]['scored_first']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['leading_at_half']['wins'] + '-' + data.teams[i]['leading_at_half']['losses'] + "-" + data.teams[i]['leading_at_half']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['decided_by_7_points']['wins'] + '-' + data.teams[i]['decided_by_7_points']['losses'] + "-" + data.teams[i]['decided_by_7_points']['ties'] + "</td></tr>";
