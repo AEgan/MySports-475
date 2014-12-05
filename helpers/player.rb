@@ -2,10 +2,7 @@
 
 # Get player info
 def getPlayerInfo(playerName, teamName)
-	puts playerName
-	puts teamName
 	teamName = teamName.upcase
-	puts teamName
 
 	# Set API Keys
 	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
@@ -13,7 +10,6 @@ def getPlayerInfo(playerName, teamName)
 
 	# Get all players in the team
 	all_players = getTeamRoster(teamName)
-	puts all_players
 	# Get basic information of input player
 	if all_players.first[:name_full].nil?
 		basicPlayerInformation = all_players.find {|play| play['name_full'] == playerName }
