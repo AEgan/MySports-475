@@ -218,6 +218,8 @@ function setModalHTML(data) {
 }
 
 function popup(box) {
+	console.log("DA FUCK");
+	$('.filterOption').off();
 	$("#teamRadio").prop("checked", true);
 	box2 = box.substr(1);
 	console.log(box2);
@@ -385,6 +387,9 @@ $(function() {
 
 	$('.form').on('submit', function (e) {
 		e.preventDefault();
+		$(".filterOption").on('click', function() {
+			filterOptionToggle(this);
+		});
 		document.getElementById("dialog-form").style.display = "none";
 		var league = $(this).find("input[name='league']:checked").val()
 	  	var category = $(this).find("input[name='category']:checked").val()
@@ -412,16 +417,20 @@ $(function() {
 		return true
 	});
 
-	$( ".filterOption" ).on( "click", function() {
-		console.log("BITCHES");
-		$('.filterOption').removeClass('filterSelected');
-		$(this).addClass('filterSelected');
-
-		var filter = $(this).prop('id');
-		set_filter(filter);
+	$(".filterOption").on('click', function() {
+		filterOptionToggle(this);
 	});
 
 });
+
+function filterOptionToggle(element) {
+	console.log("BITCHES");
+	$('.filterOption').removeClass('filterSelected');
+	$(element).addClass('filterSelected');
+
+	var filter = $(element).prop('id');
+	set_filter(filter);
+}
 
 function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam) {
 	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber, nbaTeam: nbaTeam};
