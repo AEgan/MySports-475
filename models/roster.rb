@@ -7,6 +7,8 @@ class Roster
   def self.get_roster(league, team_id)
     league = league.downcase
     team_id = team_id.downcase
+    puts league
+    puts team_id
     results = Roster.where(league: league, team_id: team_id).all.entries
     if results.empty?
       if(league.eql?("nhl"))
@@ -24,7 +26,18 @@ class Roster
 
       elsif(league.eql?("nfl"))
 
-        players = SportsDataApi::Nfl.team_roster(team_id).players.map(&:player).compact!
+        players = SportsDataApi::Nfl.team_roster(team_id).players.map(&:player).compact
+        players.sort_by! {|play| play[:last_name] }
+        roster = Roster.new()
+        roster.league = league
+        roster.team_id = team_id
+        roster.players = players
+        roster.save
+        return roster.players
+
+      elsif(league.eql?("nba"))
+
+        players = SportsDataApi::Nba.team_roster(team_id).players.map(&:player).compact
         players.sort_by! {|play| play[:last_name] }
         roster = Roster.new()
         roster.league = league

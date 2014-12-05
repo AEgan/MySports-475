@@ -16,8 +16,6 @@ end
 get '/get_tiles' do
 	if logged_in?
 		@user = current_user
-		puts "WOOOOOOOOO"
-		puts @user.customs
 		@customs = @user.customs.sort_by{|c| c.boxNum.to_i}
 		@tiles = @customs.map {|c| c.tile}
 		return @tiles.to_json
@@ -46,4 +44,3 @@ post '/delete_custom' do
 	@custom_to_delete.delete
 	return "delete_custom".to_json
 end
-

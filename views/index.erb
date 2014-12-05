@@ -74,7 +74,7 @@
       </div>
     <% end %>
   </div>
-  
+
 </body>
 </html>
 
@@ -453,7 +453,6 @@
     {{/each}}
   </table>
 </script>
-
 <!-- BOX OUTLINE -->
 <script id="outline" type="text/x-handlebars-template">
 <li class="ui-state-default unsortable" id="box{{num}}">
@@ -470,4 +469,76 @@
     <div id="modal{{num}}" class="modal">
     </div>
 </li>
+
+<script id="summary_nba_team" type="text/x-handlebars-template">
+  <h3>Team</h3>
+  <b>Name:</b> {{name}}<br />
+  <b>Alias:</b> {{alias}}<br />
+  <b>Market:</b> {{market}}<br />
+  <b>Conference:</b> {{conference}}<br />
+  <b>Division:</b> {{division}}<br />
+  <h3>Venue</h3>
+  <b>Name</b> {{venue.name}}<br />
+  <b>Capacity</b> {{venue.capacity}}<br />
+  <b>City</b> {{venue.city}}<br />
+  <b>State</b> {{venue.state}}<br />
+</script>
+
+<script id="summary_nba_player" type="text/x-handlebars-template">
+  <b>{{primary_position}} &nbsp; {{full_name}}</b><br /><hr />
+  <table class='player-stats-table'>
+    <tr><td>Number</td><td>{{jersey_number}}</td></tr>
+    <tr><td>Games Played</td><td>{{total.games_played}}</td></tr>
+    <tr><td>PPG:</td><td>{{average.points}}</td></tr>
+    <tr><td>Rebounds PG:</td><td>{{average.rebounds}}</td></tr>
+    <tr><td>Assists PG:</td><td>{{average.assists}}</td></tr>
+    <tr><td>Blocks PG:</td><td>{{average.blocks}}</td></tr>
+  </table>
+</script>
+
+<script id="modal_nba_player" type="text/x-handlebars-template">
+  <h2>{{full_name}}</h2>
+  <h3>{{primary_position}} For the {{team.market}} {{team.name}}</h3>
+  <br />
+  <h3>Totals</h3>
+  <table class='player-stats-table'>
+    <tr><td>Games Played:</td><td>{{total.games_played}}</td></tr>
+    <tr><td>Points:</td><td>{{total.points}}</td></tr>
+    <tr><td>Rebounds:</td><td>{{total.rebounds}}</td></tr>
+    <tr><td>Assists:</td><td>{{total.assists}}</td></tr>
+    <tr><td>Blocks:</td><td>{{total.blocks}}</td></tr>
+    <tr><td>Steals:</td><td>{{total.steals}}</td></tr>
+    <tr><td>Turnovers:</td><td>{{total.turnovers}}</td></tr>
+    <tr><td>Minutes Played:</td><td>{{total.minutes}}</td></tr>
+  </table>
+  <h3>Field Goals</h3>
+  <table class='player-stats-table'>
+    <tr><td>Attempts:</td><td>{{total.field_goal_att}}</td></tr>
+    <tr><td>Made:</td><td>{{total.field_goal_made}}</td></tr>
+    <tr><td>Percent:</td><td>{{total.field_goal_pct}}</td></tr>
+  </table>
+  <h3>Two Points</h3>
+  <table class='player-stats-table'>
+    <tr><td>Attempts:</td><td>{{total.two_points_att}}</td></tr>
+    <tr><td>Made:</td><td>{{total.two_points_made}}</td></tr>
+    <tr><td>Percent:</td><td>{{total.two_points_pct}}</td></tr>
+  </table>
+  <h3>Three Points</h3>
+  <table class='player-stats-table'>
+    <tr><td>Attempts:</td><td>{{total.three_points_att}}</td></tr>
+    <tr><td>Made:</td><td>{{total.three_points_made}}</td></tr>
+    <tr><td>Percent:</td><td>{{total.three_points_pct}}</td></tr>
+  </table>
+  <h3>Free Throws</h3>
+  <table class='player-stats-table'>
+    <tr><td>Attempts:</td><td>{{total.free_throws_att}}</td></tr>
+    <tr><td>Made:</td><td>{{total.free_throws_made}}</td></tr>
+    <tr><td>Percent:</td><td>{{total.free_throws_pct}}</td></tr>
+  </table>
+  <h3>Fouls</h3>
+  <table class='player-stats-table'>
+    <tr><td>Personal:</td><td>{{total.personal_fouls}}</td></tr>
+    <tr><td>Technical:</td><td>{{total.tech_fouls}}</td></tr>
+    <tr><td>Flagrant:</td><td>{{total.flagrant_fouls}}</td></tr>
+  </table>
 </script>
