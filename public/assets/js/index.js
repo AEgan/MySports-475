@@ -182,7 +182,7 @@ function setModalHTML(data) {
 	var position = data.position;
 	// QUARTERBACK
 	if(position === "QB") {
-		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data);
+		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data) + render("chart", {});
 	} else if(position === "WR") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
@@ -196,6 +196,7 @@ function setModalHTML(data) {
 		if(parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
+		modalString += render("chart", {})
 		return modalString;
 
 	} else if(position === "RB") { // RUNNING BACK
@@ -210,6 +211,7 @@ function setModalHTML(data) {
 		if(data.punt_return && parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
+		modalString += render("chart", {})
 		return modalString;
 
 	} else {
@@ -221,6 +223,7 @@ function popup(box) {
 	console.log("DA FUCK");
 	$('.filterOption').off();
 	$("#teamRadio").prop("checked", true);
+
 	box2 = box.substr(1);
 	console.log(box2);
 	var p = getElementTopLeft(box2);
@@ -421,6 +424,9 @@ $(function() {
 		filterOptionToggle(this);
 	});
 
+	
+
+	
 });
 
 function filterOptionToggle(element) {
@@ -580,4 +586,59 @@ function deleteTile(element) {
 		console.log(error);
 	});
 
+}
+
+function createChart(team, modalid) {
+		console.log("SUCKS TO SUCK");
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/get_season_stats",
+			data: {team: team, season: "2014"}
+		}).done(function(data) {
+			var names = data.map(function(t) {
+				return t.name;
+			});
+			var tds = data.map(function(t) {
+				return t.tds;
+			});
+			var data = {
+		    labels: names,
+		    datasets: [
+		        {
+		            label: "My First dataset",
+   		            fillColor: "rgba(151,187,205,0.5)",
+		            strokeColor: "rgba(151,187,205,0.8)",
+		            highlightFill: "rgba(151,187,205,0.75)",
+		            highlightStroke: "rgba(151,187,205,1)",
+		            data: tds
+		        }
+			    ]
+			};
+			// Get the context of the canvas element we want to select
+			if ($('#box' + modalid + ' #myChart').length != 0) {
+				console.log(names);
+				console.log(tds);
+				console.log("POPPY");
+				var ctx =  document.getElementById("box" + modalid).getElementsByClassName("chart")[0].getContext("2d");
+				myBarChart = new Chart(ctx).Bar(data);
+			}
+			console.log("FUDGE");
+		}).fail(function(xhr, status, error){
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+		
+}
+
+function modalClick(element) {
+	console.log(element);
+	console.log(element.href);
+	var temp = element.href
+	var modalid = temp.substring(28);
+	console.log(modalid);
+	var team = current_tiles["box" + modalid].t;
+	setTimeout(function(){ createChart(team, modalid); }, 1000);
+	// setTimeout(createChart(team), 5000);
 }

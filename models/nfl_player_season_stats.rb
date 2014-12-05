@@ -35,9 +35,10 @@ def storeSeasonStats(team, season, allStats, all_players)
 	puts "OUT HERE BRAH"
 end
 
-get '/get_season_stats' do
-	team = request["team"]
+post '/get_season_stats' do
+	content_type :json
+	team = request["team"].upcase
 	season = request["season"]
 	stats = NFLPlayerSeasonStats.where({team: team, season: season})
-	return stats[0].player_season_stats
+	return stats[0].player_season_stats.to_json
 end

@@ -59,13 +59,15 @@
                   <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
               </div>
               <div class="modal-trigger-area">
-                <a href="#modal1" class="modal-trigger details addData">More Details</a>
+                <a href="#modal1" class="modal-trigger details addData" onclick="modalClick(this)">More Details</a>
               </div>
             </div>
             <div id="modal1" class="modal">
             </div>
         </li>
       </ul>
+
+    <canvas class="chart" id="myChart" width="400" height="400"></canvas>
 
     <!-- ADD SPORTS DATA FORM -->
     <%= erb :form %>
@@ -464,7 +466,7 @@
           <img id = "box{{num}}" onclick="popup('#box{{num}}')" class="plusImg" src="assets/images/plus.png" /><br />
       </div>
       <div class="modal-trigger-area">
-        <a href="#modal{{num}}" class="modal-trigger details addData">More Details</a>
+        <a href="#modal{{num}}" class="modal-trigger details addData" onclick="modalClick(this)">More Details</a>
       </div>
     </div>
     <div id="modal{{num}}" class="modal">
@@ -544,3 +546,7 @@
     <tr><td>Flagrant:</td><td>{{total.flagrant_fouls}}</td></tr>
   </table>
 </script>
+
+<script id="chart" type="text/x-handlebars-template">
+<canvas class="chart" id="myChart" width="400" height="400"></canvas>
+</script
