@@ -21,6 +21,7 @@
   <script src="assets/js/form.js" type="text/javascript"></script>
   <script src="assets/js/handlebars_helpers.js" type="text/javascript"></script>
   <script src="assets/js/helpers.js" type="text/javascript"></script>
+  <script src="assets/js/chart.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -37,10 +38,9 @@
   <div id="filterNav">
     <ul>
         <li class="filterOption filterSelected" id="noFilter">No Filter</li>
-        <li class="filterOption" id="nfl">NFL</li>
-        <li class="filterOption" id="nhl">NHL</li>
-        <li class="filterOption" id="nba">NBA</li>
-        <li class="filterOption" id="mlb">MLB</li>
+        <li class="filterOption" id="nfl"><img class="filter_logo" src="assets/images/logos/nfl_logo.png" />NFL</li>
+        <li class="filterOption" id="nhl"><img class="filter_logo" src="assets/images/logos/nhl/nhl_logo.png" />NHL</li>
+        <li class="filterOption" id="nba"><img class="filter_logo" src="assets/images/logos/nba/nba_logo.png" />NBA</li>
     </ul>
   </div>
   <div id="wrapper">
@@ -219,17 +219,17 @@
 </script>
 
 <script id="summary_nhl_team" type="text/x-handlebars-template">
-  <h3>Team</h3>
-  <b>Name:</b>{{name}}<br />
-  <b>Alias:</b>{{alias}}<br />
-  <b>Market:</b>{{market}}<br />
-  <b>Conference:</b>{{conference}}<br />
-  <b>Division:</b>{{division}}<br />
-  <h3>Venue</h3>
-  <b>Name</b>{{venue.name}}<br />
-  <b>Capacity</b>{{venue.capacity}}<br />
-  <b>City</b>{{venue.city}}<br />
-  <b>State</b>{{venue.state}}<br />
+  <b>{{market}} {{name}}</b>
+  <hr/>
+  Conference: {{conference}}<br />
+  Division: {{division}}<br />
+  <br/>
+
+  <b>Venue: </b> <br/>
+  {{venue.name}}<br />
+  Capacity: {{venue.capacity}}<br />
+  City: {{venue.city}}<br />
+  State: {{venue.state}}<br />
 </script>
 
 <script id="summary_nhl_skater" type="text/x-handlebars-template">
@@ -473,17 +473,17 @@
 </script>
 
 <script id="summary_nba_team" type="text/x-handlebars-template">
-  <h3>Team</h3>
-  <b>Name:</b> {{name}}<br />
-  <b>Alias:</b> {{alias}}<br />
-  <b>Market:</b> {{market}}<br />
-  <b>Conference:</b> {{conference}}<br />
-  <b>Division:</b> {{division}}<br />
-  <h3>Venue</h3>
-  <b>Name</b> {{venue.name}}<br />
-  <b>Capacity</b> {{venue.capacity}}<br />
-  <b>City</b> {{venue.city}}<br />
-  <b>State</b> {{venue.state}}<br />
+  <b>{{market}} {{name}}</b>
+  <hr/>
+  Conference: {{conference}}<br />
+  Division: {{division}}<br />
+  <br/>
+
+  <b>Venue: </b> <br/>
+  {{venue.name}}<br />
+  Capacity: {{venue.capacity}}<br />
+  City: {{venue.city}}<br />
+  State: {{venue.state}}<br />
 </script>
 
 <script id="summary_nba_player" type="text/x-handlebars-template">
