@@ -6,7 +6,7 @@ var nextBoxNumber = 1;
 var box_team = new Array();
 var current_tiles = {};
 var nextBoxID = "box1";
-
+var doneCharts = [];
 function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
@@ -104,8 +104,9 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nba player stats here
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.team.alias.toLowerCase()+".png')");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+JSON.parse(data).team.alias.toLowerCase()+".png')");
 					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
+					global_data = JSON.parse(data);
 					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
 					break;
 				case "standings":
@@ -603,7 +604,7 @@ function createChart(team, modalid) {
 		    labels: names,
 		    datasets: [
 		        {
-		            label: "My First dataset",
+		            label: "Touchdowns",
    		            fillColor: "rgba(151,187,205,0.5)",
 		            strokeColor: "rgba(151,187,205,0.8)",
 		            highlightFill: "rgba(151,187,205,0.75)",
@@ -613,10 +614,8 @@ function createChart(team, modalid) {
 			    ]
 			};
 			// Get the context of the canvas element we want to select
-			if ($('#box' + modalid + ' #myChart').length != 0) {
-				console.log(names);
-				console.log(tds);
-				console.log("POPPY");
+			if (($('#box' + modalid + ' #myChart').length != 0) && (doneCharts.indexOf(modalid) == -1)) {
+				doneCharts.push(modalid);
 				var ctx =  document.getElementById("box" + modalid).getElementsByClassName("chart")[0].getContext("2d");
 				myBarChart = new Chart(ctx).Bar(data);
 			}

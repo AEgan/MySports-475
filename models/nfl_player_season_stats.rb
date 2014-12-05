@@ -18,8 +18,34 @@ def storeSeasonStats(team, season, allStats, all_players)
 			if !touchdowns.nil?
 				touchdowns = touchdowns.touchdowns
 				totalTouchDowns = touchdowns.reduce(0) {|total, (key, val)| total += val.to_i}
-				name = all_players.find{|p| p["id"] == a[:id]}["name_last"]
-				players_with_touchdowns.push({tds: totalTouchDowns, name: name})
+
+				# if basicPlayerInformation['id'].nil?
+				# 	playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation[:id]}[:stats]
+				# else
+				# 	playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation['id']}[:stats]
+				# end
+				def getName(all_players, a)
+					all_players.each do |p|
+						if p["id"].nil?
+							if p[:id] == a[:id]
+								puts "ONEONE"
+								return p
+							end
+						elsif p["id"] == a[:id]
+							puts "TWOTWO"
+							puts p
+							return p
+						end
+					end
+					return nil
+				end
+				name = getName(all_players, a)
+				if !name.nil?
+					puts "THENAMEYOYOYO"
+					puts name
+					name = name["name_last"]
+					players_with_touchdowns.push({tds: totalTouchDowns, name: name})
+				end
 			end
 		end
 
@@ -29,8 +55,6 @@ def storeSeasonStats(team, season, allStats, all_players)
 		newStats.season = season
 		newStats.player_season_stats = players_with_touchdowns
 		newStats.save
-
-		puts newStats.player_season_stats
 	end
 	puts "OUT HERE BRAH"
 end
