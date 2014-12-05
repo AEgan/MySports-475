@@ -6,7 +6,7 @@ var nextBoxNumber = 1;
 var box_team = new Array();
 var current_tiles = {};
 var nextBoxID = "box1";
-
+var doneCharts = [];
 function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
@@ -613,10 +613,8 @@ function createChart(team, modalid) {
 			    ]
 			};
 			// Get the context of the canvas element we want to select
-			if ($('#box' + modalid + ' #myChart').length != 0) {
-				console.log(names);
-				console.log(tds);
-				console.log("POPPY");
+			if (($('#box' + modalid + ' #myChart').length != 0) && (doneCharts.indexOf(modalid) == -1)) {
+				doneCharts.push(modalid);
 				var ctx =  document.getElementById("box" + modalid).getElementsByClassName("chart")[0].getContext("2d");
 				myBarChart = new Chart(ctx).Bar(data);
 			}
