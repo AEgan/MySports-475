@@ -89,7 +89,7 @@
   <h5>Background</h5>
   <table class='player-stats-table modalT'>
     <tr><td>Home Town: </td><td> {{birth_place}} </td></tr>
-    <tr><td>Birthdate: </td><td> {{birthdate}} </td></tr>
+    <tr><td>Birthdate: </td><td> {{format_date birthdate}} </td></tr>
     <tr><td>High School: </td><td> {{high_school}} </td></tr>
     <tr><td>College: </td><td> {{college}} </td></tr>
     <tr><td>Draft: </td><td>Round {{draft_round}}, {{draft_pick}} overall</td></tr>
@@ -108,9 +108,9 @@
     <table class='player-stats-table modalT'>
       <tr><td>Attempts: </td><td> {{passing.att}}</td></tr>
       <tr><td>Completions: </td><td> {{passing.cmp}}</td></tr>
-      <tr><td>Completion Percentage: </td><td> {{passing.cmp_pct}}</td></tr>
+      <tr><td>Completion Percentage: </td><td> {{round_one passing.cmp_pct}}%</td></tr>
       <tr><td>Yards: </td><td> {{passing.yds}}</td></tr>
-      <tr><td>Yards/Reception: </td><td> {{passing.cmp_avg}}</td></tr>
+      <tr><td>Yards/Reception: </td><td> {{round_one passing.cmp_avg}}</td></tr>
       <tr><td>Long: </td><td> {{passing.lg}}</td></tr>
       <tr><td>Touchdowns: </td><td> {{passing.td}}</td></tr>
       <tr><td>INTs: </td><td> {{passing.int}}</td></tr>
@@ -127,7 +127,7 @@
     <table class='player-stats-table modalT'>
       <tr><td>Attempts: </td><td> {{rushing.att}}</td></tr>
       <tr><td>Yards: </td><td> {{rushing.yds}}</td></tr>
-      <tr><td>Average: </td><td> {{rushing.avg}}</td></tr>
+      <tr><td>Average: </td><td> {{round_one rushing.avg}}</td></tr>
       <tr><td>Long: </td><td> {{rushing.lg}}</td></tr>
       <tr><td>Touchdowns: </td><td> {{rushing.td}}</td></tr>
     </table>
@@ -136,7 +136,7 @@
 
 <script id="fumbles" type="text/x-handlebars-template">​
 <div class = "modal_table">
-  <h2>Fumbles</h2>
+  <h5>Fumbles</h5>
   <table class='player-stats-table modalT'>
     <tr><td>Total: </td><td>{{fumbles.fum}}</td></tr>
     <tr><td>Lost: </td><td>{{fumbles.lost}}</td></tr>
@@ -151,7 +151,7 @@
 <table class='player-stats-table modalT'>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
   <tr><td>Yards: </td><td>{{receiving.yds}}</td></tr>
-  <tr><td>Average: </td><td>{{receiving.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one receiving.avg}}</td></tr>
   <tr><td>Long: </td><td>{{receiving.lg}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{receiving.td}}</td></tr>
   <tr><td>Yards After Catch: </td><td>{{receiving.yac}}</td></tr>
@@ -180,7 +180,7 @@
   <tr><td>Number: </td><td> {{kick_return.returns}}</td></tr>
   <tr><td>Yards: </td><td> {{kick_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td> {{kick_return.td}}</td></tr>
-  <tr><td>Average: </td><td> {{kick_return.avg}}</td></tr>
+  <tr><td>Average: </td><td> {{round_one kick_return.avg}}</td></tr>
   <tr><td>Long: </td><td> {{kick_return.lg}}</td></tr>
 </table>
 </div>
@@ -193,7 +193,7 @@
   <tr><td>Number: </td><td>{{punt_return.returns}}</td></tr>
   <tr><td>Yards: </td><td>{{punt_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{punt_return.td}}</td></tr>
-  <tr><td>Average: </td><td>{{punt_return.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one punt_return.avg}}</td></tr>
   <tr><td>Long: </td><td>{{punt_return.lg}}</td></tr>
   <tr><td>Fair Catches: </td><td>{{punt_return.fc}}</td></tr>
 </table>
@@ -232,7 +232,7 @@
 <table class='player-stats-table modalT'>
   <tr><td>Rushing Attempts: </td><td>{{rushing.att}}</td></tr>
   <tr><td>Rushing Yards: </td><td>{{rushing.yds}}</td></tr>
-  <tr><td>Average: </td><td>{{rushing.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one rushing.avg}}</td></tr>
   <tr><td>Rushing TDs: </td><td>{{rushing.td}}</td></tr>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
   <tr><td>Receiving Yards: </td><td>{{receiving.yds}}</td></tr>
@@ -260,8 +260,8 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
     <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
     <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
@@ -273,10 +273,10 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
-    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}%</td></tr>
     <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
   </table>
 </script>
@@ -290,7 +290,7 @@
     <table class='player-stats-table modalT'>
       <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
       <tr><td>Position:</td><td>{{position}}</td></tr>
-      <tr><td>Height:</td><td> {{height}} in</td></tr>
+      <tr><td>Height:</td><td> {{inchesToHeight height}} in</td></tr>
       <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
     </table>
   </div>
@@ -310,7 +310,7 @@
     <h5>Time On Ice</h5>
     <table class='player-stats-table modalT'>
       <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
-      <tr><td>Shifts per game:</td><td>{{team.time_on_ice.shifts_pg}}</td></tr>
+      <tr><td>Shifts per game:</td><td>{{round_one team.time_on_ice.shifts_pg}}</td></tr>
       <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
       <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
     </table>
@@ -352,12 +352,12 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
   </table>
   <h3>Averages</h3>
   <table class='player-stats-table'>
-    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}%</td></tr>
     <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
     <tr><td>Shots PG:</td><td>{{goaltending.average.shots_against}}</td></tr>
   </table>
@@ -533,10 +533,10 @@
   <table class='player-stats-table'>
     <tr><td>Number</td><td>{{jersey_number}}</td></tr>
     <tr><td>Games Played</td><td>{{total.games_played}}</td></tr>
-    <tr><td>PPG:</td><td>{{average.points}}</td></tr>
-    <tr><td>Rebounds PG:</td><td>{{average.rebounds}}</td></tr>
-    <tr><td>Assists PG:</td><td>{{average.assists}}</td></tr>
-    <tr><td>Blocks PG:</td><td>{{average.blocks}}</td></tr>
+    <tr><td>PPG:</td><td>{{round_one average.points}}</td></tr>
+    <tr><td>Rebounds PG:</td><td>{{round_one average.rebounds}}</td></tr>
+    <tr><td>Assists PG:</td><td>{{round_one average.assists}}</td></tr>
+    <tr><td>Blocks PG:</td><td>{{round_one average.blocks}}</td></tr>
   </table>
 </script>
 
@@ -603,7 +603,7 @@
         <td>{{name}}</td>
         <td>{{wins}}</td>
         <td>{{losses}}</td>
-        <td>{{win_pct}}</td>
+        <td>{{round_one win_pct}}%</td>
         <td>{{point_diff}}</td>
       </tr>
       {{/each}}
@@ -628,7 +628,7 @@
       <td>{{name}}</td>
       <td>{{wins}}</td>
       <td>{{losses}}</td>
-      <td>{{win_pct}}</td>
+      <td>{{round_one win_pct}}%</td>
       <td>{{point_diff}}</td>
     </tr>
     {{/each}}
@@ -649,7 +649,7 @@
         <td>{{name}}</td>
         <td>{{records.last_10.wins}}</td>
         <td>{{records.last_10.losses}}</td>
-        <td>{{records.last_10.win_pct}}</td>
+        <td>{{round_one records.last_10.win_pct}}%</td>
       </tr>
       {{/each}}
     </tbody>
@@ -668,7 +668,7 @@
         <td>{{name}}</td>
         <td>{{records.home.wins}}</td>
         <td>{{records.home.losses}}</td>
-        <td>{{records.home.win_pct}}</td>
+        <td>{{round_one records.home.win_pct}}%</td>
       </tr>
       {{/each}}
     </tbody>
@@ -687,7 +687,7 @@
       <td>{{name}}</td>
       <td>{{records.road.wins}}</td>
       <td>{{records.road.losses}}</td>
-      <td>{{records.road.win_pct}}</td>
+      <td>{{round_one records.road.win_pct}}%</td>
     </tr>
     {{/each}}
     </tbody>
