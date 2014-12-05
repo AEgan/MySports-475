@@ -59,7 +59,7 @@
                   <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
               </div>
               <div class="modal-trigger-area">
-                <a href="#modal1" class="modal-trigger details addData">More Details</a>
+                <a href="#modal1" class="modal-trigger details addData button2">More Details</a>
               </div>
             </div>
             <div id="modal1" class="modal">
@@ -506,7 +506,7 @@
           <img id = "box{{num}}" onclick="popup('#box{{num}}')" class="plusImg" src="assets/images/plus.png" /><br />
       </div>
       <div class="modal-trigger-area">
-        <a href="#modal{{num}}" class="modal-trigger details addData">More Details</a>
+        <a href="#modal{{num}}" class="modal-trigger details addData button2">More Details</a>
       </div>
     </div>
     <div id="modal{{num}}" class="modal">
@@ -584,5 +584,112 @@
     <tr><td>Personal:</td><td>{{total.personal_fouls}}</td></tr>
     <tr><td>Technical:</td><td>{{total.tech_fouls}}</td></tr>
     <tr><td>Flagrant:</td><td>{{total.flagrant_fouls}}</td></tr>
+  </table>
+</script>
+
+<script id="summary_nba_standings" type="text/x-handlebars-template">
+  <b><u>Standings for the {{name}} Division</u></b>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+      <th>Point Difference</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{wins}}</td>
+        <td>{{losses}}</td>
+        <td>{{win_pct}}</td>
+        <td>{{point_diff}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script id="modal_nba_standings" type="text/x-handlebars-template">
+  <h2>Standings for the {{name}} Division</h2>
+  <h3>Summary</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+      <th>Point Difference</th>
+    </thead>
+  <tbody>
+    {{#each teams}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{wins}}</td>
+      <td>{{losses}}</td>
+      <td>{{win_pct}}</td>
+      <td>{{point_diff}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+  <h3>
+  <h3>Last 10</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{records.last_10.wins}}</td>
+        <td>{{records.last_10.losses}}</td>
+        <td>{{records.last_10.win_pct}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Home</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{records.home.wins}}</td>
+        <td>{{records.home.losses}}</td>
+        <td>{{records.home.win_pct}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Road</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+    {{#each teams}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{records.road.wins}}</td>
+      <td>{{records.road.losses}}</td>
+      <td>{{records.road.win_pct}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
   </table>
 </script>
