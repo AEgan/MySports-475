@@ -10,8 +10,6 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
 		}
-		console.log("infoArray IS HERE");
-		console.log(infoArray);
 
 		var arrayNew = new Array();
 		arrayNew.push("#box" + String(box));
@@ -36,7 +34,6 @@ function getData (box, urlText, league, category, d, t, infoArray) {
 }
 
 function displayData(box, data, league, category, t) {
-	console.log("DISPLAY DATA");
 	box = "#box" + String(box);
 	$(box).removeClass('unsortable');
 	$(box + ' .addData').removeClass('addData');
@@ -105,12 +102,13 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nba player stats here
-					globalPlayer = data;
 					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
 					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
 					break;
 				case "standings":
 					//implement nba standings stats here
+					$(box + ' .sportsContent').html(render('summary_nba_standings', data));
+					$(box + ' > .modal').html(render('modal_nba_standings', data));
 					break;
 			}
 			break;
@@ -230,6 +228,7 @@ function popup(box) {
 	document.getElementById("submit").style.display = "block";
 	document.getElementById("nhlTeamDropdown").style.display = "none";
 	document.getElementById("nbaTeamDropdown").style.display = "none";
+	document.getElementById("nbaStandingsDropdown").style.display = "none";
 	boxNumber = box;
 	element_to_scroll_to = document.getElementById('dialog-form');
 	element_to_scroll_to.scrollIntoView();
@@ -252,13 +251,10 @@ function getQueryVariable(variable)
 }
 
 function populatePlayerList(t, league){
-	console.log("populate player list");
-	console.log(league);
 	var select = document.getElementById("playerList");
 	select.className += select.className ? ' chosen-select' : 'chosen-select';
 
 	select.options.length = 0;
-	console.log('populatePlayerList');
 	if(league === 'nfl' || league === 'NFL') {
 	    $.ajax({
 			type: "POST",
@@ -267,8 +263,6 @@ function populatePlayerList(t, league){
 		  data: {teamName: t}
 		}).done(function(data) {
 		  //alert("done");
-		  console.log("done");
-		  console.log(data);
 		   for (var i = 0; i < data.length; i++) {
 	        var opt = data[i].name_last + ", " + data[i].name_first;
 	        var el = document.createElement("option");
@@ -393,7 +387,8 @@ $(function() {
 		var nhlConference = $(this).find('select[name="nhlConference"]').val();
 		var nhlTeam = $(this).find('select[name="nhlTeam"]').val();
 		var nbaTeam = $(this).find('select[name="nbaTeam"]').val();
-		createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam);
+		var nbaDivision = $(this).find('select[name="nbaDivision"]').val();
+		createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam, nbaDivision);
 		nextBoxID = "box" + nextBoxNumber;
 	   	newBox = render("outline", {num: nextBoxNumber});
 	  	$('#sortable').append(newBox);
@@ -421,8 +416,8 @@ $(function() {
 
 });
 
-function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam) {
-	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber, nbaTeam: nbaTeam};
+function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam, nbaDivision) {
+	infoArray = {league: league, category: category, t: t, p: p, c: c, d: d, nhlConference: nhlConference, nhlTeam: nhlTeam, boxNum: nextBoxNumber, nbaTeam: nbaTeam, nbaDivision: nbaDivision};
 	switch(league) {
 	    	case "nfl":
 	    		switch (category) {
@@ -476,6 +471,8 @@ function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTea
 						break;
 					case "standings":
 						console.log("IN CASE STATEMENT NBA STANDINGS");
+						data = { division: nbaDivision };
+						getData(nextBoxNumber, "/getNBAStandings", league, category, data, t, infoArray);
 						break;
 				}
 				break;

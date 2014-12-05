@@ -108,6 +108,21 @@
         <div id="nbaTeamDropdown">
           <%= erb :nba_team_dropdown %>
         </div>
+        <div id="nbaStandingsDropdown">
+          <label for="division">Division</label>
+          <select class="divisionList chosen-select" id="nbaDivisions" name="nbaDivision">
+            <optgroup label="East">
+              <option value="atlantic">Atlantic</option>
+              <option value="central">Central</option>
+              <option value="southeast">Southeast</option>
+            </optgroup>
+            <optgroup label="West">
+              <option value="northwest">Northwest</option>
+              <option value="pacific">Pacific</option>
+              <option value="southwest">Southwest</option>
+            </optgroup>
+          </select>
+        </div>
 
         <div class="field" id="players">
           <label for="player">Player Name: </label>
