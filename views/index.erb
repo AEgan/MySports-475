@@ -59,7 +59,7 @@
                   <img id = "box1" onclick="popup('#box1')" class="plusImg" src="assets/images/plus.png" /><br />
               </div>
               <div class="modal-trigger-area">
-                <a href="#modal1" class="modal-trigger details addData" onclick="modalClick(this)">More Details</a>
+                <a href="#modal1" class="modal-trigger details addData button2" onclick="modalClick(this)">More Details</a>
               </div>
             </div>
             <div id="modal1" class="modal">
@@ -86,99 +86,120 @@
 
 <!-- MODAL -->
 <script id="basicInfo" type="text/x-handlebars-template">​
- <h1> {{name_full}} </h1>
-<h2>Background</h2>
-<table class='player-stats-table'>
-  <tr><td>Home Town: </td><td> {{birth_place}} </td></tr>
-  <tr><td>Birthdate: </td><td> {{birthdate}} </td></tr>
-  <tr><td>High School: </td><td> {{high_school}} </td></tr>
-  <tr><td>College: </td><td> {{college}} </td></tr>
-  <tr><td>Draft: </td><td>Round {{draft_round}}, {{draft_pick}} overall</td></tr>
-  <tr><td>Years in League: </td><td> {{experience}} </td></tr>
-  <tr><td>Height: </td><td> {{inchesToHeight height}}</td></tr>
-  <tr><td>Weight: </td><td> {{weight}} lbs</td></tr>
-  <tr><td>Jersey Number: </td><td>{{jersey_number}}</td></tr>
-</table>
+ <h3> {{name_full}} </h3>
+ <div class = "modal_table">
+  <h5>Background</h5>
+  <table class='player-stats-table modalT'>
+    <tr><td>Home Town: </td><td> {{birth_place}} </td></tr>
+    <tr><td>Birthdate: </td><td> {{format_date birthdate}} </td></tr>
+    <tr><td>High School: </td><td> {{high_school}} </td></tr>
+    <tr><td>College: </td><td> {{college}} </td></tr>
+    <tr><td>Draft: </td><td>Round {{draft_round}}, {{draft_pick}} overall</td></tr>
+    <tr><td>Years in League: </td><td> {{experience}} </td></tr>
+    <tr><td>Height: </td><td> {{inchesToHeight height}}</td></tr>
+    <tr><td>Weight: </td><td> {{weight}} lbs</td></tr>
+    <tr><td>Jersey Number: </td><td>{{jersey_number}}</td></tr>
+  </table>
+</div>
 ​</script>
 
 <script id="passing" type="text/x-handlebars-template">​
-<h2>Passing</h2>
-<table class='player-stats-table'>
-  <tr><td>Attempts: </td><td> {{passing.att}}</td></tr>
-  <tr><td>Completions: </td><td> {{passing.cmp}}</td></tr>
-  <tr><td>Completion Percentage: </td><td> {{passing.cmp_pct}}</td></tr>
-  <tr><td>Yards: </td><td> {{passing.yds}}</td></tr>
-  <tr><td>Yards/Reception: </td><td> {{passing.cmp_avg}}</td></tr>
-  <tr><td>Long: </td><td> {{passing.lg}}</td></tr>
-  <tr><td>Touchdowns: </td><td> {{passing.td}}</td></tr>
-  <tr><td>INTs: </td><td> {{passing.int}}</td></tr>
-  <tr><td>Pick-6: </td><td> {{passing.int_td}}</td></tr>
-  <tr><td>Sacks: </td><td> {{passing.sk}}</td></tr>
-  <tr><td>Sack yards lost: </td><td> {{passing.sk_yds}}</td></tr>
-</table>
+<div class = "modal_table">
+    <h5>Passing</h5>
+
+    <table class='player-stats-table modalT'>
+      <tr><td>Attempts: </td><td> {{passing.att}}</td></tr>
+      <tr><td>Completions: </td><td> {{passing.cmp}}</td></tr>
+      <tr><td>Completion Percentage: </td><td> {{round_one passing.cmp_pct}}%</td></tr>
+      <tr><td>Yards: </td><td> {{passing.yds}}</td></tr>
+      <tr><td>Yards/Reception: </td><td> {{round_one passing.cmp_avg}}</td></tr>
+      <tr><td>Long: </td><td> {{passing.lg}}</td></tr>
+      <tr><td>Touchdowns: </td><td> {{passing.td}}</td></tr>
+      <tr><td>INTs: </td><td> {{passing.int}}</td></tr>
+      <tr><td>Pick-6: </td><td> {{passing.int_td}}</td></tr>
+      <tr><td>Sacks: </td><td> {{passing.sk}}</td></tr>
+      <tr><td>Sack yards lost: </td><td> {{passing.sk_yds}}</td></tr>
+    </table>
+</div>
 </script>
 
 <script id="rushing" type="text/x-handlebars-template">​
-<h2>Rushing</h2>
-<table class='player-stats-table'>
-  <tr><td>Attempts: </td><td> {{rushing.att}}</td></tr>
-  <tr><td>Yards: </td><td> {{rushing.yds}}</td></tr>
-  <tr><td>Average: </td><td> {{rushing.avg}}</td></tr>
-  <tr><td>Long: </td><td> {{rushing.lg}}</td></tr>
-  <tr><td>Touchdowns: </td><td> {{rushing.td}}</td></tr>
-</table>
+  <div class = "modal_table">
+    <h5>Rushing</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Attempts: </td><td> {{rushing.att}}</td></tr>
+      <tr><td>Yards: </td><td> {{rushing.yds}}</td></tr>
+      <tr><td>Average: </td><td> {{round_one rushing.avg}}</td></tr>
+      <tr><td>Long: </td><td> {{rushing.lg}}</td></tr>
+      <tr><td>Touchdowns: </td><td> {{rushing.td}}</td></tr>
+    </table>
+  </div>
 </script>
 
 <script id="fumbles" type="text/x-handlebars-template">​
-<h2>Fumbles</h2>
-<table class='player-stats-table'>
-  <tr><td>Total: </td><td>{{fumbles.fum}}</td></tr>
-  <tr><td>Lost: </td><td>{{fumbles.lost}}</td></tr>
-</table>
+<div class = "modal_table">
+  <h5>Fumbles</h5>
+  <table class='player-stats-table modalT'>
+    <tr><td>Total: </td><td>{{fumbles.fum}}</td></tr>
+    <tr><td>Lost: </td><td>{{fumbles.lost}}</td></tr>
+  </table>
+</div>
 </script>
 
 <script id="receiving" type="text/x-handlebars-template">​
-<h2>Receiving</h2>
-<table class='player-stats-table'>
+<div class = "modal_table">
+
+<h5>Receiving</h5>
+<table class='player-stats-table modalT'>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
   <tr><td>Yards: </td><td>{{receiving.yds}}</td></tr>
-  <tr><td>Average: </td><td>{{receiving.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one receiving.avg}}</td></tr>
   <tr><td>Long: </td><td>{{receiving.lg}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{receiving.td}}</td></tr>
   <tr><td>Yards After Catch: </td><td>{{receiving.yac}}</td></tr>
   <tr><td>First Downs: </td><td>{{receiving.fd}}</td></tr>
 </table>
+
+</div>
 </script>
 
 <script id="penalties" type="text/x-handlebars-template">​
-<h2>Penalties</h2>
-<table class='player-stats-table'>
+<div class = "modal_table">
+
+<h5>Penalties</h5>
+<table class='player-stats-table modalT'>
   <tr><td>Number: </td><td> {{penalty.num}}</td></tr>
   <tr><td>Yards: </td><td> {{penalty.yds}}</td></tr>
 </table>
+
+</div>
 </script>
 
 <script id="kick_returns" type="text/x-handlebars-template">​
-<h2>Kick Returns</h2>
-<table class='player-stats-table'>
+<div class = "modal_table">
+<h5>Kick Returns</h5>
+<table class='player-stats-table modalT'>
   <tr><td>Number: </td><td> {{kick_return.returns}}</td></tr>
   <tr><td>Yards: </td><td> {{kick_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td> {{kick_return.td}}</td></tr>
-  <tr><td>Average: </td><td> {{kick_return.avg}}</td></tr>
+  <tr><td>Average: </td><td> {{round_one kick_return.avg}}</td></tr>
   <tr><td>Long: </td><td> {{kick_return.lg}}</td></tr>
 </table>
+</div>
 </script>
 
 <script id="punt_returns" type="text/x-handlebars-template">​
-<h2>Punt Returns</h2>
-<table class='player-stats-table'>
+<div class = "modal_table">
+<h5>Punt Returns</h5>
+<table class='player-stats-table modalT'>
   <tr><td>Number: </td><td>{{punt_return.returns}}</td></tr>
   <tr><td>Yards: </td><td>{{punt_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{punt_return.td}}</td></tr>
-  <tr><td>Average: </td><td>{{punt_return.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one punt_return.avg}}</td></tr>
   <tr><td>Long: </td><td>{{punt_return.lg}}</td></tr>
   <tr><td>Fair Catches: </td><td>{{punt_return.fc}}</td></tr>
 </table>
+</div>
 </script>
 
 <!-- BOX SUMMARY -->
@@ -209,15 +230,17 @@
 </script>
 
 <script id="summary_running_back" type="text/x-handlebars-template">​
-<table class='player-stats-table'>
+<div class = "modal_table">
+<table class='player-stats-table modalT'>
   <tr><td>Rushing Attempts: </td><td>{{rushing.att}}</td></tr>
   <tr><td>Rushing Yards: </td><td>{{rushing.yds}}</td></tr>
-  <tr><td>Average: </td><td>{{rushing.avg}}</td></tr>
+  <tr><td>Average: </td><td>{{round_one rushing.avg}}</td></tr>
   <tr><td>Rushing TDs: </td><td>{{rushing.td}}</td></tr>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
   <tr><td>Receiving Yards: </td><td>{{receiving.yds}}</td></tr>
   <tr><td>Receiving TDs: </td><td>{{receiving.td}}</td></tr>
 </table>
+</div>
 </script>
 
 <script id="summary_nhl_team" type="text/x-handlebars-template">
@@ -239,8 +262,8 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
     <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
     <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
@@ -252,58 +275,77 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
-    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}%</td></tr>
     <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
   </table>
 </script>
 
 <script id="summary_nhl_skater_modal" type="text/x-handlebars-template">
-<h2>Basic Information</h2>
-<h3>{{full_name}}: &nbsp; {{position}} for {{team.market}} {{team.name}}</h3><br /><hr />
-<table class='player-stats-table'>
-  <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
-  <tr><td>Position:</td><td>{{position}}</td></tr>
-  <tr><td>Height:</td><td>{{height}}</td></tr>
-  <tr><td>Weight:</td><td>{{weight}}</td></tr>
-</table>
-<h3>Scoring</h3>
-<table class='player-stats-table'>
-  <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
-  <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
-  <tr><td>Points:</td><td>{{team.statistics.total.points}}</td></tr>
-  <tr><td>+/-:</td><td>{{team.statistics.total.plus_minus}}</td></tr>
-  <tr><td>GWG:</td><td>{{team.statistics.total.winning_goals}}</td></tr>
-</table>
-<h3>Time On Ice</h3>
-<table class='player-stats-table'>
-  <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
-  <tr><td>Shifts per game:</td><td>{{team.time_on_ice.shifts_pg}}</td></tr>
-  <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
-  <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
-</table>
-<h3>Even Strength</h3>
-<table class='player-stats-table'>
-  <tr><td>Goals:</td><td>{{team.statistics.even_strength.goals}}</td></tr>
-  <tr><td>Assists:</td><td>{{team.statistics.even_strength.assists}}</td></tr>
-  <tr><td>Shots:</td><td>{{team.statistics.even_strength.shots}}</td></tr>
-  <tr><td>Missed Shots</td><td>{{team.statistics.even_strength.missed_shots}}</td></tr>
-</table>
-<h3>Powerplay</h3>
-<table class='player-stats-table'>
-  <tr><td>Goals:</td><td>{{team.statistics.powerplay.goals}}</td></tr>
-  <tr><td>Assists:</td><td>{{team.statistics.powerplay.assists}}</td></tr>
-  <tr><td>Shots:</td><td>{{team.statistics.powerplay.shots}}</td></tr>
-  <tr><td>Missed Shots</td><td>{{team.statistics.powerplay.missed_shots}}</td></tr>
-</table>
-<h3>Shootout</h3>
-<table class='player-stats-table'>
-  <tr><td>Goals:</td><td>{{team.statistics.shootout.goals}}</td></tr>
-  <tr><td>Shots:</td><td>{{team.statistics.shootout.shots}}</td></tr>
-  <tr><td>Missed Shots</td><td>{{team.statistics.shootout.missed_shots}}</td></tr>
-</table>
+<h2>{{full_name}}</h2>
+<h4>{{position}} for {{team.market}} {{team.name}}</h4><hr />
+
+  <div class = "modal_table">
+    <h5>Basic Information</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
+      <tr><td>Position:</td><td>{{position}}</td></tr>
+      <tr><td>Height:</td><td> {{inchesToHeight height}} in</td></tr>
+      <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
+    </table>
+  </div>
+
+  <div class = "modal_table">
+    <h5>Scoring</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
+      <tr><td>Assists:</td><td>{{team.statistics.total.assists}}</td></tr>
+      <tr><td>Points:</td><td>{{team.statistics.total.points}}</td></tr>
+      <tr><td>Plus/Minus</td><td>{{team.statistics.total.plus_minus}}</td></tr>
+      <tr><td>GWG:</td><td>{{team.statistics.total.winning_goals}}</td></tr>
+    </table>
+  </div>
+
+  <div class = "modal_table">
+    <h5>Time On Ice</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
+      <tr><td>Shifts per game:</td><td>{{round_one team.time_on_ice.shifts_pg}}</td></tr>
+      <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
+      <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
+    </table>
+  </div>
+
+  <div class = "modal_table">
+    <h5>Even Strength</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Goals:</td><td>{{team.statistics.even_strength.goals}}</td></tr>
+      <tr><td>Assists:</td><td>{{team.statistics.even_strength.assists}}</td></tr>
+      <tr><td>Shots:</td><td>{{team.statistics.even_strength.shots}}</td></tr>
+      <tr><td>Missed Shots</td><td>{{team.statistics.even_strength.missed_shots}}</td></tr>
+    </table>
+  </div>
+
+  <div class = "modal_table">
+    <h5>Powerplay</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Goals:</td><td>{{team.statistics.powerplay.goals}}</td></tr>
+      <tr><td>Assists:</td><td>{{team.statistics.powerplay.assists}}</td></tr>
+      <tr><td>Shots:</td><td>{{team.statistics.powerplay.shots}}</td></tr>
+      <tr><td>Missed Shots</td><td>{{team.statistics.powerplay.missed_shots}}</td></tr>
+    </table>
+  </div>
+
+  <div class = "modal_table">
+    <h5>Shootout</h5>
+    <table class='player-stats-table modalT'>
+      <tr><td>Goals:</td><td>{{team.statistics.shootout.goals}}</td></tr>
+      <tr><td>Shots:</td><td>{{team.statistics.shootout.shots}}</td></tr>
+      <tr><td>Missed Shots</td><td>{{team.statistics.shootout.missed_shots}}</td></tr>
+    </table>
+  </div>
 </script>
 
 <script id="summary_nhl_goalie_modal" type="text/x-handlebars-template">
@@ -312,12 +354,12 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
-    <tr><td>Weight:</td><td>{{weight}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
+    <tr><td>Weight:</td><td>{{weight}} lbs</td></tr>
   </table>
   <h3>Averages</h3>
   <table class='player-stats-table'>
-    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
+    <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}%</td></tr>
     <tr><td>GAA:</td><td>{{goaltending.average.goals_against}}</td></tr>
     <tr><td>Shots PG:</td><td>{{goaltending.average.shots_against}}</td></tr>
   </table>
@@ -466,7 +508,7 @@
           <img id = "box{{num}}" onclick="popup('#box{{num}}')" class="plusImg" src="assets/images/plus.png" /><br />
       </div>
       <div class="modal-trigger-area">
-        <a href="#modal{{num}}" class="modal-trigger details addData" onclick="modalClick(this)">More Details</a>
+        <a href="#modal{{num}}" class="modal-trigger details addData button2" onclick="modalClick(this)">More Details</a>
       </div>
     </div>
     <div id="modal{{num}}" class="modal">
@@ -493,10 +535,10 @@
   <table class='player-stats-table'>
     <tr><td>Number</td><td>{{jersey_number}}</td></tr>
     <tr><td>Games Played</td><td>{{total.games_played}}</td></tr>
-    <tr><td>PPG:</td><td>{{average.points}}</td></tr>
-    <tr><td>Rebounds PG:</td><td>{{average.rebounds}}</td></tr>
-    <tr><td>Assists PG:</td><td>{{average.assists}}</td></tr>
-    <tr><td>Blocks PG:</td><td>{{average.blocks}}</td></tr>
+    <tr><td>PPG:</td><td>{{round_one average.points}}</td></tr>
+    <tr><td>Rebounds PG:</td><td>{{round_one average.rebounds}}</td></tr>
+    <tr><td>Assists PG:</td><td>{{round_one average.assists}}</td></tr>
+    <tr><td>Blocks PG:</td><td>{{round_one average.blocks}}</td></tr>
   </table>
 </script>
 
@@ -549,4 +591,111 @@
 
 <script id="chart" type="text/x-handlebars-template">
 <canvas class="chart" id="myChart" width="400" height="400"></canvas>
-</script
+</script>
+
+<script id="summary_nba_standings" type="text/x-handlebars-template">
+  <b><u>Standings for the {{name}} Division</u></b>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+      <th>Point Difference</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{wins}}</td>
+        <td>{{losses}}</td>
+        <td>{{round_one win_pct}}%</td>
+        <td>{{point_diff}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</script>
+
+<script id="modal_nba_standings" type="text/x-handlebars-template">
+  <h2>Standings for the {{name}} Division</h2>
+  <h3>Summary</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+      <th>Point Difference</th>
+    </thead>
+  <tbody>
+    {{#each teams}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{wins}}</td>
+      <td>{{losses}}</td>
+      <td>{{round_one win_pct}}%</td>
+      <td>{{point_diff}}</td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+  <h3>
+  <h3>Last 10</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{records.last_10.wins}}</td>
+        <td>{{records.last_10.losses}}</td>
+        <td>{{round_one records.last_10.win_pct}}%</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Home</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+      {{#each teams}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{records.home.wins}}</td>
+        <td>{{records.home.losses}}</td>
+        <td>{{round_one records.home.win_pct}}%</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <h3>Road</h3>
+  <table class="player-stats-table">
+    <thead>
+      <th>Team</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th>Win %</th>
+    </thead>
+    <tbody>
+    {{#each teams}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{records.road.wins}}</td>
+      <td>{{records.road.losses}}</td>
+      <td>{{round_one records.road.win_pct}}%</td>
+    </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</script>

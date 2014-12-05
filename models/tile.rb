@@ -12,12 +12,17 @@ class Tile
 	field :nhlConference
 	field :nhlTeam
 	field :nbaTeam
+	field :nbaDivision
 end
 
 def get_custom_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, options={})
 	if(league.downcase.eql?('nba'))
 		if(options[:player].nil?)
-			tile = Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam]})[0]
+			if(options[:division].nil?)
+				tile = Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam]})[0]
+			else
+				tile = Tile.where({league: league, category: category, nbaDivision: options[:division]})[0]
+			end
 		else
 			tile = Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam], p: p})[0]
 		end
@@ -32,7 +37,11 @@ end
 def get_tile_if_exists(league, category, t, p, c, d, nhlConference, nhlTeam, options = {})
 	if(league.downcase.eql?('nba'))
 		if(options[:player].nil?)
-			return Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam]}).entries
+			if(options[:division].nil?)
+				return Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam]}).entries
+			else
+				return Tile.where({league: league, category: category, nbaDivision: options[:division]})
+			end
 		else
 			return Tile.where({league: league, category: category, nbaTeam: options[:nbaTeam], p: p}).entries
 		end
@@ -71,6 +80,7 @@ def create_tile(league, category, t, p, c, d, nhlConference, nhlTeam, boxNum, da
 		@new_tile.nhlTeam = nhlTeam
 		@new_tile.data = data
 		@new_tile.nbaTeam = options[:nbaTeam]
+		@new_tile.nbaDivision = options[:division]
 
 		@new_tile.save
 		return @new_tile
