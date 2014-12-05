@@ -134,6 +134,8 @@ html {
 	right: 2px;
 }
 
+
+
 .cancelButton {
 	width: 20px;
 	opacity: .8;
@@ -271,7 +273,7 @@ p {
 	width: 150px;
 	height: 25px;
 	text-align: center;
-	vertical-align: middle;
+	vertical-align: top;
 	background-color: #DDD;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -287,6 +289,20 @@ p {
 }
 .filterOption:hover {
 	background: #ffc435;
+}
+
+.filter_logo {
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 32px;
+	width: auto;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	top: -8px;
+	right: 15px;
+
 }
 
 .chosen-search {

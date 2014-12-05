@@ -101,10 +101,12 @@ function displayData(box, data, league, category, t) {
 			switch (category) {
 				case "team":
 					//implement nba team stats here
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.alias.toLowerCase()+".png')");
 					$(box + ' .sportsContent').html(render('summary_nba_team', data));
 					break;
 				case "player":
 					//implement nba player stats here
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.team.alias.toLowerCase()+".png')");
 					globalPlayer = data;
 					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
 					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
