@@ -88,7 +88,7 @@
 <h2>Background</h2>
 <table class='player-stats-table'>
   <tr><td>Home Town: </td><td> {{birth_place}} </td></tr>
-  <tr><td>Birthdate: </td><td> {{birthdate}} </td></tr>
+  <tr><td>Birthdate: </td><td> {{noGeekDates birthdate}} </td></tr>
   <tr><td>High School: </td><td> {{high_school}} </td></tr>
   <tr><td>College: </td><td> {{college}} </td></tr>
   <tr><td>Draft: </td><td>Round {{draft_round}}, {{draft_pick}} overall</td></tr>
@@ -105,7 +105,7 @@
   <tr><td>Attempts: </td><td> {{passing.att}}</td></tr>
   <tr><td>Completions: </td><td> {{passing.cmp}}</td></tr>
   <tr><td>Completion Percentage: </td><td> {{passing.cmp_pct}}</td></tr>
-  <tr><td>Yards: </td><td> {{passing.yds}}</td></tr>
+  <tr><td>Yards: </td><td> {{numberWithCommas passing.yds}}</td></tr>
   <tr><td>Yards/Reception: </td><td> {{passing.cmp_avg}}</td></tr>
   <tr><td>Long: </td><td> {{passing.lg}}</td></tr>
   <tr><td>Touchdowns: </td><td> {{passing.td}}</td></tr>
@@ -120,7 +120,7 @@
 <h2>Rushing</h2>
 <table class='player-stats-table'>
   <tr><td>Attempts: </td><td> {{rushing.att}}</td></tr>
-  <tr><td>Yards: </td><td> {{rushing.yds}}</td></tr>
+  <tr><td>Yards: </td><td> {{numberWithCommas rushing.yds}}</td></tr>
   <tr><td>Average: </td><td> {{rushing.avg}}</td></tr>
   <tr><td>Long: </td><td> {{rushing.lg}}</td></tr>
   <tr><td>Touchdowns: </td><td> {{rushing.td}}</td></tr>
@@ -139,7 +139,7 @@
 <h2>Receiving</h2>
 <table class='player-stats-table'>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
-  <tr><td>Yards: </td><td>{{receiving.yds}}</td></tr>
+  <tr><td>Yards: </td><td>{{numberWithCommas receiving.yds}}</td></tr>
   <tr><td>Average: </td><td>{{receiving.avg}}</td></tr>
   <tr><td>Long: </td><td>{{receiving.lg}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{receiving.td}}</td></tr>
@@ -160,7 +160,7 @@
 <h2>Kick Returns</h2>
 <table class='player-stats-table'>
   <tr><td>Number: </td><td> {{kick_return.returns}}</td></tr>
-  <tr><td>Yards: </td><td> {{kick_return.yds}}</td></tr>
+  <tr><td>Yards: </td><td> {{numberWithCommas kick_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td> {{kick_return.td}}</td></tr>
   <tr><td>Average: </td><td> {{kick_return.avg}}</td></tr>
   <tr><td>Long: </td><td> {{kick_return.lg}}</td></tr>
@@ -171,7 +171,7 @@
 <h2>Punt Returns</h2>
 <table class='player-stats-table'>
   <tr><td>Number: </td><td>{{punt_return.returns}}</td></tr>
-  <tr><td>Yards: </td><td>{{punt_return.yds}}</td></tr>
+  <tr><td>Yards: </td><td>{{numberWithCommas punt_return.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{punt_return.td}}</td></tr>
   <tr><td>Average: </td><td>{{punt_return.avg}}</td></tr>
   <tr><td>Long: </td><td>{{punt_return.lg}}</td></tr>
@@ -189,7 +189,7 @@
 <table class='player-stats-table'>
   <tr><td>Passing Attempts: </td><td>{{passing.att}}</td></tr>
   <tr><td>Completions: </td><td>{{passing.cmp}}</td></tr>
-  <tr><td>Yards: </td><td>{{passing.yds}}</td></tr>
+  <tr><td>Yards: </td><td>{{numberWithCommas passing.yds}}</td></tr>
   <tr><td>Touchdowns: </td><td>{{passing.td}}</td></tr>
   <tr><td>INTs: </td><td>{{passing.int}}</td></tr>
   <tr><td>QBR: </td><td>{{passing.rating}}</td></tr>
@@ -200,7 +200,7 @@
 <table class='player-stats-table'>
   <tr><td>Total TDs: </td><td> {{touchdowns.total}}</td></tr>
   <tr><td>Receptions: </td><td> {{receiving.rec}}</td></tr>
-  <tr><td>Yards: </td><td> {{receiving.yds}}</td></tr>
+  <tr><td>Yards: </td><td> {{numberWithCommas receiving.yds}}</td></tr>
   <tr><td>Long: </td><td> {{receiving.lg}}</td></tr>
   <tr><td>First Downs: </td><td> {{receiving.fd}}</td></tr>
 </table>
@@ -209,7 +209,7 @@
 <script id="summary_running_back" type="text/x-handlebars-template">​
 <table class='player-stats-table'>
   <tr><td>Rushing Attempts: </td><td>{{rushing.att}}</td></tr>
-  <tr><td>Rushing Yards: </td><td>{{rushing.yds}}</td></tr>
+  <tr><td>Rushing Yards: </td><td>{{numberWithCommas rushing.yds}}</td></tr>
   <tr><td>Average: </td><td>{{rushing.avg}}</td></tr>
   <tr><td>Rushing TDs: </td><td>{{rushing.td}}</td></tr>
   <tr><td>Receptions: </td><td>{{receiving.rec}}</td></tr>
@@ -237,7 +237,7 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
     <tr><td>Weight:</td><td>{{weight}}</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
     <tr><td>Goals:</td><td>{{team.statistics.total.goals}}</td></tr>
@@ -250,7 +250,7 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
     <tr><td>Weight:</td><td>{{weight}}</td></tr>
     <tr><td>Team:</td><td>{{team.alias}}</td></tr>
     <tr><td>SV%:</td><td>{{goaltending.total.saves_pct}}</td></tr>
@@ -264,7 +264,7 @@
 <table class='player-stats-table'>
   <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
   <tr><td>Position:</td><td>{{position}}</td></tr>
-  <tr><td>Height:</td><td>{{height}}</td></tr>
+  <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
   <tr><td>Weight:</td><td>{{weight}}</td></tr>
 </table>
 <h3>Scoring</h3>
@@ -277,9 +277,9 @@
 </table>
 <h3>Time On Ice</h3>
 <table class='player-stats-table'>
-  <tr><td>Shifts:</td><td>{{team.time_on_ice.shifts}}</td></tr>
+  <tr><td>Shifts:</td><td>{{numberWithCommas team.time_on_ice.shifts}}</td></tr>
   <tr><td>Shifts per game:</td><td>{{team.time_on_ice.shifts_pg}}</td></tr>
-  <tr><td>Total Time On Ice:</td><td>{{team.time_on_ice.total}}</td></tr>
+  <tr><td>Total Time On Ice:</td><td>{{numberWithCommas team.time_on_ice.total}}</td></tr>
   <tr><td>TOI per game</td><td>{{team.time_on_ice.toi_pg}}</td></tr>
 </table>
 <h3>Even Strength</h3>
@@ -310,7 +310,7 @@
   <table class='player-stats-table'>
     <tr><td>Number:</td><td>{{jersey_number}}</td></tr>
     <tr><td>Position:</td><td>{{position}}</td></tr>
-    <tr><td>Height:</td><td>{{height}}</td></tr>
+    <tr><td>Height:</td><td>{{inchesToHeight height}}</td></tr>
     <tr><td>Weight:</td><td>{{weight}}</td></tr>
   </table>
   <h3>Averages</h3>
@@ -322,21 +322,21 @@
   <h3>Even Strength</h3>
   <table class='player-stats-table'>
     <tr><td>Shots Against:</td><td>{{goaltending.even_strength.shots_against}}</td></tr>
-    <tr><td>Saves</td><td>{{goaltending.even_strength.saves}}</td></tr>
+    <tr><td>Saves</td><td>{{numberWithCommas goaltending.even_strength.saves}}</td></tr>
     <tr><td>Goals Allowed:</td><td>{{goaltending.even_strength.goals_against}}</td></tr>
     <tr><td>Save %:</td><td>{{goaltending.even_strength.saves_pct}}</td></tr>
   </table>
   <h3>Shorthanded</h3>
   <table class='player-stats-table'>
-    <tr><td>Shots Against:</td><td>{{goaltending.shorthanded.shots_against}}</td></tr>
-    <tr><td>Saves</td><td>{{goaltending.shorthanded.saves}}</td></tr>
+    <tr><td>Shots Against:</td><td>{{numberWithCommas goaltending.shorthanded.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{numberWithCommas goaltending.shorthanded.saves}}</td></tr>
     <tr><td>Goals Allowed:</td><td>{{goaltending.shorthanded.goals_against}}</td></tr>
     <tr><td>Save %:</td><td>{{goaltending.shorthanded.saves_pct}}</td></tr>
   </table>
   <h3>Powerplay</h3>
   <table class='player-stats-table'>
-    <tr><td>Shots Against:</td><td>{{goaltending.powerplay.shots_against}}</td></tr>
-    <tr><td>Saves</td><td>{{goaltending.powerplay.saves}}</td></tr>
+    <tr><td>Shots Against:</td><td>{{numberWithCommas goaltending.powerplay.shots_against}}</td></tr>
+    <tr><td>Saves</td><td>{{numberWithCommas goaltending.powerplay.saves}}</td></tr>
     <tr><td>Goals Allowed:</td><td>{{goaltending.powerplay.goals_against}}</td></tr>
     <tr><td>Save %:</td><td>{{goaltending.powerplay.saves_pct}}</td></tr>
   </table>
@@ -505,36 +505,36 @@
   <h3>Totals</h3>
   <table class='player-stats-table'>
     <tr><td>Games Played:</td><td>{{total.games_played}}</td></tr>
-    <tr><td>Points:</td><td>{{total.points}}</td></tr>
-    <tr><td>Rebounds:</td><td>{{total.rebounds}}</td></tr>
-    <tr><td>Assists:</td><td>{{total.assists}}</td></tr>
+    <tr><td>Points:</td><td>{{numberWithCommas total.points}}</td></tr>
+    <tr><td>Rebounds:</td><td>{{numberWithCommas total.rebounds}}</td></tr>
+    <tr><td>Assists:</td><td>{{numberWithCommas total.assists}}</td></tr>
     <tr><td>Blocks:</td><td>{{total.blocks}}</td></tr>
     <tr><td>Steals:</td><td>{{total.steals}}</td></tr>
     <tr><td>Turnovers:</td><td>{{total.turnovers}}</td></tr>
-    <tr><td>Minutes Played:</td><td>{{total.minutes}}</td></tr>
+    <tr><td>Minutes Played:</td><td>{{numberWithCommas total.minutes}}</td></tr>
   </table>
   <h3>Field Goals</h3>
   <table class='player-stats-table'>
-    <tr><td>Attempts:</td><td>{{total.field_goal_att}}</td></tr>
-    <tr><td>Made:</td><td>{{total.field_goal_made}}</td></tr>
+    <tr><td>Attempts:</td><td>{{numberWithCommas total.field_goal_att}}</td></tr>
+    <tr><td>Made:</td><td>{{numberWithCommas total.field_goal_made}}</td></tr>
     <tr><td>Percent:</td><td>{{total.field_goal_pct}}</td></tr>
   </table>
   <h3>Two Points</h3>
   <table class='player-stats-table'>
-    <tr><td>Attempts:</td><td>{{total.two_points_att}}</td></tr>
-    <tr><td>Made:</td><td>{{total.two_points_made}}</td></tr>
+    <tr><td>Attempts:</td><td>{{numberWithCommas total.two_points_att}}</td></tr>
+    <tr><td>Made:</td><td>{{numberWithCommas total.two_points_made}}</td></tr>
     <tr><td>Percent:</td><td>{{total.two_points_pct}}</td></tr>
   </table>
   <h3>Three Points</h3>
   <table class='player-stats-table'>
-    <tr><td>Attempts:</td><td>{{total.three_points_att}}</td></tr>
-    <tr><td>Made:</td><td>{{total.three_points_made}}</td></tr>
+    <tr><td>Attempts:</td><td>{{numberWithCommas total.three_points_att}}</td></tr>
+    <tr><td>Made:</td><td>{{numberWithCommas total.three_points_made}}</td></tr>
     <tr><td>Percent:</td><td>{{total.three_points_pct}}</td></tr>
   </table>
   <h3>Free Throws</h3>
   <table class='player-stats-table'>
-    <tr><td>Attempts:</td><td>{{total.free_throws_att}}</td></tr>
-    <tr><td>Made:</td><td>{{total.free_throws_made}}</td></tr>
+    <tr><td>Attempts:</td><td>{{numberWithCommas total.free_throws_att}}</td></tr>
+    <tr><td>Made:</td><td>{{numberWithCommas total.free_throws_made}}</td></tr>
     <tr><td>Percent:</td><td>{{total.free_throws_pct}}</td></tr>
   </table>
   <h3>Fouls</h3>
