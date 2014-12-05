@@ -75,6 +75,7 @@ html {
 	box-shadow: 1px 1px #3f3f3f,inset 1px 1px 6px #080808;
 	border-radius: 5px;
 	border: 1px solid #ffc435;
+	cursor: default;
 }
 .button {
    border: 1px solid #004282;
