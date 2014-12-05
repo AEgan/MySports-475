@@ -23,6 +23,7 @@ def getPlayerInfo(playerName, teamName)
 
 	# Get stats for the input player
 	player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2014", "REG")
+	storeSeasonStats(teamName, "2014", player_season_stats, all_players)
 	if basicPlayerInformation['id'].nil?
 		playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation[:id]}[:stats]
 	else

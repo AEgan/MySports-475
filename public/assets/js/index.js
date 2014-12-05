@@ -5,7 +5,8 @@ var mainPassword = "test";
 var nextBoxNumber = 1;
 var box_team = new Array();
 var current_tiles = {};
-
+var nextBoxID = "box1";
+var doneCharts = [];
 function getData (box, urlText, league, category, d, t, infoArray) {
 		if(t) {
 			t = t.toUpperCase();
@@ -140,7 +141,7 @@ function setNFLStandingsHTML(data, callback) {
 		tableStr += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
 	}
 	tableStr += "</tbody></table>";
-	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Point Differential</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
+	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
 	for(var i = 0; i < data.teams.length; i++) {
 		modalString += "<tr><td>" + data.teams[i]['name'] + "</td>";
 		modalString += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
@@ -148,7 +149,6 @@ function setNFLStandingsHTML(data, callback) {
 		modalString += "<td>" + data.teams[i]['overall']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['last_5']['wins'] + '-' + data.teams[i]['last_5']['losses'] + "-" + data.teams[i]['last_5']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['streak']['type'] + " " + data.teams[i]['streak']['length'] + "</td>";
-		modalString += "<td>" + data.teams[i]['points']['net'] + "</td>";
 		modalString += "<td>" + data.teams[i]['scored_first']['wins'] + '-' + data.teams[i]['scored_first']['losses'] + "-" + data.teams[i]['scored_first']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['leading_at_half']['wins'] + '-' + data.teams[i]['leading_at_half']['losses'] + "-" + data.teams[i]['leading_at_half']['ties'] + "</td>";
 		modalString += "<td>" + data.teams[i]['decided_by_7_points']['wins'] + '-' + data.teams[i]['decided_by_7_points']['losses'] + "-" + data.teams[i]['decided_by_7_points']['ties'] + "</td></tr>";
@@ -184,34 +184,40 @@ function setModalHTML(data) {
 	var position = data.position;
 	// QUARTERBACK
 	if(position === "QB") {
-		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data);
+		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data) + render("chart", {});
 	} else if(position === "WR" || position==="TE") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
-		if(data.penalty && parseInt(data.penalty.num) != 0) {
-			console.log("IM HERE");
-			modalString += render("penalties", data);
-		}
+		
 		if(parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
 		if(parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
+		
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
+			console.log("IM HERE");
+			modalString += render("penalties", data);
+		}
+		modalString += render("chart", {})
 		return modalString;
 
 	} else if(position === "RB") { // RUNNING BACK
 		var modalString = render("basicInfo", data) + render("rushing", data) + render("receiving", data);
 
-		if(data.penalty && parseInt(data.penalty.num) != 0) {
-			modalString += render("penalties", data);
-		}
+		
 		if(data.kick_return && parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
 		if(data.punt_return && parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
+		
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
+			modalString += render("penalties", data);
+		}
+		modalString += render("chart", {})
 		return modalString;
 
 	} else {
@@ -221,7 +227,7 @@ function setModalHTML(data) {
 
 function popup(box) {
 	$("#teamRadio").prop("checked", true);
-	$('#nflChecked').click()
+	$('#nflChecked').click();
 	box2 = box.substr(1);
 	console.log(box2);
 	var p = getElementTopLeft(box2);
@@ -426,6 +432,9 @@ $(function() {
 		set_filter(filter);
 	});
 
+	
+
+	
 });
 
 function createTile(league, category, t, p, c, d, nhlConference, nhlTeam, nbaTeam, nbaDivision) {
@@ -517,6 +526,7 @@ function populateUserTiles() {
 		dataType: "json",
   	url: "/get_tiles",
 	}).done(function(data) {
+	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam, newtile.nbaTeam);
@@ -535,26 +545,22 @@ function populateUserTiles() {
 
 function saveOrder() {
 	var sorted = $('#sortable').sortable("toArray");
-	console.log("SAVE ORDER");
-	console.log(sorted);
 	var new_sorted = sorted.map(function(t) {
 		return current_tiles[t];
 	});
-	console.log(new_sorted);
-	if (new_sorted.length > 0) {
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: "/save_order",
-			data: {new_order: new_sorted}
-		}).done(function(data) {
+	console.log(sorted);
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/save_order",
+		data: {new_order: new_sorted}
+	}).done(function(data) {
 
-		}).fail(function(xhr, status, error){
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
-	}
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
 }
 
 function deleteTile(element) {
@@ -578,4 +584,56 @@ function deleteTile(element) {
 		console.log(error);
 	});
 
+}
+
+function createChart(team, modalid) {
+		console.log("SUCKS TO SUCK");
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "/get_season_stats",
+			data: {team: team, season: "2014"}
+		}).done(function(data) {
+			var names = data.map(function(t) {
+				return t.name;
+			});
+			var tds = data.map(function(t) {
+				return t.tds;
+			});
+			var data = {
+		    labels: names,
+		    datasets: [
+		        {
+		            label: "Touchdowns",
+   		            fillColor: "rgba(151,187,205,0.5)",
+		            strokeColor: "rgba(151,187,205,0.8)",
+		            highlightFill: "rgba(151,187,205,0.75)",
+		            highlightStroke: "rgba(151,187,205,1)",
+		            data: tds
+		        }
+			    ]
+			};
+			// Get the context of the canvas element we want to select
+			if (($('#box' + modalid + ' #myChart').length != 0) && (doneCharts.indexOf(modalid) == -1)) {
+				doneCharts.push(modalid);
+				var ctx =  document.getElementById("box" + modalid).getElementsByClassName("chart")[0].getContext("2d");
+				myBarChart = new Chart(ctx).Bar(data);
+			}
+			console.log("FUDGE");
+		}).fail(function(xhr, status, error){
+			console.log(xhr);
+			console.log(status);
+			console.log(error);
+		});
+		
+}
+
+function modalClick(element) {
+	console.log(element);
+	console.log(element.href);
+	var temp = element.href
+	var modalid = temp.substring(28);
+	console.log(modalid);
+	var team = current_tiles["box" + modalid].t;
+	setTimeout(function(){ createChart(team, modalid); }, 1500);
 }
