@@ -103,7 +103,7 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nba player stats here
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.team.alias.toLowerCase()+".png')");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+JSON.parse(data).team.alias.toLowerCase()+".png')");
 					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
 					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
 					break;
