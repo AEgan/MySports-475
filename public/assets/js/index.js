@@ -106,7 +106,7 @@ function displayData(box, data, league, category, t) {
 					break;
 				case "player":
 					//implement nba player stats here
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.team.alias.toLowerCase()+".png')");
+					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/nba/"+data.team.toLowerCase()+".png')");
 					globalPlayer = data;
 					$(box + ' .sportsContent').html(render('summary_nba_player', JSON.parse(data)));
 					$(box + ' > .modal').html(render('modal_nba_player', JSON.parse(data)));
@@ -186,29 +186,31 @@ function setModalHTML(data) {
 	} else if(position === "WR") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
-		if(data.penalty && parseInt(data.penalty.num) != 0) {
-			console.log("IM HERE");
-			modalString += render("penalties", data);
-		}
+		
 		if(parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
 		if(parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
 		}
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
+			console.log("IM HERE");
+			modalString += render("penalties", data);
+		}
 		return modalString;
 
 	} else if(position === "RB") { // RUNNING BACK
 		var modalString = render("basicInfo", data) + render("rushing", data) + render("receiving", data);
 
-		if(data.penalty && parseInt(data.penalty.num) != 0) {
-			modalString += render("penalties", data);
-		}
+		
 		if(data.kick_return && parseInt(data.kick_return.returns) != 0) {
 			modalString += render("kick_returns", data);
 		}
 		if(data.punt_return && parseInt(data.punt_return.returns) != 0) {
 			modalString += render("punt_returns", data);
+		}
+		if(data.penalty && parseInt(data.penalty.num) != 0) {
+			modalString += render("penalties", data);
 		}
 		return modalString;
 
@@ -219,7 +221,7 @@ function setModalHTML(data) {
 
 function popup(box) {
 	$("#teamRadio").prop("checked", true);
-	$('#nflChecked').click()
+	$('#nflChecked').click();
 	box2 = box.substr(1);
 	console.log(box2);
 	var p = getElementTopLeft(box2);
@@ -516,6 +518,7 @@ function populateUserTiles() {
 		dataType: "json",
   	url: "/get_tiles",
 	}).done(function(data) {
+	  // data.forEach(function (newtile, index, array) {
   	for (var i = 0; i < data.length; i++) {
 	  	var newtile = data[i];
 	  	createTile(newtile.league, newtile.category, newtile.t, newtile.p, newtile.c, newtile.d, newtile.nhlConference, newtile.nhlTeam, newtile.nbaTeam);
@@ -534,26 +537,22 @@ function populateUserTiles() {
 
 function saveOrder() {
 	var sorted = $('#sortable').sortable("toArray");
-	console.log("SAVE ORDER");
-	console.log(sorted);
 	var new_sorted = sorted.map(function(t) {
 		return current_tiles[t];
 	});
-	console.log(new_sorted);
-	if (new_sorted.length > 0) {
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: "/save_order",
-			data: {new_order: new_sorted}
-		}).done(function(data) {
+	console.log(sorted);
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/save_order",
+		data: {new_order: new_sorted}
+	}).done(function(data) {
 
-		}).fail(function(xhr, status, error){
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
-	}
+	}).fail(function(xhr, status, error){
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
 }
 
 function deleteTile(element) {

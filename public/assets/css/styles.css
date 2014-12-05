@@ -9,10 +9,10 @@ html {
 #header{
 	height: 68px;
 	font-size: 34px;
-	background-image: -webkit-linear-gradient(bottom,#003364,#004282);
-	background-image: -moz-linear-gradient(bottom,#003364,#004282);
-	background-image: -o-linear-gradient(bottom,#003364,#004282);
-	background-image: linear-gradient(to top,#003364,#004282);
+	background-image: -webkit-linear-gradient(bottom,#6E2F2F,#580000);
+	background-image: -moz-linear-gradient(bottom,#6E2F2F,#580000);
+	background-image: -o-linear-gradient(bottom,#6E2F2F,#580000);
+	background-image: linear-gradient(to top,#580000,#6E2F2F);
 	margin-top: 0px;
 	padding-top: 0px;
 }
@@ -65,6 +65,17 @@ html {
 	border-color: #ffc435;
 }
 
+
+.modal {
+	color: #fff;
+    background: #1f2021;
+	background: -ms-linear-gradient(top,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
+	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
+		
+	box-shadow: 1px 1px #3f3f3f,inset 1px 1px 6px #080808;
+	border-radius: 5px;
+	border: 1px solid #ffc435;
+}
 .button {
    border: 1px solid #004282;
    background: #003364;
@@ -172,7 +183,7 @@ html {
 	background: -ms-linear-gradient(top,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
 	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
 	border: 1px solid #ffc435;
-    border-radius: 2px;
+    border-radius: 5px;
     color: #fff;
     width: 322px;
 	min-height: 182px;
@@ -215,6 +226,19 @@ table.player-stats-table {
 	border-style: solid;*/
 }
 
+table.modalT {
+	width: 100%;
+
+}
+
+.modal_table {
+	width: 45%;
+	border: 1px solid #ffc435;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 8px 8px 8px 0px;
+}
+
 table.player-stats-table tr:nth-child(even) {
 	background-color: #ddd;
 	color: #000;
@@ -254,10 +278,10 @@ p {
 #filterNav {
 	padding:0px;
 	margin: 0px;
-	background-image: -webkit-linear-gradient(bottom,#003364,#003364);
-	background-image: -moz-linear-gradient(bottom,#003364,#003364);
-	background-image: -o-linear-gradient(bottom,#003364,#003364);
-	background-image: linear-gradient(to top,#003364,#003364);
+	background-image: -webkit-linear-gradient(bottom,#580000,#580000);
+	background-image: -moz-linear-gradient(bottom,#580000,#580000);
+	background-image: -o-linear-gradient(bottom,#580000,#580000);
+	background-image: linear-gradient(to top,#580000,#580000);
 }
 
 #filterNav ul {
@@ -346,7 +370,6 @@ label.ui-button {
 	display: inline-block;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	background: #093;
 }
 
 .dark-input {
@@ -358,7 +381,9 @@ h2.dark, h3.dark {
 }
 
 .light-wrap {
-	background-color: #003364;
+	 background: #1f2021;
+	background: -ms-linear-gradient(top,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
+	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
 	margin-left: 25%;
 	margin-right: 25%;
 	padding: 1% 1% 1% 1%;
@@ -367,6 +392,8 @@ h2.dark, h3.dark {
 	border-left: 1px solid #ffc435;
 	border-right: 1px solid #ffc435;
 	border-bottom: 1px solid #ffc435;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 .loginForm {
