@@ -169,6 +169,9 @@ function setBoxHTML(data) {
 		case "RB":
 			summary += render("summary_running_back", data);
 			break;
+		case "TE":
+			summary += render("summary_wide_receiver", data);
+			break;
 		default:
 			summary += "Working on it"
 			break;
@@ -182,7 +185,7 @@ function setModalHTML(data) {
 	// QUARTERBACK
 	if(position === "QB") {
 		return render("basicInfo", data) + render("passing", data) + render("rushing", data) + render("fumbles", data);
-	} else if(position === "WR") { // WIDE RECEIVER
+	} else if(position === "WR" || position==="TE") { // WIDE RECEIVER
 		var modalString = render("basicInfo", data) + render("receiving", data);
 
 		
