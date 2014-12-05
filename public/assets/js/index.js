@@ -603,7 +603,7 @@ function createChart(team, modalid) {
 		    labels: names,
 		    datasets: [
 		        {
-		            label: "My First dataset",
+		            label: "Touchdowns",
    		            fillColor: "rgba(151,187,205,0.5)",
 		            strokeColor: "rgba(151,187,205,0.8)",
 		            highlightFill: "rgba(151,187,205,0.75)",
