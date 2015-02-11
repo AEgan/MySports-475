@@ -5,7 +5,7 @@ def getPlayerInfo(playerName, teamName)
 	teamName = teamName.upcase
 
 	# Set API Keys
-	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+	SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	# Get all players in the team
