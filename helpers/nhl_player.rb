@@ -1,6 +1,6 @@
 # gets nhl player information
 def getNHLPlayerInfo(player_id, team_name)
-  SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
+  SportsDataApi.set_key(:nhl, 'hkzpaujvak7qmd5qv2468zpd')
   SportsDataApi.set_access_level(:nhl, 't')
   player_season_stats = SportsDataApi::Nhl.player_season_stats(player_id)
   position = player_season_stats.player.primary_position

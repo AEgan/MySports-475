@@ -1,19 +1,19 @@
 # ---------------- NFL ----------------------
 # Get all players for a team
 def getTeamRoster(teamName)
-	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+	SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
 	SportsDataApi.set_access_level(:nfl, 't')
 	Roster.get_roster('nfl', teamName)
 end
 
 def getNHLTeamRoster(teamName)
-	SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
+	SportsDataApi.set_key(:nhl, 'hkzpaujvak7qmd5qv2468zpd')
 	SportsDataApi.set_access_level(:nhl, 't')
 	Roster.get_roster('nhl', teamName)
 end
 
 def getNBATeamRoster(teamId)
-	SportsDataApi.set_key(:nba, 'tjkbcujdh4hkh2nby8bfs5nf')
+	SportsDataApi.set_key(:nba, '457h29hhyh985eyg4pegdkjh')
 	SportsDataApi.set_access_level(:nba, 't')
 	Roster.get_roster('nba', teamId)
 end
@@ -22,7 +22,7 @@ end
 def getTeamInfo(teamName)
 	# Set API Keys
 	# SportsDataApi.set_key(:nfl, ENV['NFLKEY'])
-	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+	SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	# Get stats for the input player

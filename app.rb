@@ -26,6 +26,7 @@ get '/' do
   @word = "MySports"
   SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
   SportsDataApi.set_key(:nhl, 'pzgb7v6v55z9bpzccfb6rttx')
+
   SportsDataApi.set_access_level(:nfl, 't')
   SportsDataApi.set_access_level(:nhl, 't')
   erb :index

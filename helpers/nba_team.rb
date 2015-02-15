@@ -1,6 +1,6 @@
 # ---------------- NHL ----------------------
 def getNBATeamInfo(teamID)
-  SportsDataApi.set_key(:nba, 'tjkbcujdh4hkh2nby8bfs5nf')
+  SportsDataApi.set_key(:nba, '457h29hhyh985eyg4pegdkjh')
   SportsDataApi.set_access_level(:nba, 't')
   teams = SportsDataApi::Nba.teams()
   team = teams.select {|t| t.id.eql? teamID }.first
