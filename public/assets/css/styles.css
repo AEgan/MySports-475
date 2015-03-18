@@ -369,8 +369,20 @@ p {
 	position: relative;
 	top: -8px;
 	right: 15px;
+}
+.filter_logo2 {
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 20px;
+	width: auto;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	right: 15px;
 
 }
+
 
 .chosen-search {
 	color: #000000;
