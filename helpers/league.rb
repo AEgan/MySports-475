@@ -10,7 +10,7 @@ end
 
 # gets the standings for NHL
 def getNHLStandings(conference)
-	SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
+	SportsDataApi.set_key(:nhl, 'hkzpaujvak7qmd5qv2468zpd')
 	SportsDataApi.set_access_level(:nhl, 't')
 	standings = SportsDataApi::Nhl.standings('2014', 'REG')
 	if(conference.eql?("ATLANTIC") || conference.eql?("METROPOLITAN"))
@@ -23,7 +23,7 @@ end
 
 # gets the NBA standings
 def getNBAStandings(division)
-	SportsDataApi.set_key(:nba, 'tjkbcujdh4hkh2nby8bfs5nf')
+	SportsDataApi.set_key(:nba, '457h29hhyh985eyg4pegdkjh')
 	SportsDataApi.set_access_level(:nba, 't')
 	standings = SportsDataApi::Nba.standings('2014', 'REG')
 	if(division.eql?('atlantic') || division.eql?('central') || division.eql?('southeast'))

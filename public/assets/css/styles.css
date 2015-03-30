@@ -1,6 +1,6 @@
 
 html {
-	--sports-yellow: #ffc435;
+	--sports-yellow: #FFCC56;
 	background-color: #27282a;
 	font-family: Arial, sans-serif;
 	padding: 0px;
@@ -24,7 +24,7 @@ html {
 	overflow: auto;
 	min-height: 100%;
 	padding-bottom: 10px;
-	border-top: 1px solid #ffc435;
+	border-top: 1px solid #FFCC56;
 
 }
 #title {
@@ -62,7 +62,7 @@ html {
 	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
 		
 	box-shadow: 1px 1px #3f3f3f,inset 1px 1px 6px #080808;
-	border-color: #ffc435;
+	border-color: #FFCC56;
 }
 
 
@@ -74,7 +74,7 @@ html {
 		
 	box-shadow: 1px 1px #3f3f3f,inset 1px 1px 6px #080808;
 	border-radius: 5px;
-	border: 1px solid #ffc435;
+	border: 1px solid #FFCC56;
 	cursor: default;
 }
 .button {
@@ -221,7 +221,7 @@ html {
 	background: #1f2021;
 	background: -ms-linear-gradient(top,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
 	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
-	border: 1px solid #ffc435;
+	border: 1px solid #FFCC56;
     border-radius: 5px;
     color: #fff;
     width: 322px;
@@ -272,7 +272,7 @@ table.modalT {
 
 .modal_table {
 	width: 45%;
-	border: 1px solid #ffc435;
+	border: 1px solid #FFCC56;
 	border-radius: 5px;
 	display: inline-block;
 	margin: 8px 8px 8px 0px;
@@ -337,9 +337,12 @@ p {
 	height: 25px;
 	text-align: center;
 	vertical-align: top;
-	background-color: #DDD;
+	color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	border-top: 1px solid #DDD;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
 	cursor: pointer;
 	transition: all linear 0.15s;
 }
@@ -351,7 +354,8 @@ p {
 
 }
 .filterOption:hover {
-	background: #ffc435;
+	background: #DDD;
+	color: #212121;
 }
 
 .filter_logo {
@@ -405,12 +409,24 @@ label.ui-button {
 
 .welcome_button {
 	width: 100px;
+	height: 25px;
+	margin-top: 1px;
 	margin-right: 20px;
 	display: inline-block;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	background: -ms-linear-gradient(top,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
-	background: linear-gradient(to bottom,rgba(43,44,46,1) -10%,rgba(22,23,23,1) 100%);
+	border-bottom: none;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-top: 1px solid #DDD;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
+	transition: all linear 0.15s;
+}
+
+.welcome_button:hover {
+	background: #DDD;
+	color: #212121;
 
 }
 
@@ -431,9 +447,9 @@ h2.dark, h3.dark {
 	padding: 1% 1% 1% 1%;
 	font-size: 15px;
 	color: #bdbdbd;
-	border-left: 1px solid #ffc435;
-	border-right: 1px solid #ffc435;
-	border-bottom: 1px solid #ffc435;
+	border-left: 1px solid #FFCC56;
+	border-right: 1px solid #FFCC56;
+	border-bottom: 1px solid #FFCC56;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
@@ -492,5 +508,6 @@ td, th {
 }
 
 .filterSelected {
-	background-color: #ffc435;
+	background-color: #DDD;
+	color: #212121;
 }

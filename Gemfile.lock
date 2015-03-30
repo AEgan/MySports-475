@@ -76,6 +76,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (= 3.2.20)
   bcrypt
   bson_ext
   json

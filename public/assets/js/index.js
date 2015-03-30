@@ -38,31 +38,22 @@ function displayData(box, data, league, category, t) {
 	box = "#box" + String(box);
 	$(box).removeClass('unsortable');
 	$(box + ' .addData').removeClass('addData');
+
 	switch (league) {
 		case "nfl":
 			switch (category) {
 				case "player":
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-					var statsHTML = setBoxHTML(data);
-					var modalHTML = setModalHTML(data);
-					$(box + ' .sportsContent').html(statsHTML);
-					$(box + ' > .modal').html(modalHTML);
+					displayNflPlayerStats(box, data, t);
 					break;
 				case "team":
-					$(box + ' .sportsWrapper').css("backgroundImage", "url('assets/images/logos/"+t.toLowerCase()+".png')");
-					$(box + ' .sportsContent').html("<b>"+displayTeamName(t)+" &nbsp;" +"</b><br /><hr><b>Offense</b><br/> Third Down Efficiency: &nbsp;" + roundToTwo(data.third_down_efficiency.pct)+"%<br />Red Zone Efficiency: &nbsp;" + roundToTwo(data.redzone_efficiency.pct)+"%<br /><br/><b>Defense</b><br/> Forced fumbles: &nbsp;"+data.defense.force_fum+"<br />Interceptions: &nbsp;"+data.defense.int+"<br/>Punts: &nbsp;"+data.punting.punts);
-					$(box + ' > .modal').html("here it is");
-					setModals();
+					displayNflTeamStats(box, data, t);
 					break;
 				case "standings":
-					setNFLStandingsHTML(data, function(tableString, modalString) {
-						var displayModalText = "<a href="
-						$(box + ' .sportsContent').html("<b><u> Standings for " + data.name + "</u></b><br />" + tableString);
-						$(box + ' > .modal').html("<b><u> Standings for " + data.name + "</u></b><br />" + modalString);
-					});
+					displayNFLStandings(data, box);
 					break;
 			}
 			break;
+
 		case "nhl":
 			switch (category) {
 				case "team":
@@ -130,30 +121,6 @@ function displayData(box, data, league, category, t) {
 			}
 			break;
 	}
-}
-
-function setNFLStandingsHTML(data, callback) {
-	var tableStr = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th></thead><tbody>";
-	for(var i = 0; i < data.teams.length; i++) {
-		tableStr += "<tr><td>" + data.teams[i]['name'] + "</td>";
-		tableStr += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
-		tableStr += "<td>" + data.teams[i]['overall']['losses'] + "</td>";
-		tableStr += "<td>" + data.teams[i]['overall']['ties'] + "</td></tr>";
-	}
-	tableStr += "</tbody></table>";
-	var modalString = "<table class='standings-table'><thead><th>Team</th><th>Wins</th><th>Losses</th><th>Ties</th><th>Last 5</th><th>Streak</th><th>Scored First</th><th>Leading At Half</th><th>Decided by 7</th></thead><tbody>";
-	for(var i = 0; i < data.teams.length; i++) {
-		modalString += "<tr><td>" + data.teams[i]['name'] + "</td>";
-		modalString += "<td>" + data.teams[i]['overall']['wins'] + "</td>";
-		modalString += "<td>" + data.teams[i]['overall']['losses'] + "</td>";
-		modalString += "<td>" + data.teams[i]['overall']['ties'] + "</td>";
-		modalString += "<td>" + data.teams[i]['last_5']['wins'] + '-' + data.teams[i]['last_5']['losses'] + "-" + data.teams[i]['last_5']['ties'] + "</td>";
-		modalString += "<td>" + data.teams[i]['streak']['type'] + " " + data.teams[i]['streak']['length'] + "</td>";
-		modalString += "<td>" + data.teams[i]['scored_first']['wins'] + '-' + data.teams[i]['scored_first']['losses'] + "-" + data.teams[i]['scored_first']['ties'] + "</td>";
-		modalString += "<td>" + data.teams[i]['leading_at_half']['wins'] + '-' + data.teams[i]['leading_at_half']['losses'] + "-" + data.teams[i]['leading_at_half']['ties'] + "</td>";
-		modalString += "<td>" + data.teams[i]['decided_by_7_points']['wins'] + '-' + data.teams[i]['decided_by_7_points']['losses'] + "-" + data.teams[i]['decided_by_7_points']['ties'] + "</td></tr>";
-	}
-	return callback(tableStr, modalString);
 }
 
 function setBoxHTML(data) {
@@ -273,75 +240,40 @@ function populatePlayerList(t, league){
 	select.className += select.className ? ' chosen-select' : 'chosen-select';
 
 	select.options.length = 0;
+	var sprotUrl = "";
 	if(league === 'nfl' || league === 'NFL') {
-	    $.ajax({
-			type: "POST",
-			dataType: "json",
-		  url: "/getTeamRoster",
-		  data: {teamName: t}
-		}).done(function(data) {
-		  //alert("done");
-		   for (var i = 0; i < data.length; i++) {
-	        var opt = data[i].name_last + ", " + data[i].name_first;
-	        var el = document.createElement("option");
-	        el.textContent = opt;
-	        el.value = data[i].name_full;
-	        select.appendChild(el);
-	      }
-				setChosen();
-				console.log("here");
-				$(".chosen-select").trigger("chosen:updated");
-		}).fail(function(xhr, status, error){
-			//alert("fail");
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
+		sprotUrl = "/getTeamRoster";
 	} else if (league === 'nhl' || league === 'NHL') {
 		t = $("#nhlTeams").val();
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: "/getNHLTeamRoster",
-			data: {teamName: t}
-		}).done(function(data) {
-			for (var i = 0; i < data.length; i++) {
-				var opt = data[i].last_name + ", " + data[i].first_name;
-				var el = document.createElement("option");
-				el.textContent = opt;
-				el.value = data[i].id;
-				select.appendChild(el);
-			}
-			setChosen();
-			$(".chosen-select").trigger("chosen:updated");
-		}).fail(function(xhr, status, error) {
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
+		sprotUrl = "/getNHLTeamRoster";
 	} else {
 		t = $("#nbaTeams").val();
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: "/getNBATeamRoster",
-			data: {teamName: t}
-		}).done(function(data) {
-			for (var i = 0; i < data.length; i++) {
-				var opt = data[i].last_name + ", " + data[i].first_name;
-				var el = document.createElement("option");
-				el.textContent = opt;
-				el.value = data[i].id;
-				select.appendChild(el);
-			}
-			setChosen();
-			$(".chosen-select").trigger("chosen:updated");
-		}).fail(function(xhr, status, error) {
-			console.log(xhr);
-			console.log(status);
-			console.log(error);
-		});
+		sprotUrl = "/getNBATeamRoster";		
 	}
+	
+    $.ajax({
+		type: "POST",
+		dataType: "json",
+	  url: sprotUrl,
+	  data: {teamName: t}
+	}).done(function(data) {
+	  //alert("done");
+	   for (var i = 0; i < data.length; i++) {
+        var opt = data[i].name_last + ", " + data[i].name_first;
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = data[i].name_full;
+        select.appendChild(el);
+      }
+			setChosen();
+			console.log("here");
+			$(".chosen-select").trigger("chosen:updated");
+	}).fail(function(xhr, status, error){
+		//alert("fail");
+		console.log(xhr);
+		console.log(status);
+		console.log(error);
+	});
 }
 
 //function to set styling on filtering by league
@@ -654,3 +586,11 @@ function modalClick(element) {
 
 	// setTimeout(function(){ createChart(team, modalid); }, 1500);
 }
+
+
+
+
+
+
+
+

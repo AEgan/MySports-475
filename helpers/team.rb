@@ -7,13 +7,13 @@ def getTeamRoster(teamName)
 end
 
 def getNHLTeamRoster(teamName)
-	SportsDataApi.set_key(:nhl, 'gk32v4v48gsfy39pqvg2hp82')
+	SportsDataApi.set_key(:nhl, 'hkzpaujvak7qmd5qv2468zpd')
 	SportsDataApi.set_access_level(:nhl, 't')
 	Roster.get_roster('nhl', teamName)
 end
 
 def getNBATeamRoster(teamId)
-	SportsDataApi.set_key(:nba, 'tjkbcujdh4hkh2nby8bfs5nf')
+	SportsDataApi.set_key(:nba, '457h29hhyh985eyg4pegdkjh')
 	SportsDataApi.set_access_level(:nba, 't')
 	Roster.get_roster('nba', teamId)
 end
