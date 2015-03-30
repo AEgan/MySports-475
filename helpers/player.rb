@@ -5,7 +5,7 @@ def getPlayerInfo(playerName, teamName)
 	teamName = teamName.upcase
 
 	# Set API Keys
-	SportsDataApi.set_key(:nfl, 'dsvqbre5qxsqkp5aemgtpgt2')
+	SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
 	SportsDataApi.set_access_level(:nfl, 't')
 
 	# Get all players in the team
@@ -18,8 +18,18 @@ def getPlayerInfo(playerName, teamName)
 	end
 
 	# Get stats for the input player
-	player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2014", "REG")
-	storeSeasonStats(teamName, "2014", player_season_stats, all_players)
+	stats = NFLPlayerSeasonStats.where({team: team, season: "2014"})
+	if stats == []
+		player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2014", "REG")
+		storeSeasonStats(teamName, "2014", player_season_stats, all_players)
+	end
+
+	stats = NFLPlayerSeasonStats.where({team: team, season: "2013"})
+	if stats == []
+		player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2013", "REG")
+		storeSeasonStats(teamName, "2013", player_season_stats, all_players)
+	end
+
 	if basicPlayerInformation['id'].nil?
 		playerStats = player_season_stats.players.find{|p| p[:id] == basicPlayerInformation[:id]}[:stats]
 	else

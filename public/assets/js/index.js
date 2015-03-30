@@ -587,29 +587,44 @@ function deleteTile(element) {
 }
 
 function createChart(team, modalid) {
-		console.log("SUCKS TO SUCK");
+		console.log("CREATE CHART");
 		$.ajax({
 			type: "POST",
 			dataType: "json",
 			url: "/get_season_stats",
 			data: {team: team, season: "2014"}
 		}).done(function(data) {
-			var names = data.map(function(t) {
+			console.log("CREATE CHART DATA");
+			console.log(data);
+			var prev = data.statsPrev
+			var current = data.statsCurrent
+			var names = prev.map(function(t) {
 				return t.name;
 			});
-			var tds = data.map(function(t) {
+			var prevtds = prev.map(function(t) {
+				return t.tds;
+			});
+			var currenttds = current.map(function(t) {
 				return t.tds;
 			});
 			var data = {
 		    labels: names,
 		    datasets: [
 		        {
-		            label: "Touchdowns",
+		            label: "Touchdowns Previous",
    		            fillColor: "rgba(151,187,205,0.5)",
 		            strokeColor: "rgba(151,187,205,0.8)",
 		            highlightFill: "rgba(151,187,205,0.75)",
 		            highlightStroke: "rgba(151,187,205,1)",
-		            data: tds
+		            data: prevtds
+		        },
+		        {
+		            label: "Touchdowns Current",
+   		            fillColor: "rgba(255,69,0,0.5)",
+		            strokeColor: "rgba(151,187,205,0.8)",
+		            highlightFill: "rgba(151,187,205,0.75)",
+		            highlightStroke: "rgba(151,187,205,1)",
+		            data: currenttds
 		        }
 			    ]
 			};
@@ -636,4 +651,6 @@ function modalClick(element) {
 	console.log(modalid);
 	var team = current_tiles["box" + modalid].t;
 	setTimeout(function(){ createChart(team, modalid); }, 1500);
+
+	// setTimeout(function(){ createChart(team, modalid); }, 1500);
 }
