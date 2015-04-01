@@ -1,15 +1,31 @@
-# MySports
+    Project Name:
+
+
+My Sports
+
+
+    Tagline:
+
+
+All your sports in one place
+
+
+    Body:
+
+
+# My Sports
 
 Have you ever found yourself searching and searching to find sports statistics for all of your favorite sports.  Well look no further, MySports is your one stop shop for all of your sports statistics.  We eliminate the long process of searching individual websites for statistics and provide one easy-to-use dashboard to provide everything you need at a single glance.  
 
-After populating your personal dashboard for the first time, your selections will be saved so refreshing your statistics the next time only takes a single page load.
-
 We currently cover:
 
-* NFL
-* NHL
-* NBA
-* MLB is on the way!
+![Sports](https://raw.githubusercontent.com/jlazar/MySports-475/master/public/assets/images/githubpage/all-logos.png)
+
+After populating your personal dashboard for the first time, your selections will be saved so refreshing your statistics the next time only takes a single page load.
+
+Here is a screenshot from the application itself:
+
+![Screenshot](https://raw.githubusercontent.com/jlazar/MySports-475/master/public/assets/images/githubpage/dashboard.png)
 
 This is a sports dashboard web application developed by Alex Egan, Jon Lazarowicz, and Varun Murali
 as a final project for their senior capstone project course for the Information Systems
