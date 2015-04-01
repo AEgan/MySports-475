@@ -60,9 +60,31 @@ def storeSeasonStats(team, season, allStats, all_players)
 end
 
 post '/get_season_stats' do
+	SportsDataApi.set_key(:nfl, 'pzgb7v6v55z9bpzccfb6rttx')
+	SportsDataApi.set_access_level(:nfl, 't')
 	content_type :json
 	team = request["team"].upcase
 	season = request["season"]
+	allStats = {}
 	stats = NFLPlayerSeasonStats.where({team: team, season: season})
-	return stats[0].player_season_stats.to_json
+	stats2 = NFLPlayerSeasonStats.where({team: team, season: "2013"})
+
+	if stats == []
+		all_players = getTeamRoster(team)
+		player_season_stats = SportsDataApi::Nfl.player_season_stats(team, season, "REG")
+		storeSeasonStats(team, season, player_season_stats, all_players)
+	end
+	stats = NFLPlayerSeasonStats.where({team: team, season: season})
+
+	if stats2 == []
+		all_players = getTeamRoster(team)
+
+		player_season_stats = SportsDataApi::Nfl.player_season_stats(team, "2013", "REG")
+		storeSeasonStats(team, "2013", player_season_stats, all_players)
+	end
+	stats2 = NFLPlayerSeasonStats.where({team: team, season: "2013"})
+
+	allStats["statsPrev"] = stats[0].player_season_stats
+	allStats["statsCurrent"] = stats2[0].player_season_stats
+	return allStats.to_json
 end
