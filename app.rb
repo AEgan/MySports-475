@@ -14,7 +14,11 @@ require 'moped'
 enable :sessions
 
 configure do
-  Mongoid.load!("./mongoid.yml", :development)
+	if ENV["MONGOLAB_URI"]
+	  Mongoid.load!("./mongoid.yml", :prodution)	
+	else
+	  Mongoid.load!("./mongoid.yml", :development)
+	end
 end
 
 class NflTeam
