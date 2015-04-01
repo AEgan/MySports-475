@@ -15,7 +15,7 @@ enable :sessions
 
 configure do
 	if ENV["MONGOLAB_URI"]
-	  Mongoid.load!("./mongoid.yml", :prodution)	
+	  Mongoid.load!("./mongoid.yml", :production)	
 	else
 	  Mongoid.load!("./mongoid.yml", :development)
 	end

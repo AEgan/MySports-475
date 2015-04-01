@@ -2,13 +2,10 @@ production:
   sessions:
     default:
       uri: <%= ENV['MONGOLAB_URI'] %>
-      database: mongoid
-      hosts:
-        - localhost:27017
       options:
         skip_version_check: true
         safe: true
-
+        
 development:
   sessions:
     default:
