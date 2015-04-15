@@ -30,10 +30,9 @@ html {
 #title {
 	padding-left: 70px;
 	padding-top: 15px;
+	font-size: 30px;
 	color: #fff;
 	font-family: Arial;
-	text-transform: uppercase;
-	text-shadow: 0 -1px rgba(0,0,0,.5);
 }
 
 
@@ -369,8 +368,20 @@ p {
 	position: relative;
 	top: -8px;
 	right: 15px;
+}
+.filter_logo2 {
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	height: 20px;
+	width: auto;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	right: 15px;
 
 }
+
 
 .chosen-search {
 	color: #000000;
@@ -410,7 +421,8 @@ label.ui-button {
 .welcome_button {
 	width: 100px;
 	height: 25px;
-	margin-top: 1px;
+	margin-top: 8px;
+	margin-bottom: 1px;
 	margin-right: 20px;
 	display: inline-block;
 	border-bottom: none;
@@ -511,3 +523,22 @@ td, th {
 	background-color: #DDD;
 	color: #212121;
 }
+
+
+@font-face {
+  font-family: "ESP_Bold_Italic";
+  src: url('/assets/fonts/esp_bdit.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "ESP_Bold";
+  src: url('/assets/fonts/esp_bold.ttf') format("truetype");
+}
+@font-face {
+  font-family: "ESP";
+  src: url('/assets/fonts/esp.ttf') format("truetype");
+}
+
+#title { font-family: "ESP", sans-serif }
+
+

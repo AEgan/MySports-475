@@ -18,13 +18,13 @@ def getPlayerInfo(playerName, teamName)
 	end
 
 	# Get stats for the input player
-	stats = NFLPlayerSeasonStats.where({team: team, season: "2014"})
+	stats = NFLPlayerSeasonStats.where({team: teamName, season: "2014"})
 	if stats == []
 		player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2014", "REG")
 		storeSeasonStats(teamName, "2014", player_season_stats, all_players)
 	end
 
-	stats = NFLPlayerSeasonStats.where({team: team, season: "2013"})
+	stats = NFLPlayerSeasonStats.where({team: teamName, season: "2013"})
 	if stats == []
 		player_season_stats = SportsDataApi::Nfl.player_season_stats(teamName, "2013", "REG")
 		storeSeasonStats(teamName, "2013", player_season_stats, all_players)

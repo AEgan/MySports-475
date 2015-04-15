@@ -238,7 +238,7 @@ function getQueryVariable(variable)
 function populatePlayerList(t, league){
 	var select = document.getElementById("playerList");
 	select.className += select.className ? ' chosen-select' : 'chosen-select';
-
+	console.log(select);
 	select.options.length = 0;
 	var sprotUrl = "";
 	if(league === 'nfl' || league === 'NFL') {
@@ -345,12 +345,14 @@ $(function() {
 	});
 
 	$('.teamList').on('change', function () {
+		
 		if ($("input[name='category']:checked").val() == "player") {
 		    //player is checked so populate team list
 		    var e = document.getElementById("teams");
-				var strUser = e.options[e.selectedIndex].value;
-				console.log(strUser);
-				populatePlayerList(strUser);
+			var strUser = e.options[e.selectedIndex].value;
+			var league = $('.form').find("input[name='league']:checked").val()
+			console.log(strUser + "checked" + league);
+			populatePlayerList(strUser, league);
 		}
 		return true
 	});

@@ -51,8 +51,9 @@ $(function() {
 							document.getElementById("nhlStandingsDropdowns").style.display = "none";
 							document.getElementById("nbaTeamDropdown").style.display = "none";
 							document.getElementById("nbaStandingsDropdown").style.display = "none";
-				 			var e = document.getElementById("teams");
+				 			var e = document.getElementById("nhlTeams");
 							var strUser = e.options[e.selectedIndex].value;
+							console.log(strUser + "user string");
 							populatePlayerList(strUser, "nhl");
 							break;
 						case "team":
@@ -85,6 +86,9 @@ $(function() {
 							document.getElementById("nhlTeamDropdown").style.display = "none";
 							document.getElementById("players").style.display = "block";
 							document.getElementById("nbaStandingsDropdown").style.display = "none";
+							var e = document.getElementById("nbaTeams");
+							var strUser = e.options[e.selectedIndex].value;
+							console.log(strUser + "user string");
 							populatePlayerList(strUser, "nba");
 							break;
 						case "team":
